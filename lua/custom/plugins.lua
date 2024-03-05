@@ -10,6 +10,7 @@ local plugins = {
         "impl",
         "gotests",
         "gomodifytags",
+        "staticcheck",
       },
     },
   },
