@@ -5,7 +5,7 @@ local plugins = {
       ensure_installed = {
         "gopls",
         "gofumpt",
-        "goimports-reviser",
+        "goimports",
         "golines",
         "impl",
         "gotests",
