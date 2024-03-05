@@ -50,4 +50,18 @@ M.gopher = {
   }
 }
 
+M.gitsigns = {
+  plugin = true,
+  n = {
+    ["<leader>gp"] = {
+      "<cmd> Gitsigns preview_hunk <CR>",
+      "Git preview change"
+    },
+    ["<leader>gt"] = {
+      "<cmd> Gitsigns toggle_current_line_blame <CR>",
+      "Git toggle line blame"
+    },
+  }
+}
+
 return M

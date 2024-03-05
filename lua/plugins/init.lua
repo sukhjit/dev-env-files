@@ -207,6 +207,11 @@ local default_plugins = {
   },
 
   {
+    "tpope/vim-fugitive",
+    event = "VeryLazy",
+  },
+
+  {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = "Telescope",
