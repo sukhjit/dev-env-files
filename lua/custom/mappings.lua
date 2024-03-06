@@ -70,14 +70,14 @@ M.neotest = {
     ["<leader>gtr"] = {
       function ()
         local nt = require("neotest")
-        nt.output_panel.open()
+        -- nt.output_panel.open()
         nt.run.run()
       end,
       "Run Go Test"
     },
     ["<leader>gtp"] = {
       function ()
-        require('neotest').output_panel.close()
+        require('neotest').output_panel.toggle()
       end,
       "Toggle NeoTest Output panel"
     },
