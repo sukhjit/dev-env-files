@@ -55,6 +55,19 @@ local plugins = {
       vim.cmd [[silent! TSInstall go]]
     end,
   },
+  {
+    "nvim-neotest/neotest",
+    ft = "go",
+    dependencies = "nvim-neotest/neotest-go",
+    config = function(_, opts)
+      require("neotest").setup({
+        adapters = {
+          require("neotest-go"),
+        },
+      })
+      require("core.utils").load_mappings("neotest")
+    end,
+  },
 }
 
 return plugins
