@@ -46,7 +46,13 @@ M.gopher = {
     ["<leader>gsy"] = {
       "<cmd> GoTagAdd yaml <CR>",
       "Add yaml struct tags"
-    }
+    },
+    ["<leader>gsr"] = {
+      function()
+        vim.lsp.buf.rename()
+      end,
+      "Rename item",
+    },
   }
 }
 
