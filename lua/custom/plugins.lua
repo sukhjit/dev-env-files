@@ -68,6 +68,17 @@ local plugins = {
       require("core.utils").load_mappings("neotest")
     end,
   },
+  {
+    "David-Kunz/gen.nvim",
+    ft = "go",
+    config = function(_, opts)
+      require('gen').setup({
+        model = "llama2-uncensored",
+        host = "localhost",
+        port = "11434",
+      })
+    end,
+  },
 }
 
 return plugins
