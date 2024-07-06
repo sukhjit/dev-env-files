@@ -21,6 +21,7 @@ opt.shiftwidth = 4
 opt.smartindent = true
 opt.tabstop = 4
 opt.softtabstop = 4
+opt.scrolloff = 10
 
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
@@ -39,7 +40,7 @@ opt.signcolumn = "yes"
 opt.splitbelow = true
 opt.splitright = true
 opt.termguicolors = true
-opt.timeoutlen = 400
+opt.timeoutlen = 300
 opt.undofile = true
 
 -- interval for writing swap file to disk, also used by gitsigns
