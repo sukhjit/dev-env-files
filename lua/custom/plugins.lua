@@ -58,7 +58,13 @@ local plugins = {
   {
     "nvim-neotest/neotest",
     ft = "go",
-    dependencies = "nvim-neotest/neotest-go",
+    dependencies = {
+      "nvim-neotest/neotest-go",
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter"
+    },
     config = function(_, opts)
       require("neotest").setup({
         adapters = {
