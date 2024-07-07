@@ -4,6 +4,7 @@ local options = {
     css = { "prettier" },
     html = { "prettier" },
     go = { "gofumpt", "goimports", "gci" },
+    tf = { "hcl" },
   },
 
   format_on_save = {
