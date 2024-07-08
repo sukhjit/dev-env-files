@@ -18,3 +18,9 @@ set("n", "<M-,>", "<c-w>5<")
 set("n", "<M-.>", "<c-w>5>")
 set("n", "<M-t>", "<C-W>+")
 set("n", "<M-s>", "<C-W>-")
+
+-- Bufferline
+set("n", "<leader>bl", "<cmd>:BufferLinePick<CR>", { desc = "Buffer Pick" })
+set("n", "<Tab>", "<cmd>:BufferLineCycleNext<CR>", { desc = "Buffer Next" })
+set("n", "<S-Tab>", "<cmd>:BufferLineCyclePrev<CR>", { desc = "Buffer Previous" })
+set("n", "<leader>x", "<cmd>:BufferLineCyclePrev<CR>", { desc = "Buffer Previous" })
