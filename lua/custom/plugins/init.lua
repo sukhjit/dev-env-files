@@ -1,8 +1,17 @@
 return {
   {
-    "tpope/vim-sleuth",
+    {
+      "tpope/vim-fugitive",
+    },
 
-    { "numToStr/Comment.nvim", opts = {} },
+    {
+      "tpope/vim-sleuth",
+    },
+
+    {
+      "numToStr/Comment.nvim",
+      opts = {},
+    },
 
     {
       "folke/tokyonight.nvim",
