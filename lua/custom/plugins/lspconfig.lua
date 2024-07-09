@@ -82,9 +82,7 @@ return {
           },
         },
 
-        tflint = {
-          filetypes = { "tf", "tfvars" },
-        },
+        terraformls = {},
 
         tsserver = {},
 
@@ -116,6 +114,8 @@ return {
         "html-lsp",
         "css-lsp",
         "prettier",
+        "tflint",
+        "terraformls",
       })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
