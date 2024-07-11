@@ -1,9 +1,15 @@
 local opt = vim.opt
 
 opt.number = true
+
+-- tabs and indentation
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.softtabstop = 4
+opt.expandtab = true
+opt.autoindent = true
+
+opt.wrap = false
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 opt.mouse = "a"
@@ -41,3 +47,8 @@ opt.scrolloff = 10
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 opt.hlsearch = true
+
+opt.swapfile = false
+
+-- backspace
+opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position

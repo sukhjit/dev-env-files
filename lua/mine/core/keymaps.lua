@@ -1,6 +1,11 @@
+vim.g.mapleader = " "
+
+vim.g.have_nerd_font = true
+
 local set = vim.keymap.set
 
-set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+set("i", "jj", "<ESC>", { desc = "Exit insert mode with jj" })
+set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
 
 set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
