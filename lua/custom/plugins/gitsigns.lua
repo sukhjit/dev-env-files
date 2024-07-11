@@ -2,6 +2,7 @@ return {
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
     opts = {
       signs = {
         add = { text = "+" },
@@ -46,6 +47,8 @@ return {
           gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
         end, { desc = "reset git hunk" })
         -- normal mode
+        map("n", "]h", gitsigns.next_hunk, { desc = "git next hunk" })
+        map("n", "[h", gitsigns.prev_hunk, { desc = "git prev hunk" })
         map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git [s]tage hunk" })
         map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git [r]eset hunk" })
         map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "git [S]tage buffer" })
