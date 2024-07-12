@@ -84,6 +84,16 @@ return {
 
         terraformls = {},
 
+        emmet_ls = {
+          filetypes = {
+            "html",
+            "css",
+            "sass",
+            "scss",
+            "less",
+          },
+        },
+
         tsserver = {},
 
         lua_ls = {
