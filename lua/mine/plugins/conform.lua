@@ -27,6 +27,7 @@ return {
         css = { "prettier" },
         html = { "prettier" },
         javascript = { "prettier" },
+        yaml = { "yamlfmt" },
         go = { "gofumpt", "goimports", "gci" },
         terraform = { "terraform_fmt" },
         tf = { "terraform_fmt" },

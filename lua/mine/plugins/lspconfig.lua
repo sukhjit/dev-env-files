@@ -116,6 +116,7 @@ return {
         "prettier",
         "tflint",
         "terraformls",
+        "yamlfmt",
       })
       require("mason-tool-installer").setup { ensure_installed = ensure_installed }
 
