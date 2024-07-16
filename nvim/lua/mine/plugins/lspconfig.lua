@@ -117,6 +117,7 @@ return {
         "gofumpt",
         "goimports",
         "golines",
+        "iferr",
         "impl",
         "gotests",
         "gomodifytags",
