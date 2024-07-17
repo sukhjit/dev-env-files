@@ -31,6 +31,13 @@ return {
         desc = "Run Nearest",
       },
       {
+        "<leader>tl",
+        function()
+          require("neotest").run.run_last()
+        end,
+        desc = "Run Last",
+      },
+      {
         "<leader>ts",
         function()
           require("neotest").summary.toggle()
