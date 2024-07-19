@@ -68,10 +68,11 @@ bindsym $mod+q kill
 bindsym $mod+p exec --no-startup-id firefox
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run
+#bindsym $mod+d exec --no-startup-id dmenu_run
 
 #start rofi
-bindsym $mod+i exec --no-startup-id "rofi -show";
+#bindsym $mod+i exec --no-startup-id "rofi -show drun";
+bindsym $mod+d exec --no-startup-id "rofi -modi drun,run -show drun";
 
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
