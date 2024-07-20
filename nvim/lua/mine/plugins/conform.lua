@@ -33,6 +33,7 @@ return {
         -- ["terraform-vars"] = { "terraform_fmt" },
         typescript = { "prettier" },
         json = { "prettier" },
+        jsonc = { "prettier" },
         markdown = { "prettier" },
         python = { "isort", "black" },
       },

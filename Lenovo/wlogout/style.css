@@ -1,0 +1,51 @@
+* {
+  font-size: 18px;
+  font-family: "MesloLGS Nerd Font Mono";
+  border-radius: 10px;
+}
+
+window {
+  /* background-color: rgba(44, 44, 51, 0.95); */
+  background-color: rgba(26, 27, 38, 0.95);
+}
+
+button {
+  color: #82aaff;
+  background-color: rgba(0, 0, 0, 0.4);
+  outline-style: none;
+  border: none;
+  box-shadow: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30%;
+}
+
+button:hover,
+button:focus {
+  color: #fbf1c7;
+  background-color: rgba(0, 0, 0, 0.6);
+  background-size: 40%;
+}
+
+#logout {
+  background-image: image(url("icons/logout.png"));
+}
+
+#suspend {
+  background-image: image(url("icons/suspend.png"));
+}
+
+#shutdown {
+  background-image: image(url("icons/shutdown.png"));
+}
+
+#reboot {
+  background-image: image(url("icons/reboot.png"));
+}
+
+#logout,
+#suspend,
+#shutdown,
+#reboot {
+  margin: 2px;
+}
