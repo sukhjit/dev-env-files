@@ -53,7 +53,7 @@
   },
   "custom/power": {
     "format": "󰐥",
-    "on-click": "wlogout",
+    "on-click": "wlogout -b 4 -m 400px",
     "tooltip": false,
   },
   "clock": {
