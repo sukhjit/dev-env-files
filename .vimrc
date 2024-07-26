@@ -64,3 +64,5 @@ set wildmenu
 " Make wildmenu behave like similar to Bash completion.
 set wildmode=list:longest
 
+" Key mappings
+imap jj <Esc>
