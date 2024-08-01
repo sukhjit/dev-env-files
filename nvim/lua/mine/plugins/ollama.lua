@@ -4,7 +4,7 @@ return {
     ft = "go",
     config = function()
       require("gen").setup {
-        model = "llama2-uncensored",
+        model = "codellama",
         host = "localhost",
         port = "11434",
       }
