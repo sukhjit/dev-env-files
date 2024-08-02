@@ -1,0 +1,102 @@
+{
+  "height": 28,
+  "spacing": 8,
+  "modules-left": ["hyprland/workspaces", "custom/media"],
+  "modules-center": ["clock", "cpu", "memory", "temperature"],
+  "modules-right": [
+    "idle_inhibitor",
+    "custom/vpn",
+    "network",
+    "pulseaudio",
+    "battery",
+    "tray",
+  ],
+  "hyprland/mode": {
+    "format": "<span style=\"italic\">{}</span>",
+  },
+  "hyprland/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": ["", ""],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}",
+  },
+  "hyprland/window": {
+    "on-click": "ags -t datemenu",
+    "tooltip": false,
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""],
+  },
+  "memory": {
+    "format": "󰍛 {}%",
+    "format-alt": "󰍛 {used}/{total} GiB",
+    "interval": 5,
+  },
+  "cpu": {
+    "format": "󰻠 {usage}%",
+    "format-alt": "󰻠 {avg_frequency} GHz",
+    "interval": 5,
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": "",
+    },
+  },
+  "tray": {
+    "spacing": 10,
+  },
+  "clock": {
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%d/%m/%Y}",
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "on-click": "ags -t quicksettings",
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}% {format_source}",
+    "format-bluetooth": " {icon} {volume}% {format_source}",
+    "format-bluetooth-muted": "  {icon} {format_source}",
+    "format-muted": "  {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "format-icons": {
+      "default": ["", "", ""],
+    },
+    "on-click": "pavucontrol",
+  },
+  "custom/vpn": {
+    "tooltip": false,
+    "format": "VPN {} ",
+    "exec": "mullvad status | grep -q 'Connected' && echo '' || echo ''",
+    "interval": 5,
+    "on-click": "mullvad connect",
+    "on-click-right": "mullvad disconnect",
+  },
+  "network": {
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": "⬇{bandwidthDownBytes} ⬆{bandwidthUpBytes}",
+    "interval": 3,
+    "format-linked": "{ifname} (No IP) ",
+    "format": "",
+    "format-disconnected": "",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click": "wl-copy $(ip address show up scope global | grep inet | head -n1 | cut -d/ -f 1 | tr -d [:space:] | cut -c5-)",
+    "tooltip-format": " {bandwidthUpBits}  {bandwidthDownBits}\n{ifname}\n{ipaddr}/{cidr}\n",
+    "tooltip-format-wifi": " {essid} {frequency}MHz\nStrength: {signaldBm}dBm ({signalStrength}%)\nIP: {ipaddr}/{cidr}\n {bandwidthUpBits}  {bandwidthDownBits}",
+    "min-length": 17,
+    "max-length": 17,
+  },
+}
