@@ -18,6 +18,8 @@ return {
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require("mini.surround").setup()
 
+      require("mini.map").setup()
+
       -- Simple and easy statusline.
       local statusline = require "mini.statusline"
       statusline.setup {
@@ -28,6 +30,13 @@ return {
       statusline.section_location = function()
         return "%2l:%-2v"
       end
+
+      vim.keymap.set("n", "<Leader>mc", MiniMap.close, { desc = "[M]inimap [C]lose" })
+      vim.keymap.set("n", "<Leader>mf", MiniMap.toggle_focus, { desc = "[M]inimap Toggle [F]ocus" })
+      vim.keymap.set("n", "<Leader>mo", MiniMap.open, { desc = "[M]inimap [O]pen" })
+      vim.keymap.set("n", "<Leader>mr", MiniMap.refresh, { desc = "[M]inimap [R]efresh" })
+      vim.keymap.set("n", "<Leader>ms", MiniMap.toggle_side, { desc = "[M]inimap Toggle [S]ide" })
+      vim.keymap.set("n", "<Leader>mt", MiniMap.toggle, { desc = "[M]inimap, [T]oggle" })
     end,
   },
 }

@@ -10,6 +10,8 @@ return {
         { "<leader>d_", hidden = true },
         { "<leader>h", group = "Git [H]unk" },
         { "<leader>h_", hidden = true },
+        { "<leader>m", group = "[M]inimap" },
+        { "<leader>m_", hidden = true },
         { "<leader>r", group = "[R]ename" },
         { "<leader>r_", hidden = true },
         { "<leader>s", group = "[S]earch" },
