@@ -14,6 +14,7 @@ set $mod Mod4
 exec_always --no-startup-id picom
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
+exec_always feh --bg-scale ~/pictures/background.jpg
 
 # set desktop background with custom effect
 # exec --no-startup-id betterlockscreen -w dim
@@ -74,8 +75,8 @@ bindsym $mod+b exec --no-startup-id firefox --private-window
 #bindsym $mod+i exec --no-startup-id "rofi -show drun";
 bindsym $mod+d exec --no-startup-id "rofi -modi drun,run -show drun";
 
-# bindsym Control+Mod1+l exec "i3lock -c 000000"
 bindsym Control+Mod1+l exec "i3lock -i ~/pictures/background.jpg"
+bindsym Control+Mod1+s exec systemctl suspend
 # exec "xautolock -detectsleep -time 3 -locker \"i3lock -c 000000\""
 # exec "xautolock -detectsleep -time 3 -locker \"i3lock -i ~/pictures/background.jpg\""
 
@@ -253,8 +254,5 @@ for_window [class=".*"] border pixel 1, move
 # Configure 5px of space between windows and to the screen edges.
 gaps inner 7
 
-# Display Wallpaper
-exec_always feh --bg-fill ~/Pictures/wallpaper01.png
-
 # Shortcut for Lockscreen
-bindsym $mod+x exec /home/$USER/.config/scripts/lock
+# bindsym $mod+x exec /home/$USER/.config/scripts/lock
