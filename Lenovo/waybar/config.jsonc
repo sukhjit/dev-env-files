@@ -3,6 +3,9 @@
   "height": 30,
   "modules-left": ["hyprland/workspaces"],
   "modules-right": [
+    "custom/playerctl-prev",
+    "custom/playerctl",
+    "custom/playerctl-next",
     "cpu",
     "custom/myvpn",
     "custom/cputemp",
@@ -32,6 +35,24 @@
     "format-alt": "<span font='10' rise='4000'>{icon0}{icon1}{icon2}{icon3}</span> <span font='11'rise='1000'>{usage:>2}%</span>",
     "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
   },
+
+  "custom/playerctl": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/player-icon.sh",
+    "interval": 1,
+    "on-click": "playerctl play-pause",
+  },
+  "custom/playerctl-prev": {
+    "format": "",
+    "interval": 1,
+    "on-click": "playerctl previous",
+  },
+  "custom/playerctl-next": {
+    "format": "",
+    "interval": 1,
+    "on-click": "playerctl next",
+  },
+
   "custom/myvpn": {
     "format": "{}",
     "exec": "~/.config/waybar/scripts/vpn.sh",

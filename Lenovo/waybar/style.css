@@ -43,6 +43,9 @@ window#waybar {
 #cpu,
 #memory,
 #disk,
+#custom-playerctl-prev,
+#custom-playerctl-next,
+#custom-playerctl,
 #custom-cputemp,
 #custom-myvpn,
 #custom-date,
@@ -72,7 +75,7 @@ window#waybar {
   padding-right: 20px;
 }
 
-#cpu {
+#custom-playerctl-prev {
   border-radius: 5px 0px 0px 5px;
   padding-left: 20px;
 }
