@@ -13,7 +13,6 @@
     "disk",
     "network",
     "pulseaudio",
-    "custom/date",
     "clock",
     "custom/power",
   ],
@@ -75,20 +74,16 @@
     "format": "<span font='10' rise='1500'> </span>{percentage_used}%",
     "format-alt": "<span font='10' rise='1500'> </span>{free}",
   },
-  "custom/date": {
-    "format": "󰸗 {}",
-    "interval": 3600,
-    "exec": "~/.config/waybar/scripts/date.sh",
-  },
   "custom/power": {
     "format": "󰐥",
     "on-click": "wlogout -b 4 -m 400px",
     "tooltip": false,
   },
   "clock": {
-    "format": "󰅐  {:%H:%M}",
+    "format": "󰅐  {:%H:%M:%S}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}",
+    "interval": 1,
   },
   "network": {
     "interval": 5,
@@ -103,7 +98,7 @@
     "on-click-right": "kitty --class update -T update -1 -e nmtui",
   },
   "pulseaudio": {
-    "format": "{icon}  {volume}%",
+    "format": "{icon}   {volume}%",
     "format-muted": "󰖁 Muted",
     "format-icons": {
       "headphone": "",
