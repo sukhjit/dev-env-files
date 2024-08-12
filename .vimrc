@@ -66,3 +66,6 @@ set wildmode=list:longest
 
 " Key mappings
 imap jj <Esc>
+
+xnoremap K :move '<-2<CR>gv-gv
+xnoremap J :move '>+1<CR>gv-gv
