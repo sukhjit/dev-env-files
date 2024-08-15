@@ -33,11 +33,5 @@ set("n", "<M-.>", "<c-w>5>")
 set("n", "<M-t>", "<C-W>+")
 set("n", "<M-s>", "<C-W>-")
 
--- Buffer
-set("n", "<Tab>", "<cmd>:BufferNext<CR>", { desc = "Buffer Next" })
-set("n", "<S-Tab>", "<cmd>:BufferPrevious<CR>", { desc = "Buffer Previous" })
-set("n", "<leader>k", "<cmd>:BufferCloseAllButCurrent<CR>", { desc = "Buffer Close all but Current" })
-set("n", "<leader>x", "<cmd>:BufferClose<CR>", { desc = "Buffer Close" })
-
 set("v", "K", ":m '<-2<CR>gv-gv")
 set("v", "J", ":m '>+1<CR>gv-gv")
