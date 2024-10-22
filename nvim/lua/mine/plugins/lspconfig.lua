@@ -124,7 +124,7 @@ return {
           },
         },
 
-        tsserver = {},
+        ts_ls = {},
 
         lua_ls = {
           settings = {
@@ -154,7 +154,7 @@ return {
         "staticcheck",
         "html-lsp",
         "css-lsp",
-        "prettier",
+        "prettierd",
         "tflint",
         "terraformls",
         "yamlfmt",
