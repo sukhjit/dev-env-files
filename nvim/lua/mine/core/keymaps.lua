@@ -35,3 +35,5 @@ set("n", "<M-s>", "<C-W>-")
 
 set("v", "K", ":m '<-2<CR>gv-gv")
 set("v", "J", ":m '>+1<CR>gv-gv")
+
+set("n", "<leader>ll", "<cmd>call llama#init()<CR>", { desc = "Start llama AI" })
