@@ -22,18 +22,25 @@ window#waybar {
 #workspaces button {
   padding: 2px 8px;
   color: #fff;
+  border-radius: 5px;
 }
 
 #workspaces button.active {
-  color: #24283b;
   background-color: #7aa2f7;
-  border-radius: 5px;
+  color: #24283b;
 }
 
 #workspaces button:hover {
   background-color: #7dcfff;
   color: #24283b;
-  border-radius: 5px;
+}
+
+#workspaces button.empty {
+  background-color: #2e3440;
+}
+
+#workspaces button.urgent {
+  color: #bf616a;
 }
 
 #idle_inhibitor,
