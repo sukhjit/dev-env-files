@@ -1,7 +1,7 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: VictorMono Nerd Font;
+  font-family: MesloLGS Nerd Font Mono;
   font-weight: 600;
   font-size: 12px;
   min-height: 0;
@@ -59,23 +59,18 @@ window#waybar {
   border-radius: 5px;
 
   background-color: #1d202e;
-  color: #ff9e64;
+  color: #7aa2f7;
 }
 
 #custom-power {
-  font-weight: bold;
   color: #24283b;
   background-color: #db4b4b;
-  padding-left: 7px;
-  padding-right: 5px;
-  padding-top: 5px;
-  margin: 5px;
   border-radius: 5px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   margin-left: 0px;
-}
-
-#clock {
-  color: #b48ead;
+  padding: 5px 10px;
 }
 
 #tray {
