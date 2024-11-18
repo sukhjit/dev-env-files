@@ -23,10 +23,11 @@ window#waybar {
   padding: 2px 8px;
   color: #fff;
   border-radius: 5px;
+  margin-right: 2px;
 }
 
-#workspaces button.active {
-  background-color: #7aa2f7;
+#workspaces button.visible {
+  background-color: #394b70;
   color: #24283b;
 }
 
@@ -35,12 +36,18 @@ window#waybar {
   color: #24283b;
 }
 
+#workspaces button.active {
+  background-color: #7aa2f7;
+  color: #24283b;
+}
+
 #workspaces button.empty {
   background-color: #2e3440;
 }
 
 #workspaces button.urgent {
-  color: #bf616a;
+  background-color: #c53b53;
+  color: #ffffff;
 }
 
 #idle_inhibitor,
