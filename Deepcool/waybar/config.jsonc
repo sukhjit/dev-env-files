@@ -1,8 +1,7 @@
 {
   "height": 30,
   "spacing": 4,
-  "modules-left": ["hyprland/workspaces"],
-  "modules-center": ["hyprland/window"],
+  "modules-left": ["hyprland/workspaces", "wlr/taskbar"],
   "modules-right": [
     "idle_inhibitor",
     "pulseaudio",
@@ -16,6 +15,7 @@
     "tray",
     "custom/power",
   ],
+
   // Modules configuration
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -25,6 +25,20 @@
       "1": [],
     },
   },
+
+  "wlr/taskbar": {
+    "format": "{icon} {name} ",
+    "icon-size": 14,
+    "all-outputs": true,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "ignore-list": ["wofi"],
+    "rewrite": {
+      "Firefox Web Browser": "Firefox",
+      "Google Chrome": "Chrome",
+    },
+  },
+
   "idle_inhibitor": {
     "format": "{icon}",
     "format-icons": {
@@ -32,27 +46,33 @@
       "deactivated": "",
     },
   },
+
   "tray": {
     "spacing": 10,
   },
+
   "clock": {
     "format": "󰅐  {:%H:%M:%S}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}",
     "interval": 1,
   },
+
   "cpu": {
     "format": "{usage}% ",
     "tooltip": true,
   },
+
   "memory": {
     "format": "{}% ",
   },
+
   "temperature": {
     "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 80,
     "format": "{temperatureC}°C ",
   },
+
   "power-profiles-daemon": {
     "format": "{icon}",
     "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
@@ -64,6 +84,7 @@
       "power-saver": "",
     },
   },
+
   "network": {
     "format-wifi": "{essid} ({signalStrength}%) ",
     "format-ethernet": "{ipaddr}/{cidr} ",
@@ -72,6 +93,7 @@
     "format-disconnected": "Disconnected ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
+
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
     "format": "{volume}% {icon} {format_source}",
@@ -91,6 +113,7 @@
     },
     "on-click": "pavucontrol",
   },
+
   "custom/power": {
     "format": "⏻",
     "tooltip": false,
@@ -104,6 +127,7 @@
       "hibernate": "systemctl hibernate",
     },
   },
+
   "custom/gpu": {
     "format": "{}",
     "exec": "$HOME/.config/waybar/scripts/gpu.sh",
