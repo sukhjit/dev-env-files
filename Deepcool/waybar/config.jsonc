@@ -107,7 +107,7 @@
 
   "custom/power": {
     "format": "⏻",
-    "on-click": "wlogout -b 6 -c 0 -r 0 -m 0 --layout /home/sukhjit/.config/wlogout/layout --css /home/sukhjit/.config/wlogout/style.css --protocol layer-shell",
+    "on-click": "wlogout --protocol layer-shell",
     "tooltip": false,
   },
 
