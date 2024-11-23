@@ -5,17 +5,15 @@
   font-weight: 600;
   font-size: 12px;
   min-height: 0;
+  background-color: transparent;
 }
 
 window#waybar {
-  background: #12131a;
   color: white;
 }
 
 #workspaces {
-  background-color: #1d202e;
-  margin: 5px;
-  margin-left: 6px;
+  margin: 5px 0px 5px 6px;
   border-radius: 5px;
 }
 
@@ -50,7 +48,6 @@ window#waybar {
   color: #ffffff;
 }
 
-#idle_inhibitor,
 #custom-date,
 #clock,
 #battery,
@@ -65,9 +62,21 @@ window#waybar {
   padding: 2px 10px;
   margin: 5px 0px;
   border-radius: 5px;
-
   background-color: #1d202e;
   color: #7aa2f7;
+}
+
+#taskbar button {
+  padding: 2px 5px;
+  margin: 5px 2px;
+  border-radius: 5px;
+  background-color: #1d202e;
+  color: #7aa2f7;
+}
+
+#taskbar button.active {
+  background-color: #7aa2f7;
+  color: #24283b;
 }
 
 #custom-power {
@@ -77,7 +86,7 @@ window#waybar {
   margin-right: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
-  margin-left: 0px;
+  margin-left: 2px;
   font-size: 13px;
   padding: 5px 13px 5px 9px;
 }
