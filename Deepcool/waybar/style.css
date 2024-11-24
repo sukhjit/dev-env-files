@@ -13,15 +13,18 @@ window#waybar {
 }
 
 #workspaces {
-  margin: 5px 0px 5px 6px;
+  margin: 5px 0px 5px 4px;
   border-radius: 5px;
 }
 
 #workspaces button {
-  padding: 1px 3px;
   color: #fff;
+  padding: 1px 2px;
+  margin: 1px 2px 1px 1px;
   border-radius: 5px;
-  margin-right: 2px;
+
+  background-color: #1d202e;
+  color: #7aa2f7;
 }
 
 #workspaces button.visible {
@@ -66,9 +69,14 @@ window#waybar {
   color: #7aa2f7;
 }
 
+#taskbar {
+  padding-left: 0px;
+  margin-left: 0px;
+}
+
 #taskbar button {
   padding: 2px 5px;
-  margin: 5px 2px;
+  margin: 5px 3px 5px 0px;
   border-radius: 5px;
   background-color: #1d202e;
   color: #7aa2f7;
