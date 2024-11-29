@@ -4,6 +4,7 @@
   "modules-left": ["hyprland/workspaces", "wlr/taskbar"],
   "modules-right": [
     "pulseaudio",
+    "custom/myvpn",
     "network",
     "power-profiles-daemon",
     "cpu",
@@ -40,6 +41,14 @@
 
   "tray": {
     "spacing": 10,
+  },
+
+  "custom/myvpn": {
+    "format": "VPN: {}",
+    "exec": "~/.config/waybar/scripts/vpn.sh",
+    "interval": 5,
+    "on-click": "mullvad connect",
+    "on-click-right": "mullvad disconnect",
   },
 
   "clock": {
