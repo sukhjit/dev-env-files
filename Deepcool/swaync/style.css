@@ -1,24 +1,12 @@
-@define-color cc-bg rgba(0, 0, 0, 0.5);
-@define-color noti-border-color rgba(255, 255, 255, 0.15);
-@define-color noti-bg rgb(17, 17, 27);
-@define-color noti-bg-darker rgb(43, 43, 57);
-@define-color noti-bg-hover rgb(27, 27, 43);
-@define-color noti-bg-focus rgba(27, 27, 27, 0.6);
-@define-color noti-close-bg rgba(255, 255, 255, 0.1);
-@define-color noti-close-bg-hover rgba(255, 255, 255, 0.15);
-@define-color text-color rgba(169, 177, 214, 1);
-@define-color text-color-disabled rgb(150, 150, 150);
-@define-color bg-selected rgb(0, 128, 255);
-
 * {
-  font-family: JetBrainsMono NF;
-  font-weight: bolder;
+  font-family: "MesloLGS Nerd Font Mono Regular";
+  /* font-weight: bolder; */
 }
 
 .control-center .notification-row:focus,
 .control-center .notification-row:hover {
   opacity: 1;
-  background: @noti-bg-darker;
+  background: rgb(43, 43, 57);
 }
 
 .notification-row {
@@ -39,8 +27,8 @@
 }
 
 .close-button {
-  background: @noti-close-bg;
-  color: @text-color;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(169, 177, 214, 1);
   text-shadow: none;
   padding: 0;
   border-radius: 100%;
@@ -54,7 +42,7 @@
 
 .close-button:hover {
   box-shadow: none;
-  background: @noti-close-bg-hover;
+  background: rgba(255, 255, 255, 0.15);
   transition: all 0.15s ease-in-out;
   border: none;
 }
@@ -64,16 +52,16 @@
   padding: 4px;
   margin: 0;
   box-shadow: none;
-  background: @noti-bg;
+  background: rgb(17, 17, 27);
   border: none;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
   transition: all 0.15s ease-in-out;
 }
 
 .notification-default-action:hover,
 .notification-action:hover {
   -gtk-icon-effect: none;
-  background: @noti-bg-hover;
+  background: rgb(27, 27, 43);
 }
 
 .notification-default-action {
@@ -106,29 +94,29 @@
 }
 
 .inline-reply-entry {
-  background: @noti-bg-darker;
-  color: @text-color;
-  caret-color: @text-color;
-  border: 1px solid @noti-border-color;
+  background: rgb(43, 43, 57);
+  color: rgba(169, 177, 214, 1);
+  caret-color: rgba(169, 177, 214, 1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
 }
 
 .inline-reply-button {
   margin-left: 4px;
-  background: @noti-bg;
-  border: 1px solid @noti-border-color;
+  background: rgb(17, 17, 27);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
 }
 
 .inline-reply-button:disabled {
   background: initial;
-  color: @text-color-disabled;
+  color: rgb(150, 150, 150);
   border: 1px solid transparent;
 }
 
 .inline-reply-button:hover {
-  background: @noti-bg-hover;
+  background: rgb(27, 27, 43);
 }
 
 .body-image {
@@ -149,7 +137,7 @@
   font-size: 16px;
   font-weight: 700;
   background: transparent;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
   text-shadow: none;
   margin-right: 18px;
 }
@@ -158,12 +146,12 @@
   font-size: 15px;
   font-weight: 400;
   background: transparent;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
   text-shadow: none;
 }
 
 .control-center {
-  background: @cc-bg;
+  background: rgba(0, 0, 0, 0.5);
   border: 1px solid #2ac3de;
   border-radius: 10px;
 }
@@ -185,27 +173,27 @@
 }
 
 .widget-title {
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
   margin: 10px;
   font-size: 1.5rem;
 }
 
 .widget-title > button {
   font-size: initial;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
   text-shadow: none;
-  background: @noti-bg;
-  border: 1px solid @noti-border-color;
+  background: rgb(17, 17, 27);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: none;
   border-radius: 12px;
 }
 
 .widget-title > button:hover {
-  background: @noti-bg-hover;
+  background: rgb(27, 27, 43);
 }
 
 .widget-dnd {
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
   margin: 10px;
   font-size: 1.1rem;
 }
@@ -213,17 +201,17 @@
 .widget-dnd > switch {
   font-size: initial;
   border-radius: 12px;
-  background: @noti-bg;
-  border: 1px solid @noti-border-color;
+  background: rgb(17, 17, 27);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: none;
 }
 
 .widget-dnd > switch:checked {
-  background: @bg-selected;
+  background: rgb(0, 128, 255);
 }
 
 .widget-dnd > switch slider {
-  background: @noti-bg-hover;
+  background: rgb(27, 27, 43);
   border-radius: 12px;
 }
 
@@ -233,12 +221,12 @@
 
 .widget-label > label {
   font-size: 1.5rem;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
 }
 
 .widget-mpris {
-  color: @text-color;
-  background: @noti-bg-darker;
+  color: rgba(169, 177, 214, 1);
+  background: rgb(43, 43, 57);
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
@@ -263,18 +251,18 @@
   padding: 8px;
   margin: 20px 10px 10px;
   border-radius: 12px;
-  background: @noti-bg-darker;
+  background: rgb(43, 43, 57);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button {
   margin: 3px;
   background: #343b58;
   border-radius: 12px;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
 }
 
 .widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  /* background: @noti-bg-hover; */
+  /* background: rgb(27, 27, 43); */
   color: rgba(158, 206, 106, 1);
 }
 
@@ -289,12 +277,12 @@
 }
 
 .widget-volume {
-  background: @noti-bg-darker;
+  background: rgb(43, 43, 57);
   padding: 8px;
   margin: 10px;
   border-radius: 12px;
   font-size: x-large;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
 }
 
 .widget-volume > box > button {
@@ -303,19 +291,19 @@
 }
 
 .per-app-volume {
-  background-color: @noti-bg;
+  background-color: rgb(17, 17, 27);
   padding: 4px 8px 8px;
   margin: 0 8px 8px;
   border-radius: 12px;
 }
 
 .widget-backlight {
-  background: @noti-bg-darker;
+  background: rgb(43, 43, 57);
   padding: 8px;
   margin: 10px;
   border-radius: 12px;
   font-size: x-large;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
 }
 
 .widget-inhibitors {
@@ -325,14 +313,14 @@
 
 .widget-inhibitors > button {
   font-size: initial;
-  color: @text-color;
+  color: rgba(169, 177, 214, 1);
   text-shadow: none;
-  background: @noti-bg;
-  border: 1px solid @noti-border-color;
+  background: rgb(17, 17, 27);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: none;
   border-radius: 12px;
 }
 
 .widget-inhibitors > button:hover {
-  background: @noti-bg-hover;
+  background: rgb(27, 27, 43);
 }
