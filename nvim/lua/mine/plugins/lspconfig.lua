@@ -114,6 +114,8 @@ return {
 
         terraformls = {},
 
+        tailwindcss = {},
+
         emmet_ls = {
           filetypes = {
             "html",
