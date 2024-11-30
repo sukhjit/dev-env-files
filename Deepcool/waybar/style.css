@@ -4,12 +4,11 @@
   font-family: MesloLGS Nerd Font;
   font-weight: 600;
   font-size: 12px;
-  min-height: 0;
-  background-color: transparent;
 }
 
 window#waybar {
-  color: white;
+  background-color: transparent;
+  color: rgba(217, 216, 216, 1);
 }
 
 #workspaces {
