@@ -112,19 +112,17 @@ return {
           },
         },
 
-        terraformls = {},
-
-        tailwindcss = {},
-
-        emmet_ls = {
-          filetypes = {
-            "html",
-            "css",
-            "sass",
-            "scss",
-            "less",
-          },
+        html = {
+          filetypes = { "html" },
         },
+
+        cssls = {},
+        tailwindcss = {},
+        dockerls = {},
+        sqlls = {},
+        terraformls = {},
+        jsonls = {},
+        yamlls = {},
 
         ts_ls = {},
 
