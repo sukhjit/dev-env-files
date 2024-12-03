@@ -1,7 +1,7 @@
 {
   "height": 30,
   "spacing": 4,
-  "modules-left": ["hyprland/workspaces", "wlr/taskbar"],
+  "modules-left": ["hyprland/workspaces"],
   "modules-right": [
     "pulseaudio",
     "custom/myvpn",
