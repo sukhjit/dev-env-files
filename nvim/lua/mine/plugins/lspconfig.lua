@@ -121,7 +121,6 @@ return {
         dockerls = {},
         sqlls = {},
         terraformls = {},
-        jsonls = {},
         yamlls = {},
 
         ts_ls = {},
