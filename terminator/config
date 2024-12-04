@@ -1,0 +1,54 @@
+[global_config]
+  extra_styling = False
+  inactive_color_offset = 1.0
+  enabled_plugins = LaunchpadCodeURLHandler, APTURLHandler, LaunchpadBugURLHandler
+[keybindings]
+  zoom_in = <Primary>KP_Add
+  zoom_out = <Primary>KP_Subtract
+  zoom_normal = <Primary>KP_0
+  go_next = None
+  go_prev = <Primary><Shift>p
+  switch_to_tab_1 = <Alt>1
+  switch_to_tab_2 = <Alt>2
+  switch_to_tab_3 = <Alt>3
+  switch_to_tab_4 = <Alt>4
+  switch_to_tab_5 = <Alt>5
+  switch_to_tab_6 = <Alt>6
+  switch_to_tab_7 = <Alt>7
+  switch_to_tab_8 = <Alt>8
+  switch_to_tab_9 = <Alt>9
+  switch_to_tab_10 = <Alt>0
+  split_horiz = <Alt><Shift>d
+  split_vert = <Alt>d
+  hide_window = None
+  new_window = <Primary><Shift>n
+  broadcast_off = None
+  broadcast_group = None
+  broadcast_all = None
+  edit_tab_title = None
+  layout_launcher = None
+[profiles]
+  [[default]]
+    font = MesloLGS Nerd Font Mono 9
+    scrollback_lines = 10000
+    disable_mousewheel_zoom = True
+    login_shell = True
+    use_system_font = False
+    bold_is_bright = True
+    copy_on_selection = True
+    show_titlebar = False
+    background_darkness = 0.92
+    cursor_color = "#a9b1d6"
+    background_color = "#1a1b26"
+    foreground_color = "#a9b1d6"
+    palette = "#1a1b26:#f7768e:#9ece6a:#e0af68:#7aa2f7:#9a7ecc:#4abaaf:#acb0d0:#4e5173:#f7768e:#9ece6a:#e0af68:#7aa2f7:#9a7ecc:#4abaaf:#acb0d0"
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
