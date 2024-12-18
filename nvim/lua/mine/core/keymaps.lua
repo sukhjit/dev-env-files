@@ -40,3 +40,7 @@ set("n", "<leader>ll", "<cmd>call llama#init()<CR>", { desc = "Start llama AI" }
 
 -- keep pasted value in register
 set("v", "<leader>p", '"_dP')
+
+-- quick fix navigation
+set("n", "<M-j>", "<cmd>cnext<CR>")
+set("n", "<M-k>", "<cmd>cprev<CR>")
