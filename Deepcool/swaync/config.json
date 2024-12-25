@@ -42,10 +42,4 @@
             "image-radius": 12
         }
     }
-    "scripts": {
-        "audio": {
-            "exec": "sh $HOME/.scripts/notif.sh",
-            "app-name": ".*",
-        }
-    }
 }
