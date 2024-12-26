@@ -36,6 +36,7 @@ return {
         jsonc = { "prettierd" },
         markdown = { "prettierd" },
         python = { "isort", "black" },
+        xml = { "xmlformatter" },
       },
     },
   },
