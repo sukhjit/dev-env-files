@@ -5,6 +5,7 @@ return {
     config = function()
       require("which-key").add {
         { "<leader>c", group = "[C]ode" },
+        { "<leader>cp", group = "[C]ode [P]ackage" },
         { "<leader>c_", hidden = true },
         { "<leader>d", group = "[D]ocument" },
         { "<leader>d_", hidden = true },
