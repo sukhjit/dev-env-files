@@ -14,7 +14,7 @@ return {
     require('mason-null-ls').setup {
       ensure_installed = {
         'checkmake',
-        'prettier',
+        'prettierd',
         'stylua',
         'eslint_d',
         'shfmt',
@@ -32,7 +32,17 @@ return {
       code_actions.impl,
 
       diagnostics.checkmake,
-      formatting.prettier.with { filetypes = { 'json', 'yaml', 'markdown' } },
+      formatting.prettierd.with {
+        filetypes = {
+          'css',
+          'html',
+          'javascript',
+          'json',
+          'jsonc',
+          'markdown',
+          'typescript',
+        },
+      },
       formatting.stylua,
       formatting.shfmt.with { args = { '-i', '4' } },
       formatting.terraform_fmt,
