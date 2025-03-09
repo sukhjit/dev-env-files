@@ -29,7 +29,7 @@ require('lazy').setup({
   require 'plugins.myllama',
   require 'plugins.neo-tree',
   require 'plugins.neotest',
-  require 'plugins.none-ls',
+  require 'plugins.lint',
   require 'plugins.telescope',
   require 'plugins.todo',
   require 'plugins.treesitter',
