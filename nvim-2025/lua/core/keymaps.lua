@@ -37,3 +37,11 @@ vim.keymap.set('v', '<leader>p', '"_dP')
 -- quick fix navigation
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
+
+-- Terraform comment line
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'terraform',
+  callback = function()
+    vim.bo.commentstring = '# %s'
+  end,
+})
