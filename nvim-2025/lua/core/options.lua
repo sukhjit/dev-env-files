@@ -56,3 +56,6 @@ vim.opt.swapfile = false
 
 -- allow backspace on indent, end of line or insert mode start position
 vim.opt.backspace = 'indent,eol,start'
+
+-- use rounded borders for floating windows
+vim.o.winborder = 'rounded'

@@ -1,15 +1,3 @@
-local border = {
-  { '🭽', 'FloatBorder' },
-  { '▔', 'FloatBorder' },
-  { '🭾', 'FloatBorder' },
-  { '▕', 'FloatBorder' },
-  { '🭿', 'FloatBorder' },
-  { '▁', 'FloatBorder' },
-  { '🭼', 'FloatBorder' },
-  { '▏', 'FloatBorder' },
-}
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-
 return {
   {
     'neovim/nvim-lspconfig',
@@ -51,11 +39,7 @@ return {
           ---@param bufnr? integer some lsp support methods only in specific files
           ---@return boolean
           local function client_supports_method(client, method, bufnr)
-            if vim.fn.has 'nvim-0.11' == 1 then
-              return client:supports_method(method, bufnr)
-            else
-              return client.supports_method(method, { bufnr = bufnr })
-            end
+            return client:supports_method(method, bufnr)
           end
 
           -- The following two autocommands are used to highlight references of the
@@ -184,7 +168,7 @@ return {
           commands = {
             RuffAutofix = {
               function()
-                vim.lsp.buf.execute_command {
+                vim.lsp.buf.client:exec_cmd {
                   command = 'ruff.applyAutofix',
                   arguments = {
                     { uri = vim.uri_from_bufnr(0) },
@@ -195,7 +179,7 @@ return {
             },
             RuffOrganizeImports = {
               function()
-                vim.lsp.buf.execute_command {
+                vim.lsp.buf.client:exec_cmd {
                   command = 'ruff.applyOrganizeImports',
                   arguments = {
                     { uri = vim.uri_from_bufnr(0) },
@@ -225,7 +209,11 @@ return {
                 callSnippet = 'Replace',
               },
               telemetry = { enable = false },
-              diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+                disable = { 'missing-fields' },
+              },
             },
           },
         },
