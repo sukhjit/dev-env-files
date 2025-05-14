@@ -2,7 +2,7 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
-    branch = '0.1.x',
+    -- branch = '0.1.x', -- using master branch
     dependencies = {
       'nvim-lua/plenary.nvim',
       {
@@ -27,8 +27,8 @@ return {
             i = {
               ['<c-enter>'] = 'to_fuzzy_refine',
               ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
-              ['<C-j>'] = require('telescope.actions').move_selection_next,     -- move to next result
-              ['<C-l>'] = require('telescope.actions').select_default,          -- open file
+              ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
+              ['<C-l>'] = require('telescope.actions').select_default, -- open file
             },
           },
         },
