@@ -28,6 +28,9 @@ setopt hist_find_no_dups
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
+# bind Home and End keys for tmux
+bindkey "\E[1~" beginning-of-line
+bindkey "\E[4~" end-of-line
 
 ###############################################
 
