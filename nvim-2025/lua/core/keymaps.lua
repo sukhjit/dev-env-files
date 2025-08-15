@@ -9,6 +9,9 @@ vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode with jj' })
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+-- move text after cursor to next line
+vim.keymap.set('n', '<leader>j', 'i<CR><Esc>')
+
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
