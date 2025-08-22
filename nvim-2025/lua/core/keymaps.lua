@@ -33,6 +33,7 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv-gv")
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv-gv")
 
 vim.keymap.set('n', '<leader>ll', '<cmd>call llama#init()<CR>', { desc = 'Start llama AI' })
+vim.keymap.set('n', '<leader>lc', '<cmd>call llama#disable()<CR>', { desc = 'Stop llama AI' })
 
 -- keep pasted value in register
 vim.keymap.set('v', '<leader>p', '"_dP')
