@@ -2,5 +2,8 @@
 alacritty/themes
 Lenovo/alacritty/themes
 
-
+# lazy lock file
 nvim/lazy-lock.json
+
+# Thunar
+Deepcool/Thunar/accels.scm
