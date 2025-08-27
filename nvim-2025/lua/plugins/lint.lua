@@ -30,7 +30,7 @@ return {
         go = {
           'gofumpt',
           'goimports',
-          -- 'golines',
+          'golines',
         },
         terraform = { 'terraform_fmt' },
         tf = { 'terraform_fmt' },
@@ -45,4 +45,3 @@ return {
     },
   },
 }
-
