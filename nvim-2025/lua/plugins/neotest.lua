@@ -6,7 +6,10 @@ return {
       'nvim-lua/plenary.nvim',
       'antoinemadec/FixCursorHold.nvim',
       'nvim-treesitter/nvim-treesitter',
-      'fredrikaverpil/neotest-golang',
+      {
+        'fredrikaverpil/neotest-golang',
+        version = 'v1.15.1',
+      },
     },
     keys = {
       {
