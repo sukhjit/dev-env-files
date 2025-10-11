@@ -1,5 +1,5 @@
 return {
   {
-    'ggml-org/llama.vim',
+    'sukhjit/llama.vim',
   },
 }
