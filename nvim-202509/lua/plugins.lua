@@ -59,8 +59,15 @@ vim.pack.add {
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
   { src = 'https://github.com/hrsh7th/cmp-path' },
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp-signature-help' },
+  { src = 'https://github.com/windwp/nvim-autopairs' },
 }
 
+-- autopairs
+require('nvim-autopairs').setup {
+  require('cmp').event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done()),
+}
+
+-- autocompletion
 local luasnip = require 'luasnip'
 local cmp = require 'cmp'
 cmp.setup {
