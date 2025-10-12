@@ -14,7 +14,12 @@ vim.pack.add {
   { src = 'https://github.com/antoinemadec/FixCursorHold.nvim' },
   {
     src = 'https://github.com/fredrikaverpil/neotest-golang',
-    version = 'v1.15.1',
+    version = 'main',
+    data = {
+      run = function(_)
+        vim.system({ 'go', 'install', 'gotest.tools/gotestsum@latest' }):wait()
+      end,
+    },
   },
 
   { src = 'https://github.com/David-Kunz/gen.nvim' },
@@ -31,7 +36,19 @@ vim.pack.add {
   { src = 'https://github.com/neovim/nvim-lspconfig' },
   { src = 'https://github.com/nvim-telescope/telescope.nvim' },
   { src = 'https://github.com/nvim-tree/nvim-web-devicons' },
-  { src = 'https://github.com/nvim-treesitter/nvim-treesitter', version = 'master' },
+  {
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter',
+    version = 'main',
+    data = {
+      run = function(_)
+        vim.cmd 'TSUpdate go'
+      end,
+    },
+  },
+  {
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
+    version = 'main',
+  },
   { src = 'https://github.com/olexsmir/gopher.nvim' },
   { src = 'https://github.com/romgrk/barbar.nvim' },
   { src = 'https://github.com/stevearc/conform.nvim' },
@@ -95,6 +112,46 @@ require('nvim-treesitter.configs').setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+-- functions/classes jump configuration
+require('nvim-treesitter-textobjects').setup {
+  select = {
+    enable = true,
+    lookahead = true,
+  },
+}
+local nttmove = require 'nvim-treesitter-textobjects.move'
+vim.keymap.set({ 'n', 'x', 'o' }, ']m', function()
+  nttmove.goto_next_start('@function.outer', 'textobjects')
+end, { desc = 'Jump to Next Function Start Outer' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, ']]', function()
+  nttmove.goto_next_start('@class.outer', 'textobjects')
+end, { desc = 'Jump to Next Class Start Outer' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, ']M', function()
+  nttmove.goto_next_end('@function.outer', 'textobjects')
+end, { desc = 'Jump to Next Function End Outer' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '][', function()
+  nttmove.goto_next_end('@class.outer', 'textobjects')
+end, { desc = 'Jump to Next Class End Outer' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '[m', function()
+  nttmove.goto_previous_start('@function.outer', 'textobjects')
+end, { desc = 'Jump to Previous Function Start Outer' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '[[', function()
+  nttmove.goto_previous_start('@class.outer', 'textobjects')
+end, { desc = 'Jump to Previous Class Start Outer' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '[M', function()
+  nttmove.goto_previous_end('@function.outer', 'textobjects')
+end, { desc = 'Jump to Previous Function End Outer' })
+
+vim.keymap.set({ 'n', 'x', 'o' }, '[]', function()
+  nttmove.goto_previous_end('@class.outer', 'textobjects')
+end, { desc = 'Jump to Previous Class End Outer' })
 
 -- enable highlighting
 vim.api.nvim_create_autocmd('FileType', {
@@ -289,15 +346,22 @@ require('gitsigns').setup {
     end, { desc = 'reset git hunk' })
     -- normal mode
     map('n', ']h', function()
-      gitsigns.nav_hunk 'next'
+      if vim.wo.diff then
+        vim.cmd.normal { ']h', bang = true }
+      else
+        gitsigns.nav_hunk 'next'
+      end
     end, { desc = 'git next hunk' })
     map('n', '[h', function()
-      gitsigns.nav_hunk 'prev'
+      if vim.wo.diff then
+        vim.cmd.normal { '[h', bang = true }
+      else
+        gitsigns.nav_hunk 'prev'
+      end
     end, { desc = 'git prev hunk' })
     map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
     map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
     map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'git [S]tage buffer' })
-    map('n', '<leader>hu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
     map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
     map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
     map('n', '<leader>hb', function()
@@ -305,11 +369,11 @@ require('gitsigns').setup {
     end, { desc = 'git [b]lame line' })
     map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
     map('n', '<leader>hD', function()
-      gitsigns.diffthis '@'
+      gitsigns.diffthis '~'
     end, { desc = 'git [D]iff against last commit' })
     -- Toggles
     map('n', '<leader>hB', gitsigns.toggle_current_line_blame, { desc = 'toggle git show [B]lame line' })
-    map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+    map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'git [p]review hunk [i]nline' })
   end,
 }
 
