@@ -239,6 +239,7 @@ require('mason-tool-installer').setup {
     'html-lsp',
     'jsonls',
     'lua_ls',
+    'prettierd',
     'pylsp',
     'ruff',
     'sqlls',
@@ -246,6 +247,7 @@ require('mason-tool-installer').setup {
     'tailwindcss',
     'terraformls',
     'ts_ls',
+    'xmlformatter',
     'yamlls',
 
     -- golang
