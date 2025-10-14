@@ -344,6 +344,42 @@ require('mini.statusline').setup {}
 vim.cmd ':lua MiniStatusline.section_location = function() return "%2l:%-2v" end'
 
 -- telescope
+local actions = require 'telescope.actions'
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ['<esc>'] = actions.close,
+        ['<c-enter>'] = 'to_fuzzy_refine',
+        ['<C-k>'] = require('telescope.actions').move_selection_previous, -- move to prev result
+        ['<C-j>'] = require('telescope.actions').move_selection_next, -- move to next result
+        ['<C-l>'] = require('telescope.actions').select_default, -- open file
+      },
+    },
+  },
+  pickers = {
+    find_files = {
+      file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+      hidden = true,
+    },
+  },
+  live_grep = {
+    file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+    additional_args = function(_)
+      return { '--hidden' }
+    end,
+  },
+  extensions = {
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown(),
+    },
+  },
+}
+
+-- Enable Telescope extensions if they are installed
+pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'ui-select')
+
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
