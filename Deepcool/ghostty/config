@@ -26,3 +26,4 @@ gtk-titlebar = false
 window-decoration = false
 
 unfocused-split-opacity = 1.0
+background-opacity = 0.9
