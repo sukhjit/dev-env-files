@@ -61,7 +61,14 @@ vim.pack.add {
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp-signature-help' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
+  { src = 'https://github.com/sukhjit/go-pkgs-check.nvim' },
 }
+
+local gpc = require 'GoPkgsCheck'
+gpc.setup {}
+vim.keymap.set('n', '<Leader>cps', gpc.show, { desc = '[Code] [P]ackage [S]how' })
+vim.keymap.set('n', '<Leader>cpu', gpc.update, { desc = '[Code] [P]ackage [U]pdate' })
+vim.keymap.set('n', '<Leader>cpc', gpc.clear, { desc = '[Code] [P]ackage [C]lear' })
 
 require('ibl').setup {}
 
