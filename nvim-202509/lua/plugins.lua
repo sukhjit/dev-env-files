@@ -60,7 +60,10 @@ vim.pack.add {
   { src = 'https://github.com/hrsh7th/cmp-path' },
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp-signature-help' },
   { src = 'https://github.com/windwp/nvim-autopairs' },
+  { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
 }
+
+require('ibl').setup {}
 
 -- autopairs
 require('nvim-autopairs').setup {
