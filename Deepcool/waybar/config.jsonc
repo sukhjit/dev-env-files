@@ -3,6 +3,7 @@
   "spacing": 4,
   "modules-left": ["hyprland/workspaces"],
   "modules-right": [
+    "upower",
     "custom/screenrecording",
     "pulseaudio",
     "custom/myvpn",
@@ -162,5 +163,14 @@
     "on-click": "$HOME/.config/waybar/scripts/start-stop-screenrecord.sh",
     "signal": 8,
     "return-type": "json",
+  },
+
+  "upower": {
+    "show-icon": true,
+    "icon-size": 20,
+    "hide-if-empty": false,
+    "tooltip": true,
+    "tooltip-spacing": 5,
+    "on-click": false,
   },
 }
