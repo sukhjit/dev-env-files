@@ -9,7 +9,7 @@ vim.pack.add {
 
   { src = 'https://github.com/nvim-neotest/neotest' },
   -- dependencies
-  { src = 'https://github.com//nvim-neotest/nvim-nio' },
+  { src = 'https://github.com/nvim-neotest/nvim-nio' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
   { src = 'https://github.com/antoinemadec/FixCursorHold.nvim' },
   {
@@ -146,43 +146,121 @@ require('gen').setup {
   debug = false,
 }
 
-require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    'lua',
-    'python',
-    'javascript',
-    'typescript',
-    'vimdoc',
-    'vim',
-    'regex',
-    'terraform',
-    'sql',
-    'dockerfile',
-    'toml',
-    'json',
-    'java',
-    'groovy',
-    'go',
-    'gitignore',
-    'graphql',
-    'yaml',
-    'make',
-    'cmake',
-    'markdown',
-    'markdown_inline',
-    'bash',
-    'tsx',
-    'css',
-    'html',
-  },
-  sync_install = false,
-  auto_install = true,
-  ignore_install = {},
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { '<filetype>' },
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
+
+local langs = {
+  'lua',
+  'python',
+  'javascript',
+  'typescript',
+  'vimdoc',
+  'vim',
+  'regex',
+  'terraform',
+  'sql',
+  'dockerfile',
+  'toml',
+  'json',
+  'java',
+  'groovy',
+  'go',
+  'gitignore',
+  'graphql',
+  'yaml',
+  'make',
+  'cmake',
+  'markdown',
+  'markdown_inline',
+  'bash',
+  'tsx',
+  'css',
+  'html',
 }
+
+local group = vim.api.nvim_create_augroup('MyTreesitterSetup', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+  group = group,
+  pattern = langs,
+  callback = function(args)
+    -- Enable highlighting for the buffer
+    vim.treesitter.start(args.buf)
+
+    -- Enable indentation for the buffer
+    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
+require('nvim-treesitter').install {
+  'lua',
+  'python',
+  'javascript',
+  'typescript',
+  'vimdoc',
+  'vim',
+  'regex',
+  'terraform',
+  'sql',
+  'dockerfile',
+  'toml',
+  'json',
+  'java',
+  'groovy',
+  'go',
+  'gitignore',
+  'graphql',
+  'yaml',
+  'make',
+  'cmake',
+  'markdown',
+  'markdown_inline',
+  'bash',
+  'tsx',
+  'css',
+  'html',
+}
+
+-- require('nvim-treesitter.configs').setup {
+--   ensure_installed = {
+--     'lua',
+--     'python',
+--     'javascript',
+--     'typescript',
+--     'vimdoc',
+--     'vim',
+--     'regex',
+--     'terraform',
+--     'sql',
+--     'dockerfile',
+--     'toml',
+--     'json',
+--     'java',
+--     'groovy',
+--     'go',
+--     'gitignore',
+--     'graphql',
+--     'yaml',
+--     'make',
+--     'cmake',
+--     'markdown',
+--     'markdown_inline',
+--     'bash',
+--     'tsx',
+--     'css',
+--     'html',
+--   },
+--   sync_install = false,
+--   auto_install = true,
+--   ignore_install = {},
+--   highlight = {
+--     enable = true,
+--     additional_vim_regex_highlighting = false,
+--   },
+-- }
 
 -- functions/classes jump configuration
 require('nvim-treesitter-textobjects').setup {
@@ -524,6 +602,7 @@ require('gitsigns').setup {
 require('neotest').setup {
   adapters = {
     require 'neotest-golang' {
+      runner = 'gotestsum',
       go_test_args = {
         '-v',
         '-race',
