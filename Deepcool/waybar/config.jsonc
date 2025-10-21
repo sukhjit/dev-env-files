@@ -4,16 +4,17 @@
   "modules-left": ["hyprland/workspaces"],
   "modules-right": [
     "upower",
-    "custom/screenrecording",
     "pulseaudio",
     "custom/myvpn",
     "network",
-    "power-profiles-daemon",
     "cpu",
-    "memory",
     "temperature",
     "custom/gpu",
+    "memory",
     "clock",
+    "keyboard-state",
+    "custom/screenrecording",
+    "power-profiles-daemon",
     "custom/notifications",
     "tray",
     "custom/power",
@@ -26,6 +27,16 @@
     "format": "{icon}",
     "persistent_workspaces": {
       "1": [],
+    },
+  },
+
+  "keyboard-state": {
+    "numlock": true,
+    "capslock": true,
+    "format": "{name} {icon}",
+    "format-icons": {
+      "locked": " ",
+      "unlocked": " ",
     },
   },
 

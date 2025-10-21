@@ -64,12 +64,26 @@ window#waybar {
 #custom-notifications,
 #custom-screenrecording,
 #upower,
+#keyboard-state,
 #network {
   padding: 2px 10px;
   margin: 5px 0px;
   border-radius: 5px;
   background-color: #1d202e;
   color: #7aa2f7;
+}
+
+#keyboard-state {
+  margin: 5px 0px;
+  padding: 0px 2px;
+}
+
+#keyboard-state > label {
+  padding: 0 3px;
+}
+
+#keyboard-state > label.locked {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 #custom-screenrecording {
