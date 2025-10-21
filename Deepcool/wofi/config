@@ -9,3 +9,6 @@ print_command=true
 layer=overlay
 insensitive=true
 prompt=
+insensitive=true
+allow_images=true
+image_size=16
