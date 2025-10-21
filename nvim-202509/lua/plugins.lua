@@ -24,7 +24,11 @@ vim.pack.add {
 
   { src = 'https://github.com/David-Kunz/gen.nvim' },
   { src = 'https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim' },
-  { src = 'https://github.com/echasnovski/mini.statusline' },
+
+  { src = 'https://github.com/nvim-mini/mini.notify' },
+  { src = 'https://github.com/nvim-mini/mini.pairs' },
+  { src = 'https://github.com/nvim-mini/mini.statusline' },
+
   { src = 'https://github.com/folke/todo-comments.nvim' },
   { src = 'https://github.com/folke/tokyonight.nvim' },
   { src = 'https://github.com/folke/which-key.nvim' },
@@ -62,7 +66,6 @@ vim.pack.add {
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp' },
   { src = 'https://github.com/hrsh7th/cmp-path' },
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp-signature-help' },
-  { src = 'https://github.com/windwp/nvim-autopairs' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/sukhjit/go-pkgs-check.nvim' },
 }
@@ -74,11 +77,6 @@ vim.keymap.set('n', '<Leader>cpu', gpc.update, { desc = '[Code] [P]ackage [U]pda
 vim.keymap.set('n', '<Leader>cpc', gpc.clear, { desc = '[Code] [P]ackage [C]lear' })
 
 require('ibl').setup {}
-
--- autopairs
-require('nvim-autopairs').setup {
-  require('cmp').event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done()),
-}
 
 -- autocompletion
 local luasnip = require 'luasnip'
@@ -427,7 +425,17 @@ require('gopher').setup {
   },
 }
 
--- mini.statusline
+-- mini
+require('mini.notify').setup {}
+vim.notify = require('mini.notify').make_notify()
+
+require('mini.pairs').setup {
+  modes = {
+    insert = true,
+    command = true,
+    terminal = true,
+  },
+}
 require('mini.statusline').setup {}
 vim.cmd ':lua MiniStatusline.section_location = function() return "%2l:%-2v" end'
 
