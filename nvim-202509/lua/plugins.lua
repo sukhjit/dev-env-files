@@ -49,6 +49,9 @@ vim.pack.add {
     src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects',
     version = 'main',
   },
+  {
+    src = 'https://github.com/nvim-treesitter/nvim-treesitter-context',
+  },
   { src = 'https://github.com/olexsmir/gopher.nvim' },
   { src = 'https://github.com/romgrk/barbar.nvim' },
   { src = 'https://github.com/stevearc/conform.nvim' },
@@ -146,129 +149,126 @@ require('gen').setup {
   debug = false,
 }
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { '<filetype>' },
-  callback = function()
-    vim.treesitter.start()
-  end,
-})
-
-local langs = {
-  'lua',
-  'python',
-  'javascript',
-  'typescript',
-  'vimdoc',
-  'vim',
-  'regex',
-  'terraform',
-  'sql',
-  'dockerfile',
-  'toml',
-  'json',
-  'java',
-  'groovy',
-  'go',
-  'gitignore',
-  'graphql',
-  'yaml',
-  'make',
-  'cmake',
-  'markdown',
-  'markdown_inline',
-  'bash',
-  'tsx',
-  'css',
-  'html',
+local treesitter = require 'nvim-treesitter'
+local ts_config = require 'nvim-treesitter.config'
+treesitter.setup {
+  -- Directory to install parsers and queries to
+  install_dir = vim.fn.stdpath 'data' .. '/site',
 }
-
-local group = vim.api.nvim_create_augroup('MyTreesitterSetup', { clear = true })
-vim.api.nvim_create_autocmd('FileType', {
-  group = group,
-  pattern = langs,
-  callback = function(args)
-    -- Enable highlighting for the buffer
-    vim.treesitter.start(args.buf)
-
-    -- Enable indentation for the buffer
-    vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})
-
-require('nvim-treesitter').install {
-  'lua',
-  'python',
-  'javascript',
-  'typescript',
-  'vimdoc',
-  'vim',
-  'regex',
-  'terraform',
-  'sql',
-  'dockerfile',
-  'toml',
-  'json',
-  'java',
-  'groovy',
-  'go',
-  'gitignore',
-  'graphql',
-  'yaml',
-  'make',
-  'cmake',
-  'markdown',
-  'markdown_inline',
-  'bash',
-  'tsx',
-  'css',
-  'html',
-}
-
--- require('nvim-treesitter.configs').setup {
---   ensure_installed = {
---     'lua',
---     'python',
---     'javascript',
---     'typescript',
---     'vimdoc',
---     'vim',
---     'regex',
---     'terraform',
---     'sql',
---     'dockerfile',
---     'toml',
---     'json',
---     'java',
---     'groovy',
---     'go',
---     'gitignore',
---     'graphql',
---     'yaml',
---     'make',
---     'cmake',
---     'markdown',
---     'markdown_inline',
---     'bash',
---     'tsx',
---     'css',
---     'html',
---   },
---   sync_install = false,
---   auto_install = true,
---   ignore_install = {},
---   highlight = {
---     enable = true,
---     additional_vim_regex_highlighting = false,
---   },
--- }
-
--- functions/classes jump configuration
 require('nvim-treesitter-textobjects').setup {
   select = {
     enable = true,
     lookahead = true,
   },
 }
+require('treesitter-context').setup()
+
+local ensure_installed = {
+  'bash',
+  'c',
+  'cmake',
+  'comment',
+  'css',
+  'diff',
+  'dockerfile',
+  'gitcommit',
+  'gitignore',
+  'go',
+  'graphql',
+  'help',
+  'html',
+  'java',
+  'javascript',
+  'json',
+  'lua',
+  'luadoc',
+  'make',
+  'markdown',
+  'markdown_inline',
+  'python',
+  'regex',
+  'sql',
+  'terraform',
+  'toml',
+  'tsx',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'yaml',
+}
+local syntax_map = {
+  -- ['tiltfile'] = 'starlark',
+}
+local already_installed = ts_config.get_installed 'parsers'
+local parsers_to_install = vim
+  .iter(ensure_installed)
+  :filter(function(parser)
+    return not vim.tbl_contains(already_installed, parser)
+  end)
+  :totable()
+if #parsers_to_install > 0 then
+  treesitter.install(parsers_to_install)
+end
+
+local function ts_start(bufnr, parser_name)
+  vim.treesitter.start(bufnr, parser_name)
+  -- Use regex based syntax-highlighting as fallback as some plugins might need it
+  vim.bo[bufnr].syntax = 'ON'
+  -- Use treesitter for folds
+  vim.wo.foldlevel = 99
+  vim.wo.foldmethod = 'expr'
+  vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+  vim.wo.foldtext = 'v:lua.vim.treesitter.foldtext()'
+  -- Use treesitter for indentation
+  vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+end
+
+-- Auto-install and start parsers for any buffer
+vim.api.nvim_create_autocmd({ 'FileType' }, {
+  desc = 'Enable Treesitter',
+  callback = function(event)
+    local bufnr = event.buf
+    local filetype = event.match
+
+    -- Skip if no filetype
+    if filetype == '' then
+      return
+    end
+
+    -- Get parser name based on filetype
+    local lang = vim.tbl_get(syntax_map, filetype)
+    if lang == nil then
+      lang = filetype
+    else
+      vim.notify('Using language override ' .. lang)
+    end
+    local parser_name = vim.treesitter.language.get_lang(lang)
+    if not parser_name then
+      vim.notify(vim.inspect('No treesitter parser found for filetype: ' .. lang), vim.log.levels.WARN)
+      return
+    end
+
+    -- Try to get existing parser
+    if not vim.tbl_contains(ts_config.get_available(), parser_name) then
+      return
+    end
+
+    -- Check if parser is already installed
+    if not vim.tbl_contains(already_installed, parser_name) then
+      -- If not installed, install parser asynchronously and start treesitter
+      vim.notify('Installing parser for ' .. parser_name, vim.log.levels.INFO)
+      treesitter.install({ parser_name }):await(function()
+        ts_start(bufnr, parser_name)
+      end)
+      return
+    end
+
+    -- Start treesitter for this buffer
+    ts_start(bufnr, parser_name)
+  end,
+})
+
+-- functions/classes jump configuration
 local nttmove = require 'nvim-treesitter-textobjects.move'
 vim.keymap.set({ 'n', 'x', 'o' }, ']m', function()
   nttmove.goto_next_start('@function.outer', 'textobjects')
