@@ -73,6 +73,18 @@ window#waybar {
   color: #7aa2f7;
 }
 
+#cpu {
+  padding-right: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+#temperature {
+  padding-left: 8px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 #keyboard-state {
   margin: 5px 0px;
   padding: 0px 2px;

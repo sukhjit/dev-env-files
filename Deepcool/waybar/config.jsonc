@@ -3,18 +3,17 @@
   "spacing": 4,
   "modules-left": ["hyprland/workspaces"],
   "modules-right": [
-    "upower",
     "pulseaudio",
     "custom/myvpn",
     "network",
-    "cpu",
-    "temperature",
+    "group/hardware",
     "custom/gpu",
     "memory",
     "clock",
     "keyboard-state",
     "custom/screenrecording",
     "power-profiles-daemon",
+    "upower",
     "custom/notifications",
     "tray",
     "custom/power",
@@ -27,16 +26,6 @@
     "format": "{icon}",
     "persistent_workspaces": {
       "1": [],
-    },
-  },
-
-  "keyboard-state": {
-    "numlock": true,
-    "capslock": true,
-    "format": "{name} {icon}",
-    "format-icons": {
-      "locked": " ",
-      "unlocked": " ",
     },
   },
 
@@ -57,6 +46,33 @@
     "spacing": 10,
   },
 
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": ["cpu", "temperature"],
+  },
+
+  "cpu": {
+    "format": "CPU: {usage}%",
+    "tooltip": true,
+    "on-click": "ghostty -e htop",
+  },
+
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C",
+  },
+
+  "keyboard-state": {
+    "numlock": true,
+    "capslock": true,
+    "format": "{name} {icon}",
+    "format-icons": {
+      "locked": " ",
+      "unlocked": " ",
+    },
+  },
+
   "custom/myvpn": {
     "format": "VPN: {}",
     "exec": "~/.config/waybar/scripts/vpn.sh",
@@ -66,7 +82,7 @@
   },
 
   "clock": {
-    "format": "{:%a, %d %b %H:%M:%S}",
+    "format": "{:%H:%M:%S}",
     "format-alt": "{:%Y-%m-%d}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "calendar": {
@@ -80,20 +96,9 @@
     "interval": 1,
   },
 
-  "cpu": {
-    "format": "{usage}% ",
-    "tooltip": true,
-    "on-click": "ghostty -e htop",
-  },
-
   "memory": {
-    "format": "{}% ",
-  },
-
-  "temperature": {
-    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 80,
-    "format": "{temperatureC}°C ",
+    "format": "RAM: {percentage}%",
+    "tooltip-format": "{used}/{total}",
   },
 
   "power-profiles-daemon": {
