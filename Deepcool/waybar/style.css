@@ -62,7 +62,6 @@ window#waybar {
 #temperature,
 #custom-gpu,
 #custom-notifications,
-#custom-screenrecording,
 #upower,
 #keyboard-state,
 #network {
@@ -92,15 +91,6 @@ window#waybar {
 
 #keyboard-state > label {
   padding: 0 3px 0px 3px;
-}
-
-#custom-screenrecording {
-  padding-right: 12px;
-}
-
-#custom-screenrecording.active {
-  background-color: #7aa2f7;
-  color: #24283b;
 }
 
 #custom-notifications {

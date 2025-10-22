@@ -10,7 +10,6 @@
     "custom/gpu",
     "memory",
     "keyboard-state",
-    "custom/screenrecording",
     "power-profiles-daemon",
     "upower",
     "custom/notifications",
@@ -176,13 +175,6 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true,
-  },
-
-  "custom/screenrecording": {
-    "exec": "$HOME/.config/waybar/scripts/indicator-screenrecord.sh",
-    "on-click": "$HOME/.config/waybar/scripts/start-stop-screenrecord.sh",
-    "signal": 8,
-    "return-type": "json",
   },
 
   "upower": {
