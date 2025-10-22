@@ -135,7 +135,8 @@ require('todo-comments').setup {
 }
 
 require('gen').setup {
-  model = 'llama3.2',
+  -- model = 'llama3.2',
+  model = 'qwen3-coder:30b',
   host = 'localhost',
   port = '11434',
   display_mode = 'vertical-split', -- The display mode. Can be "float" or "split" or "horizontal-split".
@@ -394,6 +395,7 @@ require('conform').setup {
     lsp_fallback = true,
   },
   formatters_by_ft = {
+    sh = { 'shfmt' },
     lua = { 'stylua' },
     css = { 'prettierd' },
     html = { 'prettierd' },
