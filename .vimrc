@@ -64,6 +64,9 @@ set wildmenu
 " Make wildmenu behave like similar to Bash completion.
 set wildmode=list:longest
 
+" Set path for viminfo file
+set viminfofile=$XDG_STATE_HOME/vim/viminfo
+
 " Key mappings
 imap jj <Esc>
 

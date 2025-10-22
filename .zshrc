@@ -13,10 +13,6 @@ source $ZSH/oh-my-zsh.sh
 source ~/.p10k.zsh
 
 # powerlevel10k settings
-export PAGER='less -FRX'
-HISTFILE="$HOME/.zsh_history"
-SAVEHIST=1000
-HISTSIZE=999
 setopt share_history
 setopt hist_expire_dups_first
 setopt hist_verify
@@ -34,10 +30,10 @@ bindkey "\E[4~" end-of-line
 
 ###############################################
 
-export EDITOR=vim
-
 alias pbcopy='wl-copy'
 alias pbpaste='wl-paste'
+
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
 alias odcs_decode='pbpaste | base64 --decode | zcat | jq . | pbcopy'
 alias odcs_encode='pbpaste | jq -r tostring | tr -d "\n" | gzip -9 | base64 | tr -d "\n" | pbcopy'
