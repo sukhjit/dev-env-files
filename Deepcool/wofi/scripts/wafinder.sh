@@ -1,28 +1,41 @@
 #!/bin/sh
 
-menu=" Calculator\n󰎚 Note\n Screenshot\n Cancel"
+menu=" Calculator\n󰎚 Note\n Screenshot\n Battery\n Cancel"
 
-selected=$(echo -e $menu | wofi -W 10% --dmenu --line 4 --cache-file /dev/null -p "Apps" | awk '{print tolower ($2)}')
+walinecount=$(echo -e $menu | wc -l)
 
-calculator () {
-    notify-send $(wofi -W 10% --dmenu --line 1  -p "calc" | bc -l 2>/dev/null)
+selected=$(echo -e $menu | wofi -W 10% --dmenu --line $walinecount --cache-file /dev/null -p "Apps" | awk '{print tolower ($2)}')
+
+calculator() {
+    notify-send $(wofi -W 10% --dmenu --line 1 -p "calc" | bc -l 2>/dev/null)
 }
 
-note () {
+note() {
     source ~/.config/wofi/scripts/notes.sh
 }
 
-screenshot () {
-   hyprshot -m region
+screenshot() {
+    hyprshot -m region
+}
+
+battery() {
+    source ~/.config/wofi/scripts/battery.sh
 }
 
 case $selected in
-   calculator)
-      calculator;;
-   note)
-      note;;
-   screenshot)
-      screenshot;;
-   cancel)
-      exit 0;;
+calculator)
+    calculator
+    ;;
+note)
+    note
+    ;;
+screenshot)
+    screenshot
+    ;;
+battery)
+    battery
+    ;;
+cancel)
+    exit 0
+    ;;
 esac
