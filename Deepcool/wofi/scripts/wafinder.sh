@@ -1,6 +1,6 @@
 #!/bin/sh
 
-menu=" Calculator\n󰎚 Note\n Cancel"
+menu=" Calculator\n󰎚 Note\n Screenshot\n Cancel"
 
 selected=$(echo -e $menu | wofi -W 10% --dmenu --line 4 --cache-file /dev/null -p "Apps" | awk '{print tolower ($2)}')
 
@@ -12,11 +12,17 @@ note () {
     source ~/.config/wofi/scripts/notes.sh
 }
 
+screenshot () {
+   hyprshot -m region
+}
+
 case $selected in
    calculator)
       calculator;;
    note)
       note;;
+   screenshot)
+      screenshot;;
    cancel)
       exit 0;;
 esac
