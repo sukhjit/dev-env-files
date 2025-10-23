@@ -1,6 +1,6 @@
 #!/bin/sh
 
-menu=" Calculator\n󰎚 Note\n Screenshot\n Battery\n Cancel"
+menu="  Audio\n Calculator\n󰎚 Note\n Screenshot\n Battery\n Cancel"
 
 walinecount=$(echo -e $menu | wc -l)
 
@@ -22,20 +22,15 @@ battery() {
     source ~/.config/wofi/scripts/battery.sh
 }
 
+audioswitch() {
+    source ~/.config/wofi/scripts/audioswitch.sh
+}
+
 case $selected in
-calculator)
-    calculator
-    ;;
-note)
-    note
-    ;;
-screenshot)
-    screenshot
-    ;;
-battery)
-    battery
-    ;;
-cancel)
-    exit 0
-    ;;
+audio) audioswitch ;;
+calculator) calculator ;;
+note) note ;;
+screenshot) screenshot ;;
+battery) battery ;;
+cancel) exit 0 ;;
 esac
