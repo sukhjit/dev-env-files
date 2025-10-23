@@ -54,6 +54,7 @@ window#waybar {
 #custom-myvpn,
 #clock,
 #battery,
+#bluetooth,
 #pulseaudio,
 #power-profiles-daemon,
 #cpu,
@@ -68,6 +69,15 @@ window#waybar {
   border-radius: 3px;
   background-color: #1d202e;
   color: #7aa2f7;
+}
+
+#bluetooth {
+  font-size: 13px;
+  font-weight: 400;
+}
+
+#pulseaudio {
+  padding-right: 10px;
 }
 
 #cpu {

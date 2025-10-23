@@ -11,6 +11,7 @@
     "memory",
     "keyboard-state",
     "power-profiles-daemon",
+    "bluetooth",
     "clock",
     "tray",
     "custom/power",
@@ -122,24 +123,24 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
   },
 
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "",
+    "tooltip-format": "Devices connected: {num_connections}",
+    "on-click": "blueberry",
+  },
+
   "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
-    "format": "{volume}% {icon} {format_source}",
-    "format-bluetooth": "{volume}% {icon} {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "",
+    "format": "{icon}",
+    "on-click": "$TERMINAL --class=Wiremix -e wiremix",
+    "on-click-right": "pamixer -t",
+    "tooltip-format": "Playing at {volume}%",
+    "scroll-step": 5,
+    "format-muted": "",
     "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
       "default": ["", "", ""],
     },
-    "on-click": "pavucontrol",
   },
 
   "custom/power": {
