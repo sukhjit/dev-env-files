@@ -61,7 +61,6 @@ window#waybar {
 #disk,
 #temperature,
 #custom-gpu,
-#custom-notifications,
 #keyboard-state,
 #network {
   padding: 0px 7px;
@@ -90,10 +89,6 @@ window#waybar {
 
 #keyboard-state > label {
   padding: 0 3px 0px 3px;
-}
-
-#custom-notifications {
-  font-size: 14px;
 }
 
 #taskbar {
