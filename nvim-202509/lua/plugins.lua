@@ -428,7 +428,11 @@ require('gopher').setup {
 }
 
 -- mini
-require('mini.notify').setup {}
+require('mini.notify').setup {
+  lsp_progress = {
+    duration_last = 5000,
+  },
+}
 vim.notify = require('mini.notify').make_notify()
 
 require('mini.pairs').setup {
