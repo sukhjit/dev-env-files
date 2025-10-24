@@ -12,6 +12,9 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 source ~/.p10k.zsh
 
+# custom scripts
+[[ -d $XDG_CONFIG_HOME/custom-scripts ]] && export PATH="$PATH:$XDG_CONFIG_HOME/custom-scripts"
+
 # powerlevel10k settings
 setopt share_history
 setopt hist_expire_dups_first
