@@ -9,7 +9,13 @@ note() {
 }
 
 screenshot() {
-    hyprshot -m region
+    hyprshot -m region --raw |
+        satty --filename - \
+            --output-filename "$HOME/screenshots/$(date +'%Y-%m-%d-%H%M%S').png" \
+            --early-exit \
+            --actions-on-enter save-to-clipboard \
+            --save-after-copy \
+            --copy-command 'wl-copy'
 }
 
 battery() {
