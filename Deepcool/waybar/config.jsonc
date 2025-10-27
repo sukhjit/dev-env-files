@@ -75,7 +75,7 @@
   },
 
   "custom/myvpn": {
-    "format": "VPN{}",
+    "format": "{}",
     "exec": "~/.config/waybar/scripts/vpn.sh",
     "interval": 5,
     "on-click": "mullvad connect",
