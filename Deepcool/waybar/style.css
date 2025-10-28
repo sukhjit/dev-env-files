@@ -52,6 +52,7 @@ window#waybar {
 
 #custom-date,
 #custom-notifications,
+#custom-screenrecording,
 #custom-myvpn,
 #clock,
 #battery,
@@ -70,6 +71,10 @@ window#waybar {
   border-radius: 3px;
   background-color: #1d202e;
   color: #7aa2f7;
+}
+
+#custom-screenrecording {
+  padding-right: 10px;
 }
 
 #custom-notifications {

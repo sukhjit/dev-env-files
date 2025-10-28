@@ -2,6 +2,7 @@
   "spacing": 4,
   "modules-left": ["hyprland/workspaces"],
   "modules-right": [
+    "custom/screenrecording",
     "pulseaudio",
     "custom/myvpn",
     "network",
@@ -183,5 +184,12 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true,
+  },
+
+  "custom/screenrecording": {
+    "exec": "$XDG_CONFIG_HOME/custom-scripts/indicator-screenrecord.sh",
+    "on-click": "$XDG_CONFIG_HOME/custom-scripts/start-stop-screenrecord.sh",
+    "signal": 8,
+    "return-type": "json",
   },
 }

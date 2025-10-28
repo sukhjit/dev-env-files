@@ -15,7 +15,7 @@ screenshot() {
 }
 
 show_main_menu() {
-    menu="  Audio\n Calculator\n Keybindings\n󰎚 Note\n Screenshot\n Battery\n Cancel"
+    menu="  Audio\n Calculator\n Keybindings\n󰎚 Note\n Screenshot\n Screenrecord\n Battery\n Cancel"
 
     walinecount=$(echo -e $menu | wc -l)
 
@@ -33,6 +33,9 @@ show_main_menu() {
         ;;
     screenshot)
         screenshot
+        ;;
+    screenrecord)
+        source $XDG_CONFIG_HOME/custom-scripts/start-stop-screenrecord.sh
         ;;
     keybindings)
         source $XDG_CONFIG_HOME/custom-scripts/keybindings.sh
