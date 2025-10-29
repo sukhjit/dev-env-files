@@ -15,7 +15,7 @@ screenshot() {
 }
 
 show_main_menu() {
-    menu="  Audio\n Calculator\n Keybindings\n󰎚 Note\n Screenshot\n Screenrecord\n Battery\n Cancel"
+    menu="  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n Cancel"
 
     walinecount=$(echo -e $menu | wc -l)
 
@@ -30,6 +30,9 @@ show_main_menu() {
         ;;
     note)
         source $XDG_CONFIG_HOME/custom-scripts/notes.sh
+        ;;
+    nwgdock)
+        pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c wofi
         ;;
     screenshot)
         screenshot
