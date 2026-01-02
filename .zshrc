@@ -38,6 +38,8 @@ alias pbpaste='wl-paste'
 
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
+alias b64decode='pbpaste | base64 --decode | pbcopy'
+alias b64encode='pbpaste | base64 | pbcopy'
 alias odcs_decode='pbpaste | base64 --decode | zcat | jq . | pbcopy'
 alias odcs_encode='pbpaste | jq -r tostring | tr -d "\n" | gzip -9 | base64 | tr -d "\n" | pbcopy'
 
