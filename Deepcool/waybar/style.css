@@ -73,6 +73,10 @@ window#waybar {
   color: #7aa2f7;
 }
 
+#network {
+  padding-right: 12px;
+}
+
 #custom-screenrecording {
   padding-right: 10px;
 }
