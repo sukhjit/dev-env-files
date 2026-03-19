@@ -68,6 +68,7 @@ vim.pack.add {
   { src = 'https://github.com/hrsh7th/cmp-nvim-lsp-signature-help' },
   { src = 'https://github.com/lukas-reineke/indent-blankline.nvim' },
   { src = 'https://github.com/sukhjit/go-pkgs-check.nvim' },
+  { src = 'https://github.com/greggh/claude-code.nvim' },
 }
 
 local gpc = require 'GoPkgsCheck'
@@ -77,6 +78,8 @@ vim.keymap.set('n', '<Leader>cpu', gpc.update, { desc = '[Code] [P]ackage [U]pda
 vim.keymap.set('n', '<Leader>cpc', gpc.clear, { desc = '[Code] [P]ackage [C]lear' })
 
 require('ibl').setup {}
+
+require('claude-code').setup {}
 
 -- autocompletion
 local luasnip = require 'luasnip'
