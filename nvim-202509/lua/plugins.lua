@@ -332,6 +332,7 @@ require('mason-tool-installer').setup {
     'prettierd',
     'pylsp',
     'ruff',
+    'shfmt',
     'sqlls',
     'stylua',
     'tailwindcss',
