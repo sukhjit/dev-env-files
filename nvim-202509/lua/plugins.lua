@@ -163,7 +163,6 @@ local ensure_installed = {
   'gitignore',
   'go',
   'graphql',
-  'help',
   'html',
   'java',
   'javascript',
