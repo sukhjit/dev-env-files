@@ -11,28 +11,28 @@ fzflua.setup {
   },
 }
 
+vim.keymap.set('n', '<leader>sh', fzflua.helptags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sk', fzflua.keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sf', fzflua.files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sw', fzflua.grep_cword, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', fzflua.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', fzflua.diagnostics_document, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', fzflua.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', fzflua.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader><leader>', fzflua.buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>/', fzflua.blines, { desc = '[/] Fuzzily search in current buffer' })
+
+vim.keymap.set('n', '<leader>s/', function()
+  fzflua.lines { fzf_opts = { ['--exact'] = '' } }
+end, { desc = '[S]earch [/] in Open Files' })
+
+vim.keymap.set('n', '<leader>sn', function()
+  fzflua.files { cwd = vim.fn.stdpath 'config' }
+end, { desc = '[S]earch [N]eovim files' })
+
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
   callback = function(event)
-    vim.keymap.set('n', '<leader>sh', fzflua.helptags, { desc = '[S]earch [H]elp' })
-    vim.keymap.set('n', '<leader>sk', fzflua.keymaps, { desc = '[S]earch [K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', fzflua.files, { desc = '[S]earch [F]iles' })
-    vim.keymap.set('n', '<leader>sw', fzflua.grep_cword, { desc = '[S]earch current [W]ord' })
-    vim.keymap.set('n', '<leader>sg', fzflua.live_grep, { desc = '[S]earch by [G]rep' })
-    vim.keymap.set('n', '<leader>sd', fzflua.diagnostics_document, { desc = '[S]earch [D]iagnostics' })
-    vim.keymap.set('n', '<leader>sr', fzflua.resume, { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>s.', fzflua.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-    vim.keymap.set('n', '<leader><leader>', fzflua.buffers, { desc = '[ ] Find existing buffers' })
-    vim.keymap.set('n', '<leader>/', fzflua.blines, { desc = '[/] Fuzzily search in current buffer' })
-
-    vim.keymap.set('n', '<leader>s/', function()
-      fzflua.lines { fzf_opts = { ['--exact'] = '' } }
-    end, { desc = '[S]earch [/] in Open Files' })
-
-    vim.keymap.set('n', '<leader>sn', function()
-      fzflua.files { cwd = vim.fn.stdpath 'config' }
-    end, { desc = '[S]earch [N]eovim files' })
-
     -- LSP
     vim.keymap.set({ 'n', 'x' }, 'gra', vim.lsp.buf.code_action, { desc = '[G]oto Code [A]ction' })
     vim.keymap.set('n', 'grr', fzflua.lsp_references, { desc = '[G]oto [R]eferences' })
