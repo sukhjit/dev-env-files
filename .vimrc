@@ -62,7 +62,7 @@ set history=1000
 set wildmenu
 
 " Make wildmenu behave like similar to Bash completion.
-set wildmode=list:longest
+" set wildmode=list:longest
 
 " Set path for viminfo file
 set viminfofile=$XDG_STATE_HOME/vim/viminfo
@@ -72,3 +72,6 @@ imap jj <Esc>
 
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv
+
+" Search down into subfolders
+set path+=**
