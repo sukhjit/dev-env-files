@@ -123,6 +123,11 @@ require('todo-comments').setup {
   signs = false,
 }
 
+vim.g.llama_config = {
+  keymap_inst_cancel = '<Esc><Esc>',
+  keymap_fim_accept_word = '<C-b>',
+}
+
 require('gen').setup {
   -- model = 'llama3.2',
   model = 'qwen3-coder:30b',
