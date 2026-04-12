@@ -45,6 +45,7 @@ alias odcs_encode='pbpaste | jq -r tostring | tr -d "\n" | gzip -9 | base64 | tr
 
 alias ll='ls -la'
 
+# git alias
 alias glog='git log --date-order --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
 alias gl='git log --oneline'
 alias gla='gl --graph --all --oneline'
@@ -52,6 +53,11 @@ alias gd='git diff'
 alias gdw='gd --color-words'
 alias gs='git status'
 alias glt='git log --no-walk --tags --oneline'
+alias gitWhatChangesMost='git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20'
+alias gitWhoBuiltThis='git shortlog -sn --no-merges'
+alias gitFixList='git log -i -E --grep="fix|bug|broken" --name-only --format='' | sort | uniq -c | sort -nr | head -20'
+alias gitCountByMonth='git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c'
+alias gitRevertFreq='git log --oneline --since="1 year ago" | grep -iE "revert|hotfix|emergency|rollback"'
 
 alias randomGen='openssl rand -base64 8 | md5'
 alias curlAk="curl -H \"Pragma: \
