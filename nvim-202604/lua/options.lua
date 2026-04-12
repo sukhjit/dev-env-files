@@ -12,7 +12,9 @@ vim.opt.mouse = 'a'
 
 vim.opt.showmode = false
 
-vim.opt.clipboard = 'unnamedplus'
+vim.schedule(function()
+  vim.o.clipboard = 'unnamedplus'
+end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -59,3 +61,6 @@ vim.opt.backspace = 'indent,eol,start'
 
 -- use rounded borders for floating windows
 vim.o.winborder = 'rounded'
+
+-- raise a dialog asking if you wish to save the current file(s)
+vim.o.confirm = true

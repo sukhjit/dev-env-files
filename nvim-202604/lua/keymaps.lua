@@ -7,6 +7,7 @@ vim.keymap.set('i', 'jj', '<ESC>', { desc = 'Exit insert mode with jj' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
+-- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- move text after cursor to next line
@@ -16,7 +17,8 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>ql', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix [L]ist' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
-vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { noremap = true, desc = 'Exit terminal mode' })
+
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
@@ -30,26 +32,28 @@ vim.keymap.set('n', '<M-s>', '<C-W>-')
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv-gv")
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv-gv")
 
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format' })
+vim.keymap.set('n', '<leader>ll', '<cmd>call llama#init()<CR>', { desc = 'Start llama AI' })
+vim.keymap.set('n', '<leader>lc', '<cmd>call llama#disable()<CR>', { desc = 'Stop llama AI' })
+vim.g.llama_config = {
+  keymap_inst_cancel = '<Esc><Esc>',
+  keymap_fim_accept_word = '<C-b>',
+}
 
+-- lsp
 vim.keymap.set('n', '<C-c>', ':%y+<CR>', { desc = 'Copy whole file to clipboard' })
 
 vim.keymap.set('v', 'p', '"_dP', { desc = 'Paste without overwriting' })
+
+vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- quick fix navigation
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 
--- open small terminal
-vim.keymap.set('n', '<leader>te', function()
-  vim.cmd.vnew()
-  vim.cmd.term()
-  vim.cmd.wincmd 'J'
-  vim.api.nvim_win_set_height(0, 10)
-end, { desc = 'Open [T][e]rminal' })
-
--- enable disable inlay hints
-vim.keymap.set('n', '<leader>th', function()
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-  vim.notify(vim.lsp.inlay_hint.is_enabled() and 'inlay hints enabled' or 'inlay hints disabled')
-end, { desc = 'Toggle inlay [h]ints' })
+-- Terraform comment line
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'terraform',
+  callback = function()
+    vim.bo.commentstring = '# %s'
+  end,
+})
