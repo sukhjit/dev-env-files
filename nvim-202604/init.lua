@@ -39,6 +39,20 @@ require('lazy').setup({
     ---@type Gitsigns.Config
     ---@diagnostic disable-next-line: missing-fields
     opts = {
+      signs = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
+      signs_staged = {
+        add = { text = '+' },
+        change = { text = '~' },
+        delete = { text = '_' },
+        topdelete = { text = '‾' },
+        changedelete = { text = '~' },
+      },
       on_attach = function(bufnr)
         local gitsigns = require 'gitsigns'
 
@@ -802,9 +816,33 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'romgrk/barbar.nvim',
+    dependencies = {
+      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
+      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+    },
+    init = function()
+      vim.g.barbar_auto_setup = false
+
+      vim.keymap.set('n', '<S-Tab>', '<cmd>:BufferNext<CR>', { desc = 'Buffer Next' })
+      vim.keymap.set('n', '<S-C-Tab>', '<cmd>:BufferPrevious<CR>', { desc = 'Buffer Previous' })
+      vim.keymap.set('n', '<leader>k', '<cmd>:BufferCloseAllButCurrent<CR>', { desc = 'Buffer Close all but Current' })
+      vim.keymap.set('n', '<leader>x', '<cmd>:BufferClose<CR>', { desc = 'Buffer Close' })
+    end,
+    opts = {},
+    version = '^1.0.0',
+  },
+
   -- llm
   {
     'ggml-org/llama.vim',
+  },
+  {
+    'greggh/claude-code.nvim',
+    config = function()
+      require('claude-code').setup()
+    end,
   },
   {
     'David-Kunz/gen.nvim',
