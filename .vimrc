@@ -1,3 +1,11 @@
+set encoding=UTF-8
+
+" File encoding
+set fileencoding=utf-8
+
+" Disable highlight on search
+set nohlsearch
+
 " Disable compatibility with vi which can cause unexpected issues.
 set nocompatible
 
@@ -15,6 +23,9 @@ syntax on
 
 " Add numbers to each line on the left-hand side.
 set number
+
+" Use relative line numbers
+set relativenumber
 
 " Set shift width to 4 spaces.
 set shiftwidth=4
@@ -67,11 +78,72 @@ set wildmenu
 " Set path for viminfo file
 set viminfofile=$XDG_STATE_HOME/vim/viminfo
 
+" Search down into subfolders
+set path+=**
+
+" Command line height
+set cmdheight=1
+
+" Show buffers as tabs at top
+set showtabline=2
+
+" function to list buffers in tabline
+function! MyTabLine()
+  let s = ''
+  let current = bufnr('%')
+  for i in range(1, bufnr('$'))
+    if buflisted(i)
+      let s .= (i == current ? '%#TabLineSel#' : '%#TabLine#')
+      let name = fnamemodify(bufname(i), ':t')
+      let s .= ' ' . (name == '' ? '[No Name]' : name) . ' '
+      if getbufvar(i, '&modified')
+        let s .= '[+] '
+      endif
+    endif
+  endfor
+  let s .= '%#TabLineFill#'
+  return s
+endfunction
+
+set tabline=%!MyTabLine()
+
+" =============
 " Key mappings
+" =============
+
+" Set leader key
+let mapleader = " "
+let maplocalleader = " "
+
+" Disable the spacebar key's default behavior in Normal and Visual modes
+nnoremap <Space> <Nop>
+vnoremap <Space> <Nop>
+
 imap jj <Esc>
+
+" delete single character without copying into register
+nnoremap x "_x
 
 xnoremap K :move '<-2<CR>gv-gv
 xnoremap J :move '>+1<CR>gv-gv
 
-" Search down into subfolders
-set path+=**
+" Find and center
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" clear highlights
+nnoremap <Esc> :noh<CR>
+
+" Navigate buffers
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <leader><leader> :buffers<CR>:buffer<Space>
+nnoremap <leader>x :bdelete<CR>
+nnoremap <leader>b :enew<CR>
+
+" Navigate between splits
+nnoremap <C-k> :wincmd k<CR>
+nnoremap <C-j> :wincmd j<CR>
+nnoremap <C-h> :wincmd h<CR>
+nnoremap <C-l> :wincmd l<CR>
+
