@@ -1,0 +1,31 @@
+theme = TokyoNight
+
+font-family = MesloLGS Nerd Font
+font-size = 9
+
+keybind = alt+t=new_tab
+keybind = alt+d=new_split:right
+keybind = shift+alt+d=new_split:down
+keybind = alt+up=goto_split:top
+keybind = alt+down=goto_split:bottom
+keybind = alt+left=goto_split:left
+keybind = alt+right=goto_split:right
+
+keybind = ctrl+shift+up=resize_split:up,10
+keybind = ctrl+shift+down=resize_split:down,10
+keybind = ctrl+shift+left=resize_split:left,10
+keybind = ctrl+shift+right=resize_split:right,10
+
+keybind = ctrl+enter=ignore
+
+keybind = alt+f=toggle_split_zoom
+
+shell-integration = zsh
+
+gtk-titlebar = false
+window-decoration = false
+
+copy-on-select = clipboard
+unfocused-split-opacity = 0.9
+background-opacity = 0.9
+split-divider-color = #524f67
