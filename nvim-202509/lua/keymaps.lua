@@ -39,13 +39,14 @@ vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format' })
 
 vim.keymap.set('n', '<C-c>', ':%y+<CR>', { desc = 'Copy whole file to clipboard' })
 
+vim.keymap.set('v', 'x', '"_dx', { desc = 'Cut without overwriting' })
 vim.keymap.set('v', 'p', '"_dP', { desc = 'Paste without overwriting' })
 
 vim.keymap.set('n', '<leader>qq', '<cmd>qa<cr>', { desc = 'Quit All' })
 
 -- quick fix navigation
-vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
-vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
+vim.keymap.set('n', '<leader>j', '<cmd>cnext<CR>')
+vim.keymap.set('n', '<leader>k', '<cmd>cprev<CR>')
 
 -- Terraform comment line
 vim.api.nvim_create_autocmd('FileType', {
