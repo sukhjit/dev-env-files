@@ -704,6 +704,14 @@ require('lazy').setup({
   },
 
   {
+    'nvim-treesitter/nvim-treesitter-context',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('treesitter-context').setup {}
+    end,
+  },
+
+  {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
     opts = {
