@@ -12,3 +12,4 @@ prompt=
 insensitive=true
 allow_images=true
 image_size=16
+allow_markup=true

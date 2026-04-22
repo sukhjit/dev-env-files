@@ -15,7 +15,7 @@ screenshot() {
 }
 
 show_main_menu() {
-    menu=" Project\n  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n Cancel"
+    menu=" Project\n  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰃭 Calendar\n Cancel"
 
     walinecount=$(echo -e $menu | wc -l)
 
@@ -48,6 +48,9 @@ show_main_menu() {
         ;;
     battery)
         source $XDG_CONFIG_HOME/custom-scripts/battery.sh
+        ;;
+    calendar)
+        cal | sed "s|\b$(date '+%-d')\b|<span color='red'>$(date '+%-d')</span>|" | wofi -W 9% --dmenu --cache-file /dev/null -p "Calendar"
         ;;
     cancel)
         exit 0
