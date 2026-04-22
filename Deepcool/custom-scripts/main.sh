@@ -15,7 +15,7 @@ screenshot() {
 }
 
 show_main_menu() {
-    menu=" Project\n  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰈭 Dictionary\n Cancel"
+    menu=" Project\n  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n Cancel"
 
     walinecount=$(echo -e $menu | wc -l)
 
@@ -48,9 +48,6 @@ show_main_menu() {
         ;;
     battery)
         source $XDG_CONFIG_HOME/custom-scripts/battery.sh
-        ;;
-    dictionary)
-        source $XDG_CONFIG_HOME/custom-scripts/define.sh
         ;;
     cancel)
         exit 0
