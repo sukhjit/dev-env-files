@@ -33,6 +33,8 @@ bindkey "\E[4~" end-of-line
 
 ###############################################
 
+alias getsong='yt-dlp -x --audio-format mp3 --audio-quality 0 -o "%(title)s.%(ext)s"'
+
 alias pbcopy='wl-copy'
 alias pbpaste='wl-paste'
 
