@@ -15,13 +15,16 @@ screenshot() {
 }
 
 show_main_menu() {
-    menu="  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰈭 Dictionary\n Cancel"
+    menu=" Project\n  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰈭 Dictionary\n Cancel"
 
     walinecount=$(echo -e $menu | wc -l)
 
-    selected=$(echo -e $menu | wofi -W 10% --dmenu --line $walinecount --cache-file /dev/null -p "Apps" | awk '{print tolower ($2)}')
+    selected="$(echo -e $menu | wofi -W 10% --dmenu --line $walinecount --cache-file /dev/null -p "Apps" | awk '{print tolower ($2)}')"
 
     case $selected in
+    project)
+        source $XDG_CONFIG_HOME/custom-scripts/tmux-repo.sh
+        ;;
     audio)
         source $XDG_CONFIG_HOME/custom-scripts/audioswitch.sh
         ;;
