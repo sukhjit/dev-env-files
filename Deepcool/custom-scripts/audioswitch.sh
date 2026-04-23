@@ -12,7 +12,7 @@ speakers() {
 
 choosespeakers() {
     options="Headphones\nSpeakers"
-    choice=$(echo -e "$options" | wofi --dmenu --cache-file /dev/null -W 10% -i -L 3 -p "Choose audio:")
+    choice=$(echo -e "$options" | walker --dmenu --width 100 --height 3 -p "Choose audio:")
 
     case "$choice" in
     Speakers) speakers ;;

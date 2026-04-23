@@ -1,9 +1,5 @@
 #!/bin/sh
 
-calculator() {
-    notify-send $(wofi -W 10% --dmenu --line 1 -p "calc" | bc -l 2>/dev/null)
-}
-
 screenshot() {
     hyprshot -m region --raw |
         satty --filename - \
@@ -15,11 +11,10 @@ screenshot() {
 }
 
 show_main_menu() {
-    menu=" Project\n  Audio\n Calculator\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰃭 Calendar\n Cancel"
+    menu=" Project\n  Audio\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰃭 Calendar\n Cancel"
 
     walinecount=$(echo -e $menu | wc -l)
-
-    selected="$(echo -e $menu | wofi -W 10% --dmenu --line $walinecount --cache-file /dev/null -p "Apps" | awk '{print tolower ($2)}')"
+    selected="$(echo -e $menu | walker --width 100 --height $walinecount --dmenu -p "Apps" | awk '{print tolower ($2)}')"
 
     case $selected in
     project)
@@ -35,7 +30,7 @@ show_main_menu() {
         source $XDG_CONFIG_HOME/custom-scripts/notes.sh
         ;;
     nwgdock)
-        pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c wofi
+        pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c walker
         ;;
     screenshot)
         screenshot
@@ -50,7 +45,7 @@ show_main_menu() {
         source $XDG_CONFIG_HOME/custom-scripts/battery.sh
         ;;
     calendar)
-        cal | sed "s|\b$(date '+%-d')\b|<span color='red'>$(date '+%-d')</span>|" | wofi -W 9% --dmenu --cache-file /dev/null -p "Calendar"
+        cal | walker --dmenu -p "Calendar"
         ;;
     cancel)
         exit 0

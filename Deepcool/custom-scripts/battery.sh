@@ -25,4 +25,4 @@ for item in $(upower --enumerate); do
 done
 
 lineCount=$(echo -e $devicesList | wc -l)
-echo -e "$devicesList" | wofi -W 20% --line $lineCount --dmenu --cache-file /dev/null -j
+echo -e "$devicesList" | walker --width 100 --height $lineCount --dmenu

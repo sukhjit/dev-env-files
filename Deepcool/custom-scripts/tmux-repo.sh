@@ -6,7 +6,7 @@ repoName="$(ls -1d "$HOME"/work/*/ 2>/dev/null | xargs -n1 basename)"
 [ -n "$repoName" ] || exit 0
 
 # select a project
-chosen="$(printf '%s\n' $repoName | wofi --dmenu -p 'Projects:')"
+chosen="$(printf '%s\n' $repoName | walker --dmenu -p 'Projects:')"
 
 [ -n "$chosen" ] || exit 0
 

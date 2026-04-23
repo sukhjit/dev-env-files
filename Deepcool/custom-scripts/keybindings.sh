@@ -79,4 +79,4 @@ menu_height=$((monitor_height * 40 / 100))
 dynamic_bindings |
     sort -u |
     parse_bindings |
-    wofi --dmenu --cache-file /dev/null -p 'Keybindings' -W 80% -H 80% -n -j
+    walker --dmenu -p 'Keybindings' --height 800 -n
