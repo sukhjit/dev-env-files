@@ -11,7 +11,7 @@ screenshot() {
 }
 
 show_main_menu() {
-    menu=" Project\n  Audio\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰃭 Calendar\n Cancel"
+    menu=" Project\n  Audio\n Keybindings\n󰎚 Note\n󱂩 NwgDock\n Screenshot\n Screenrecord\n Battery\n󰃭 Calendar\n󰃉 Colourpicker\n Cancel"
 
     walinecount=$(echo -e $menu | wc -l)
     selected="$(echo -e $menu | walker --width 100 --height $walinecount --dmenu -p "Apps" | awk '{print tolower ($2)}')"
@@ -22,9 +22,6 @@ show_main_menu() {
         ;;
     audio)
         source $XDG_CONFIG_HOME/custom-scripts/audioswitch.sh
-        ;;
-    calculator)
-        calculator
         ;;
     note)
         source $XDG_CONFIG_HOME/custom-scripts/notes.sh
@@ -46,6 +43,10 @@ show_main_menu() {
         ;;
     calendar)
         cal | walker --dmenu -p "Calendar"
+        ;;
+    colourpicker)
+        walker --close
+        hyprpicker
         ;;
     cancel)
         exit 0
