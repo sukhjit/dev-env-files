@@ -1,6 +1,6 @@
 {
   "spacing": 4,
-  "modules-left": ["hyprland/workspaces"],
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-right": [
     "custom/screenrecording",
     "pulseaudio",
@@ -17,6 +17,11 @@
     "tray",
     "custom/power",
   ],
+
+  "hyprland/window": {
+    "max-length": 40,
+    "separate-outputs": false,
+  },
 
   // Modules configuration
   "hyprland/workspaces": {

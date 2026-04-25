@@ -7,8 +7,8 @@
 }
 
 window#waybar {
-  background-color: transparent;
-  color: rgba(217, 216, 216, 1);
+  background-color: rgba(50, 52, 74, 0.9);
+  color: #c0caf5;
 }
 
 #workspaces {
@@ -17,11 +17,9 @@ window#waybar {
 }
 
 #workspaces button {
-  color: #fff;
   padding: 0px 2px;
   margin: 1px 2px 1px 1px;
   border-radius: 2px;
-
   background-color: #1d202e;
   color: #7aa2f7;
 }
@@ -132,7 +130,7 @@ window#waybar {
   color: #24283b;
   background-color: #db4b4b;
   border-radius: 3px;
-  margin-right: 2px;
+  margin-right: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 0px;
@@ -140,7 +138,7 @@ window#waybar {
 }
 
 #tray {
-  background-color: #455085;
+  background-color: #444b6a;
   margin: 5px;
   margin-left: 0px;
   margin-right: 0px;
