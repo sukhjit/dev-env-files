@@ -4,7 +4,6 @@
   "modules-right": [
     "custom/screenrecording",
     "pulseaudio",
-    "custom/myvpn",
     "network",
     "group/hardware",
     "custom/gpu",
@@ -80,14 +79,6 @@
     },
   },
 
-  "custom/myvpn": {
-    "format": "{}",
-    "exec": "~/.config/waybar/scripts/vpn.sh",
-    "interval": 5,
-    "on-click": "mullvad connect",
-    "on-click-right": "mullvad disconnect",
-  },
-
   "clock": {
     "format": "{:%H:%M:%S}",
     "format-alt": "{:%Y-%m-%d}",
@@ -126,7 +117,7 @@
     "format-ethernet": "󰀂",
     "format-alt": "󱛇",
     "format-disconnected": "󰖪",
-    "tooltip-format-wifi": "{icon} {essid}",
+    "tooltip-format-wifi": "{icon}  {essid} {signalStrength}%",
     "tooltip-format-ethernet": "󰀂  {ifname}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 5,
