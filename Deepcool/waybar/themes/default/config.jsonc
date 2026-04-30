@@ -46,7 +46,7 @@
   },
 
   "tray": {
-    "spacing": 10,
+    "spacing": 4,
   },
 
   "group/hardware": {
@@ -81,14 +81,14 @@
 
   "clock": {
     "format": "{:%H:%M:%S}",
-    "format-alt": "{:%Y-%m-%d}",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%A, %d %B %Y %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>",
     "calendar": {
       "format": {
         "months": "<span color='#BB9AF7'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>",
+        "today": "<span color='#ff6699'><b>{}</b></span>",
       },
     },
     "interval": 1,
@@ -117,8 +117,8 @@
     "format-ethernet": "󰀂",
     "format-alt": "󱛇",
     "format-disconnected": "󰖪",
-    "tooltip-format-wifi": "{icon}  {essid} {signalStrength}%",
-    "tooltip-format-ethernet": "󰀂  {ifname}",
+    "tooltip-format-wifi": "{signalStrength}% {essid} {ipaddr}",
+    "tooltip-format-ethernet": "󰀂  {ifname} {ipaddr}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 5,
   },
