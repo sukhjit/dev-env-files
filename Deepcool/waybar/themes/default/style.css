@@ -61,7 +61,6 @@ window#waybar {
 #disk,
 #temperature,
 #custom-gpu,
-#keyboard-state,
 #network {
   padding: 0px 6px;
   margin: 5px 0px;

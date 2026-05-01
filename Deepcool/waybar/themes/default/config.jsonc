@@ -8,7 +8,6 @@
     "group/hardware",
     "custom/gpu",
     "memory",
-    "keyboard-state",
     "power-profiles-daemon",
     "custom/notifications",
     "bluetooth",
@@ -64,19 +63,6 @@
     "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 80,
     "format": "{temperatureC}°C",
-  },
-
-  "keyboard-state": {
-    "numlock": true,
-    "capslock": false,
-    "format": {
-      "numlock": "N {icon}",
-      "capslock": "C {icon}",
-    },
-    "format-icons": {
-      "locked": " ",
-      "unlocked": " ",
-    },
   },
 
   "clock": {
