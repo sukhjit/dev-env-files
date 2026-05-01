@@ -368,7 +368,16 @@ require('lazy').setup({
             client.server_capabilities.semanticTokensProvider = nil
           end,
         },
-        yamlls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                -- Bitbucket's remote schema has an unresolvable root-level $ref; use patched local copy.
+                [('file://' .. vim.fn.stdpath 'config' .. '/schemas/bitbucket-pipelines.json')] = 'bitbucket-pipelines.yml',
+              },
+            },
+          },
+        },
         bashls = {},
         dockerls = {},
         docker_compose_language_service = {},
