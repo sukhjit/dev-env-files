@@ -363,7 +363,11 @@ require('lazy').setup({
         cssls = {},
         tailwindcss = {},
         sqlls = {},
-        terraformls = {},
+        terraformls = {
+          on_attach = function(client)
+            client.server_capabilities.semanticTokensProvider = nil
+          end,
+        },
         yamlls = {},
         bashls = {},
         dockerls = {},
