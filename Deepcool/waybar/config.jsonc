@@ -11,6 +11,7 @@
     "memory",
     "power-profiles-daemon",
     "custom/notifications",
+    "custom/weather",
     "bluetooth",
     "clock",
     "tray",
@@ -144,8 +145,15 @@
     "format": "{}",
     "exec": "$HOME/.config/waybar/scripts/gpu.sh",
     "return-type": "json",
-    "interval": 2,
+    "interval": 5,
     "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+  },
+
+  "custom/weather": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/weather.sh",
+    "return-type": "json",
+    "interval": 300,
   },
 
   "custom/notifications": {
