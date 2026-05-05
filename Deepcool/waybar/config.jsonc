@@ -153,6 +153,7 @@
     "format": "{}",
     "exec": "$HOME/.config/waybar/scripts/weather.sh",
     "return-type": "json",
+    "on-click": "$HOME/.config/waybar/scripts/weather.sh open",
     "interval": 300,
   },
 
