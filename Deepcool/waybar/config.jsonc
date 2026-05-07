@@ -1,6 +1,7 @@
 {
   "spacing": 4,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["custom/webcam"],
   "modules-right": [
     "custom/screenrecording",
     "pulseaudio",
@@ -147,6 +148,13 @@
     "return-type": "json",
     "interval": 5,
     "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+  },
+
+  "custom/webcam": {
+    "exec": "~/.config/waybar/scripts/webcam.sh",
+    "return-type": "json",
+    "interval": 2,
+    "format": "{}",
   },
 
   "custom/weather": {

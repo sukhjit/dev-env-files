@@ -62,6 +62,7 @@ window#waybar {
 #temperature,
 #custom-gpu,
 #custom-weather,
+#custom-webcam,
 #network {
   padding: 0px 6px;
   margin: 5px 0px;
