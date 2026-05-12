@@ -39,7 +39,6 @@ vim.g.llama_config = {
   keymap_fim_accept_word = '<C-b>',
 }
 
--- lsp
 vim.keymap.set('n', '<C-c>', ':%y+<CR>', { desc = 'Copy whole file to clipboard' })
 
 vim.keymap.set('v', 'p', '"_dP', { desc = 'Paste without overwriting' })
