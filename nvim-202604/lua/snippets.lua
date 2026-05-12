@@ -74,3 +74,8 @@ vim.api.nvim_create_autocmd('FileType', {
     end
   end,
 })
+
+-- auto resize splits when the terminal's window is resized
+vim.api.nvim_create_autocmd('VimResized', {
+  command = 'wincmd =',
+})
