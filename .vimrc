@@ -85,7 +85,7 @@ set path+=**
 set cmdheight=1
 
 " Show buffers as tabs at top
-set showtabline=2
+" set showtabline=2
 
 " function to list buffers in tabline
 function! MyTabLine()
