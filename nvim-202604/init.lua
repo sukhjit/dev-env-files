@@ -343,6 +343,10 @@ require('lazy').setup({
             gopls = {
               gofumpt = true,
               completeUnimported = true,
+              hints = {
+                parameterNames = true,
+                assignVariableTypes = true,
+              },
               usePlaceholders = true,
               analyses = {
                 nilness = true,
