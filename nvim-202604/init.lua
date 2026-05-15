@@ -594,6 +594,8 @@ require('lazy').setup({
     opts = {
       keymap = {
         preset = 'enter',
+        ['<Tab>'] = { 'snippet_forward', 'fallback' },
+        ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
       },
       appearance = {
         nerd_font_variant = 'mono',
@@ -607,7 +609,7 @@ require('lazy').setup({
       sources = {
         default = { 'lsp', 'path', 'snippets' },
       },
-      snippets = { preset = 'luasnip' },
+      snippets = { preset = 'default' },
       fuzzy = { implementation = 'lua' },
       signature = { enabled = true },
     },
