@@ -34,10 +34,6 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv-gv")
 
 vim.keymap.set('n', '<leader>ll', '<cmd>call llama#init()<CR>', { desc = 'Start llama AI' })
 vim.keymap.set('n', '<leader>lc', '<cmd>call llama#disable()<CR>', { desc = 'Stop llama AI' })
-vim.g.llama_config = {
-  keymap_inst_cancel = '<Esc><Esc>',
-  keymap_fim_accept_word = '<C-b>',
-}
 
 vim.keymap.set('n', '<C-c>', ':%y+<CR>', { desc = 'Copy whole file to clipboard' })
 

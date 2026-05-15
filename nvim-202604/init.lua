@@ -898,6 +898,12 @@ require('lazy').setup({
   -- llm
   {
     'ggml-org/llama.vim',
+    init = function()
+      vim.g.llama_config = {
+        keymap_inst_cancel = '<Esc><Esc>',
+        keymap_fim_accept_word = '<C-b>',
+      }
+    end,
   },
   {
     'greggh/claude-code.nvim',
