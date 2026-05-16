@@ -518,7 +518,6 @@ require('mason').setup {
   'prettierd',
   'pylsp',
   'ruff',
-  'shfmt',
   'sqlls',
   'stylua',
   'tailwindcss',
@@ -539,6 +538,8 @@ vim.list_extend(ensure_installed, {
   'iferr',
   'impl',
   'staticcheck',
+  -- rest
+  'shfmt',
 })
 
 require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -556,6 +557,9 @@ require('conform').setup {
   notify_on_error = false,
   format_on_save = function(bufnr)
     local enabled_filetypes = {
+      sh = true,
+      css = true,
+      javascript = true,
       go = true,
       lua = true,
       python = true,
