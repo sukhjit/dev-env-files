@@ -19,6 +19,10 @@ menu() {
     echo -e "$options" | walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
 }
 
+show_background_menu() {
+    walker -m menus:BackgroundSelector --width 800 --minheight 400
+}
+
 screenshot() {
     hyprshot -m region --raw |
         satty --filename - \
@@ -110,9 +114,10 @@ tmuxRepos() {
 }
 
 show_main_menu() {
-    case $(menu "Choose" "  Project\n  Audio\n  Keybindings\n󰎚  Notes\n󱂩  NwgDock\n  Screenshot\n  Screenrecord\n  Battery\n󰃉  Color") in
+    case $(menu "Choose" "  Project\n  Audio\n  Keybindings\n󰎚  Notes\n  Background\n󱂩  NwgDock\n  Screenshot\n  Screenrecord\n  Battery\n󰃉  Color") in
     *Project*) tmuxRepos ;;
     *Audio*) audio ;;
+    *Background*) show_background_menu ;;
     *Keybindings*) source $XDG_CONFIG_HOME/custom-scripts/keybindings.sh ;;
     *Notes*) selectednote ;;
     *NwgDock*) pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c walker ;;
