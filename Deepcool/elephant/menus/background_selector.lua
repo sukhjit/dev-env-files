@@ -29,6 +29,7 @@ function GetEntries()
 	-- Directories to search
 	local dirs = {
 		home .. "/Pictures",
+		home .. "/Dropbox/Photos",
 	}
 
 	-- Track added files to avoid duplicates
