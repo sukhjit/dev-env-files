@@ -799,7 +799,12 @@ vim.g.llama_config = {
   keymap_fim_accept_word = '<C-b>',
 }
 
-require('claude-code').setup {}
+require('claude-code').setup {
+  window = {
+    position = 'vertical',
+    split_ratio = 0.5,
+  },
+}
 
 require('gen').setup {
   model = 'qwen3-coder:30b',
