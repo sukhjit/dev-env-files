@@ -634,7 +634,19 @@ require('blink.cmp').setup {
 -- ========================
 -- SECTION 8: TREESITTER --
 -- ========================
-vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
+vim.pack.add {
+  { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' },
+  { src = gh 'nvim-treesitter/nvim-treesitter-textobjects', version = 'main' },
+  { src = gh 'nvim-treesitter/nvim-treesitter-context' },
+}
+
+require('treesitter-context').setup {}
+require('nvim-treesitter-textobjects').setup {
+  select = {
+    enable = true,
+    lookahead = true,
+  },
+}
 
 -- Ensure basic parsers are installed
 local parsers = {
