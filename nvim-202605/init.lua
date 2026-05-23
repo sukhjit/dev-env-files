@@ -206,6 +206,8 @@ local telescope_plugins = {
   gh 'nvim-lua/plenary.nvim',
   gh 'nvim-telescope/telescope.nvim',
   gh 'nvim-telescope/telescope-ui-select.nvim',
+  gh 'nvim-telescope/telescope-media-files.nvim',
+  gh 'nvim-lua/popup.nvim',
 }
 if vim.fn.executable 'make' == 1 then
   table.insert(telescope_plugins, gh 'nvim-telescope/telescope-fzf-native.nvim')
@@ -241,12 +243,17 @@ require('telescope').setup {
   },
   extensions = {
     ['ui-select'] = { require('telescope.themes').get_dropdown() },
+    media_files = {
+      filetypes = { 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'mov', 'avi', 'mkv', 'webm', 'mp3', 'wav', 'ogg', 'flac' },
+      file_cmd = 'rg',
+    },
   },
 }
 
 -- Enable Telescope extensions if they are installed
 pcall(require('telescope').load_extension, 'fzf')
 pcall(require('telescope').load_extension, 'ui-select')
+pcall(require('telescope').load_extension 'media_files')
 
 -- See `:help telescope.builtin`
 local builtin = require 'telescope.builtin'
@@ -261,6 +268,7 @@ vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' }
 vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>sm', require('telescope').extensions.media_files.media_files, { desc = '[S]earch [M]edia Files' })
 vim.keymap.set('n', '<leader>sF', function()
   builtin.find_files {
     find_command = {
