@@ -1,7 +1,7 @@
 {
   "spacing": 4,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["custom/webcam"],
+  "modules-center": ["custom/webcam", "custom/media"],
   "modules-right": [
     "custom/screenrecording",
     "pulseaudio",
@@ -80,7 +80,7 @@
 
   "memory": {
     "format": "  {percentage}%",
-    "tooltip-format": "Used: {used:0.2f}GB / {total:0.2f}GB\nAvailable: {avail:0.2f}GB\nSwap used: {swapUsed:0.2f}GB / {swapTotal:0.2f}GB ({swapPercentage}%)"
+    "tooltip-format": "Used: {used:0.2f}GB / {total:0.2f}GB\nAvailable: {avail:0.2f}GB\nSwap used: {swapUsed:0.2f}GB / {swapTotal:0.2f}GB ({swapPercentage}%)",
   },
 
   "power-profiles-daemon": {
@@ -191,5 +191,11 @@
     "on-click": "$XDG_CONFIG_HOME/custom-scripts/start-stop-screenrecord.sh",
     "signal": 8,
     "return-type": "json",
+  },
+
+  "custom/media": {
+    "exec": "~/.config/waybar/scripts/media.sh",
+    "interval": 1,
+    "on-click": "playerctl play-pause",
   },
 }
