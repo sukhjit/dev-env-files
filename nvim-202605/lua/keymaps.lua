@@ -57,3 +57,6 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.bo.commentstring = '# %s'
   end,
 })
+
+-- custom keymap to generate uuid
+vim.keymap.set('n', '<leader>ug', ':.!uuidgen<CR>', { desc = '[G]enerate UUID' })

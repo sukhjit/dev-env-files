@@ -61,7 +61,8 @@ alias gitFixList='git log -i -E --grep="fix|bug|broken" --name-only --format='' 
 alias gitCountByMonth='git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c'
 alias gitRevertFreq='git log --oneline --since="1 year ago" | grep -iE "revert|hotfix|emergency|rollback"'
 
-alias randomGen='openssl rand -base64 8 | md5'
+alias randomGen='openssl rand -base64 8 | md5sum'
+
 alias curlAk="curl -H \"Pragma: \
     akamai-x-cache-on, \
     akamai-x-cache-remote-on, \
