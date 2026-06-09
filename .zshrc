@@ -1,21 +1,19 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+autoload -Uz compinit
+if [[ -n $XDG_CONFIG_HOME/zsh/.zcompdump(#qNmh-24) ]]; then
+    compinit -C
+else
+    compinit
 fi
 
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="sukhjit"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(git)
-source $ZSH/oh-my-zsh.sh
-source ~/.p10k.zsh
+source $XDG_CONFIG_HOME/zsh/fzf-tab/fzf-tab.plugin.zsh
+source $XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(starship init zsh)"
 
 # custom scripts
 [[ -d $XDG_CONFIG_HOME/custom-scripts ]] && export PATH="$PATH:$XDG_CONFIG_HOME/custom-scripts"
 
-# powerlevel10k settings
 setopt share_history
 setopt hist_expire_dups_first
 setopt hist_verify
@@ -25,11 +23,21 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
-# bind Home and End keys for tmux
-bindkey "\E[1~" beginning-of-line
-bindkey "\E[4~" end-of-line
+bindkey "^[[3~" delete-char
+bindkey "^[[H" beginning-of-line
+bindkey "^[[F" end-of-line
+
+# Jump back or forward one word (Ctrl + Left/Right)
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+
+# Fix Home and End keys explicitly inside tmux
+bindkey '^[[1~' beginning-of-line
+bindkey '^[[4~' end-of-line
+
+# search history key
+bindkey "^R" history-incremental-search-backward
+# source <(fzf --zsh)
 
 ###############################################
 
@@ -45,7 +53,7 @@ alias b64encode='pbpaste | base64 | pbcopy'
 alias odcs_decode='pbpaste | base64 --decode | zcat | jq . | pbcopy'
 alias odcs_encode='pbpaste | jq -r tostring | tr -d "\n" | gzip -9 | base64 | tr -d "\n" | pbcopy'
 
-alias ll='ls -la'
+alias ll='ls -la --color=auto'
 
 # git alias
 alias glog='git log --date-order --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'

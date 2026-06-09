@@ -7,7 +7,7 @@ export XDG_PICTURES_DIR=${XDG_PICTURES_DIR:="$HOME/Pictures"}
 export ZDOTDIR=$HOME/.config/zsh
 export HISTFILE="$ZDOTDIR/history"
 export HISTSIZE=30000
-export SAVEHIST=30000
+export SAVEHIST=50000
 
 export EDITOR="vim"
 export OPENER="xdg-open"
@@ -25,5 +25,6 @@ export PSQLRC=$XDG_CONFIG_HOME/pg/psqlrc
 export PSQL_HISTORY=$XDG_STATE_HOME/psql_history
 export PASSWORD_STORE_DIR=$XDG_DATA_HOME/pass
 export PYTHON_HISTORY=$XDG_STATE_HOME/python_history
+export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship.toml
 
 export WGETRC=$XDG_CONFIG_HOME/wgetrc
