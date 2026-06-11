@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+list=(
+    $XDG_CONFIG_HOME/zsh/fzf-tab
+    $XDG_CONFIG_HOME/zsh/zsh-autosuggestions
+    $XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting
+)
+
+for item in "${list[@]}"; do
+    echo "Updating $item"
+    (
+        cd $item && git pull
+    )
+
+    echo ""
+done

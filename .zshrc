@@ -1,18 +1,25 @@
 autoload -Uz compinit
-if [[ -n $XDG_CONFIG_HOME/zsh/.zcompdump(#qNmh-24) ]]; then
-    compinit -C
-else
-    compinit
-fi
+compinit
+
+export PATH="$HOME/.local/bin:$PATH"
 
 source $XDG_CONFIG_HOME/zsh/fzf-tab/fzf-tab.plugin.zsh
 source $XDG_CONFIG_HOME/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $XDG_CONFIG_HOME/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 eval "$(starship init zsh)"
-
-# custom scripts
-[[ -d $XDG_CONFIG_HOME/custom-scripts ]] && export PATH="$PATH:$XDG_CONFIG_HOME/custom-scripts"
+# Prompt Engineering Starship
+PROMPT_NEEDS_NEWLINE=false
+precmd() {
+  if [[ "$PROMPT_NEEDS_NEWLINE" == true ]]; then
+    echo
+  fi
+  PROMPT_NEEDS_NEWLINE=true
+}
+clear() {
+  PROMPT_NEEDS_NEWLINE=false
+  command clear
+}
 
 setopt share_history
 setopt hist_expire_dups_first

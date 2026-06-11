@@ -48,10 +48,10 @@ function GetEntries()
 					seen[filename] = true
 					table.insert(entries, {
 						Text = FormatName(filename),
-						SubText = home .. "/.config/custom-scripts/set-bg.sh " .. ShellEscape(background),
+						SubText = home .. "/.local/bin/set-bg " .. ShellEscape(background),
 						Value = background,
 						Actions = {
-							activate = home .. "/.config/custom-scripts/set-bg.sh " .. ShellEscape(background),
+							activate = home .. "/.local/bin/set-bg " .. ShellEscape(background),
 						},
 						Preview = background,
 						PreviewType = "file",

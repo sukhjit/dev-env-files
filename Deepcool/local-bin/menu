@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 menu() {
     local prompt="$1"
@@ -118,11 +118,11 @@ show_main_menu() {
     *Project*) tmuxRepos ;;
     *Audio*) audio ;;
     *Background*) show_background_menu ;;
-    *Keybindings*) source $XDG_CONFIG_HOME/custom-scripts/keybindings.sh ;;
+    *Keybindings*) source $HOME/.local/bin/keybindings ;;
     *Notes*) selectednote ;;
     *NwgDock*) pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c walker ;;
     *Screenshot*) screenshot ;;
-    *Screenrecord*) source $XDG_CONFIG_HOME/custom-scripts/start-stop-screenrecord.sh ;;
+    *Screenrecord*) source $HOME/.local/bin/start-stop-screenrecord ;;
     *Battery*) battery ;;
     *Color*)
         walker --close

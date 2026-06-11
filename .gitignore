@@ -7,3 +7,6 @@ nvim/lazy-lock.json
 
 # Thunar
 Deepcool/Thunar/accels.scm
+# custom python3.12
+Deepcool/local-bin/python3.12
+

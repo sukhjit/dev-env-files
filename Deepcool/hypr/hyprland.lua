@@ -220,10 +220,11 @@ hl.device({
 
 local mainMod = "SUPER"
 
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("$XDG_CONFIG_HOME/custom-scripts/menu.sh"))
 hl.bind("ALT + space", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("~/.config/waybar/scripts/restart.sh"))
+
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("$HOME/.local/bin/menu"))
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("$XDG_CONFIG_HOME/.config/waybar/scripts/restart.sh"))
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
 
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprshot -m region"))
@@ -278,10 +279,10 @@ hl.bind("ALT + mouse:272", hl.dsp.window.drag(), { mouse = true }) -- ALT + LMB:
 hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true }) -- ALT + RMB: Resize a window
 
 -- Resize window with Ctrl + mainMod + arrow key
-hl.bind("CTRL + SUPER + right", hl.dsp.window.resize({ x = 50, y = 0 }))
-hl.bind("CTRL + SUPER + left", hl.dsp.window.resize({ x = -50, y = 0 }))
-hl.bind("CTRL + SUPER + down", hl.dsp.window.resize({ x = 0, y = 50 }))
-hl.bind("CTRL + SUPER + up", hl.dsp.window.resize({ x = 0, y = -50 }))
+hl.bind("CTRL + SUPER + right", hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
+hl.bind("CTRL + SUPER + left", hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
+hl.bind("CTRL + SUPER + down", hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
+hl.bind("CTRL + SUPER + up", hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
 
 -- Multimedia keys for volume
 hl.bind(
