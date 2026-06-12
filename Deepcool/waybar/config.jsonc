@@ -1,6 +1,6 @@
 {
   "spacing": 4,
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-left": ["ext/workspaces", "hyprland/window"],
   "modules-center": ["custom/webcam", "custom/media"],
   "modules-right": [
     "custom/screenrecording",
@@ -25,10 +25,14 @@
   },
 
   // Modules configuration
-  "hyprland/workspaces": {
+  // "hyprland/workspaces": {
+  "ext/workspaces": {
     "disable-scroll": true,
     "all-outputs": true,
     "format": "{icon}",
+    "on-click": "activate",
+    // Hyprland 0.55.x lua config breaks "dispatch workspace N" IPC — use eval instead
+    // "on-click": "bash -c 'hyprctl eval \"hl.dispatch(hl.dsp.focus({workspace = $1}))\"' --",
     "persistent_workspaces": {
       "1": [],
     },
