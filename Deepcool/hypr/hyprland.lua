@@ -48,14 +48,16 @@ end)
 -------------------------------
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+local home = os.getenv("HOME")
+
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("XDG_SESSION_TYPE", "wayland")
-hl.env("XDG_PICTURES_DIR", "$HOME/Pictures")
-hl.env("HYPRSHOT_DIR", "$HOME/screenshots")
+hl.env("XDG_PICTURES_DIR", home .. "/Pictures")
+hl.env("HYPRSHOT_DIR", home .. "screenshots")
 -- nvidia
 hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
@@ -224,7 +226,7 @@ hl.bind("ALT + space", hl.dsp.exec_cmd(menu))
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("$HOME/.local/bin/menu"))
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("$XDG_CONFIG_HOME/.config/waybar/scripts/restart.sh"))
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("$XDG_CONFIG_HOME/waybar/scripts/restart.sh"))
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
 
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprshot -m region"))
