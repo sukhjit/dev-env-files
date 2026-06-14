@@ -269,8 +269,9 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
 end
 
--- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + M", hl.dsp.focus({ workspace = "special:magic" }))
+-- Toggle special workspace (scratchpad)
+hl.bind(mainMod .. " + M", hl.dsp.workspace.toggle_special("magic"))
+-- Move item to the scratchpad
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.window.move({ workspace = "special:magic", follow = true }))
 
 -- Scroll through existing workspaces with mainMod + scroll
