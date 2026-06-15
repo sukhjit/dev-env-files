@@ -23,16 +23,6 @@ show_background_menu() {
     walker -m menus:BackgroundSelector --width 800 --minheight 400
 }
 
-screenshot() {
-    hyprshot -m region --raw |
-        satty --filename - \
-            --output-filename "$HOME/screenshots/$(date +'%Y-%m-%d-%H%M%S').png" \
-            --early-exit \
-            --actions-on-enter save-to-clipboard \
-            --save-after-copy \
-            --copy-command 'wl-copy'
-}
-
 audio() {
     case $(menu "Audio output" "  Headphones\n  Speakers") in
     *Speakers*)
@@ -121,7 +111,7 @@ show_main_menu() {
     *Keybindings*) source $HOME/.local/bin/keybindings ;;
     *Notes*) selectednote ;;
     *NwgDock*) pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c walker ;;
-    *Screenshot*) screenshot ;;
+    *Screenshot*) source $HOME/.local/bin/screenshot ;;
     *Screenrecord*) source $HOME/.local/bin/start-stop-screenrecord ;;
     *Battery*) battery ;;
     *Color*)

@@ -226,8 +226,8 @@ hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("$HOME/.local/bin/menu"))
 hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("$XDG_CONFIG_HOME/waybar/scripts/restart.sh"))
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
 
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprshot -m region"))
-hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m output"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("$HOME/.local/bin/screenshot region"))
+hl.bind("PRINT", hl.dsp.exec_cmd("$HOME/.local/bin/screenshot output"))
 
 hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("swaync-client -t -sw"))
