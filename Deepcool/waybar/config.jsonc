@@ -15,12 +15,12 @@
     "bluetooth",
     "clock",
     "tray",
-    "custom/power",
+    "custom/power"
   ],
 
   "hyprland/window": {
     "max-length": 40,
-    "separate-outputs": false,
+    "separate-outputs": false
   },
 
   // Modules configuration
@@ -33,8 +33,8 @@
     // Hyprland 0.55.x lua config breaks "dispatch workspace N" IPC — use eval instead
     // "on-click": "bash -c 'hyprctl eval \"hl.dispatch(hl.dsp.focus({workspace = $1}))\"' --",
     "persistent_workspaces": {
-      "1": [],
-    },
+      "1": []
+    }
   },
 
   "wlr/taskbar": {
@@ -46,24 +46,24 @@
     "ignore-list": ["wofi"],
     "rewrite": {
       "(.*) Firefox Web Browser ": " Firefox ",
-      "(.*) Google Chrome ": " Chrome ",
-    },
+      "(.*) Google Chrome ": " Chrome "
+    }
   },
 
   "tray": {
-    "spacing": 4,
+    "spacing": 4
   },
 
   "cpu": {
     "format": "  {usage}%",
     "tooltip": true,
-    "on-click": "ghostty -e htop",
+    "on-click": "ghostty -e htop"
   },
 
   "temperature": {
     "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
     "critical-threshold": 80,
-    "format": "󰈸 {temperatureC}°C",
+    "format": "󰈸 {temperatureC}°C"
   },
 
   "clock": {
@@ -75,15 +75,15 @@
         "months": "<span color='#BB9AF7'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b>{}</b></span>",
-      },
+        "today": "<span color='#ff6699'><b>{}</b></span>"
+      }
     },
-    "interval": 1,
+    "interval": 1
   },
 
   "memory": {
     "format": "  {percentage}%",
-    "tooltip-format": "Used: {used:0.2f}GB / {total:0.2f}GB\nAvailable: {avail:0.2f}GB\nSwap used: {swapUsed:0.2f}GB / {swapTotal:0.2f}GB ({swapPercentage}%)",
+    "tooltip-format": "Used: {used:0.2f}GB / {total:0.2f}GB\nAvailable: {avail:0.2f}GB\nSwap used: {swapUsed:0.2f}GB / {swapTotal:0.2f}GB ({swapPercentage}%)"
   },
 
   "power-profiles-daemon": {
@@ -94,8 +94,8 @@
       "default": "",
       "performance": "",
       "balanced": "",
-      "power-saver": "",
-    },
+      "power-saver": ""
+    }
   },
 
   "network": {
@@ -107,7 +107,7 @@
     "tooltip-format-wifi": "Network: <b>{essid}</b>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
     "tooltip-format-ethernet": "󰀂  {ifname} {ipaddr}",
     "tooltip-format-disconnected": "Disconnected",
-    "interval": 5,
+    "interval": 5
   },
 
   "bluetooth": {
@@ -115,7 +115,7 @@
     "format-disabled": "󰂲",
     "format-connected": "󰂯",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "blueberry",
+    "on-click": "blueberry"
   },
 
   "pulseaudio": {
@@ -133,16 +133,16 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": ["", "", ""],
+      "default": ["", "", ""]
     },
     "on-click": "$TERMINAL --class=Wiremix -e wiremix",
-    "on-click-right": "pamixer -t",
+    "on-click-right": "pamixer -t"
   },
 
   "custom/power": {
     "format": "⏻",
     "on-click": "wlogout --protocol layer-shell",
-    "tooltip": false,
+    "tooltip": false
   },
 
   "custom/gpu": {
@@ -150,14 +150,14 @@
     "exec": "$HOME/.config/waybar/scripts/gpu.sh",
     "return-type": "json",
     "interval": 5,
-    "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+    "format-icons": ["󰝦", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"]
   },
 
   "custom/webcam": {
     "exec": "~/.config/waybar/scripts/webcam.sh",
     "return-type": "json",
     "interval": 2,
-    "format": "{}",
+    "format": "{}"
   },
 
   "custom/weather": {
@@ -165,7 +165,7 @@
     "exec": "$HOME/.config/waybar/scripts/weather.sh",
     "return-type": "json",
     "on-click": "$HOME/.config/waybar/scripts/weather.sh open",
-    "interval": 300,
+    "interval": 300
   },
 
   "custom/notifications": {
@@ -179,26 +179,26 @@
       "inhibited-notification": "<span foreground='red'><sup></sup></span>",
       "inhibited-none": "",
       "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": "",
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
-    "escape": true,
+    "escape": true
   },
 
   "custom/screenrecording": {
     "exec": "$HOME/.local/bin/indicator-screenrecord",
     "on-click": "$HOME/.local/bin/start-stop-screenrecord",
     "signal": 8,
-    "return-type": "json",
+    "return-type": "json"
   },
 
   "custom/media": {
     "exec": "~/.config/waybar/scripts/media.sh",
     "interval": 1,
-    "on-click": "playerctl play-pause",
-  },
+    "on-click": "playerctl play-pause"
+  }
 }

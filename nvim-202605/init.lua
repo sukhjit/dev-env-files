@@ -608,6 +608,11 @@ require('conform').setup {
     python = { 'ruff_format' },
     xml = { 'xmlformatter' },
   },
+  formatters = {
+    prettierd = {
+      args = { '--trailing-comma', 'none' },
+    },
+  },
 }
 
 vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
