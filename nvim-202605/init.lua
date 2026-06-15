@@ -393,6 +393,16 @@ local servers = {
   jsonls = {},
   cssls = {},
   tailwindcss = {},
+  phpactor = {
+    cmd = { 'phpactor', 'language-server' },
+    filetypes = { 'php' },
+    root_markers = { '.git', 'composer.json', '.phpactor.json', '.phpactor.yml' },
+    workspace_required = true,
+    init_options = {
+      ['language_server_phpstan.enabled'] = false,
+      ['language_server_psalm.enabled'] = false,
+    },
+  },
   sqlls = {},
   terraformls = {
     on_attach = function(client)
@@ -512,6 +522,7 @@ require('mason').setup {
   'dockerls',
   'gopls',
   'html-lsp',
+  'phpactor',
   'jsonls',
   'lua_ls',
   'prettierd',
@@ -538,6 +549,7 @@ vim.list_extend(ensure_installed, {
   'impl',
   'staticcheck',
   -- rest
+  'php-cs-fixer',
   'shfmt',
 })
 
@@ -561,6 +573,7 @@ require('conform').setup {
       javascript = true,
       go = true,
       lua = true,
+      php = true,
       python = true,
       tf = true,
     }
@@ -584,6 +597,7 @@ require('conform').setup {
       'goimports',
       'golines',
     },
+    php = { 'php_cs_fixer' },
     terraform = { 'terraform_fmt' },
     tf = { 'terraform_fmt' },
     ['terraform-vars'] = { 'terraform_fmt' },
@@ -667,6 +681,7 @@ local parsers = {
   'make',
   'markdown',
   'markdown_inline',
+  'php',
   'python',
   'regex',
   'sql',
