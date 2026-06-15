@@ -1,9 +1,8 @@
 {
   "spacing": 4,
   "modules-left": ["ext/workspaces", "hyprland/window"],
-  "modules-center": ["custom/webcam", "custom/media"],
+  "modules-center": ["custom/screenrecording", "custom/webcam", "custom/media"],
   "modules-right": [
-    "custom/screenrecording",
     "pulseaudio",
     "network",
     "cpu",
