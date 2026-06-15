@@ -1,326 +1,363 @@
+:root {
+  --text: #cdd6f4;
+  --blue: #89b4fa;
+  --surface0: #313244;
+  --surface1: #45475a;
+  --surface2: #585b70;
+  --sapphire: #74c7ec;
+  --mantle: #181825;
+  --red: #f38ba8;
+  --subtext0: #a6adc8;
+  --subtext1: #bac2de;
+  --base: #1e1e2e;
+  --maroon: #eba0ac;
+  --pink: #f5c2e7;
+  --yellow: #f9e2af;
+}
+
 * {
-  font-family: "MesloLGS Nerd Font Mono Regular";
-  /* font-weight: bolder; */
+  all: unset;
+  font-size: 14px;
+  font-family: "Ubuntu Nerd Font";
+  transition: 200ms;
 }
 
-.control-center .notification-row:focus,
-.control-center .notification-row:hover {
-  opacity: 1;
-  background: rgb(43, 43, 57);
+trough highlight {
+  background: var(--text);
 }
 
-.notification-row {
-  outline: none;
+scale {
+  margin: 0 7px;
 }
 
-.notification {
-  border-radius: 12px;
-  margin: 10px;
+scale trough {
+  margin: 0rem 1rem;
+  min-height: 8px;
+  min-width: 70px;
+  border-radius: 12.6px;
+}
+
+trough slider {
+  margin: -10px;
+  border-radius: 12.6px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+  transition: all 0.2s ease;
+  background-color: var(--blue);
+}
+
+trough slider:hover {
+  box-shadow:
+    0 0 2px rgba(0, 0, 0, 0.8),
+    0 0 8px var(--blue);
+}
+
+trough {
+  background-color: var(--surface0);
+}
+
+/* notifications */
+
+.notification-background {
+  box-shadow:
+    0 0 8px 0 rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px var(--surface1);
+  border-radius: 12.6px;
+  margin: 18px;
+  background: var(--mantle);
+  color: var(--text);
   padding: 0;
-  border: 2px solid #2ac3de;
 }
 
-.notification-content {
-  background: transparent;
-  padding: 10px;
-  border-radius: 12px;
+.notification-background .notification {
+  padding: 7px;
+  border-radius: 12.6px;
 }
 
-.close-button {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(169, 177, 214, 1);
-  text-shadow: none;
-  padding: 0;
-  border-radius: 100%;
-  margin-top: 10px;
-  margin-right: 16px;
-  box-shadow: none;
-  border: none;
-  min-width: 24px;
-  min-height: 24px;
+.notification-background .notification.critical {
+  box-shadow: inset 0 0 7px 0 var(--red);
 }
 
-.close-button:hover {
-  box-shadow: none;
-  background: rgba(255, 255, 255, 0.15);
-  transition: all 0.15s ease-in-out;
-  border: none;
+.notification .notification-content {
+  margin: 7px;
 }
 
-.notification-default-action,
-.notification-action {
-  padding: 4px;
-  margin: 0;
-  box-shadow: none;
-  background: rgb(17, 17, 27);
-  border: none;
-  color: rgba(169, 177, 214, 1);
-  transition: all 0.15s ease-in-out;
+.notification .notification-content overlay {
+  /* icons */
+  margin: 4px;
 }
 
-.notification-default-action:hover,
-.notification-action:hover {
-  -gtk-icon-effect: none;
-  background: rgb(27, 27, 43);
+.notification-content .summary {
+  color: var(--text);
 }
 
-.notification-default-action {
-  border-radius: 12px;
+.notification-content .time {
+  color: var(--subtext0);
 }
 
-.notification-default-action:not(:only-child) {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+.notification-content .body {
+  color: var(--subtext1);
 }
 
-.notification-action {
-  border-radius: 0;
-  border-top: none;
-  border-right: none;
+.notification > *:last-child > * {
+  min-height: 3.4em;
 }
 
-.notification-action:first-child {
-  border-bottom-left-radius: 10px;
-  background: #1b1b2b;
+.notification-background .close-button {
+  margin: 7px;
+  padding: 2px;
+  border-radius: 6.3px;
+  color: var(--base);
+  background-color: var(--red);
 }
 
-.notification-action:last-child {
-  border-bottom-right-radius: 10px;
-  background: #1b1b2b;
+.notification-background .close-button:hover {
+  background-color: var(--maroon);
 }
 
-.inline-reply {
-  margin-top: 8px;
+.notification-background .close-button:active {
+  background-color: var(--pink);
 }
 
-.inline-reply-entry {
-  background: rgb(43, 43, 57);
-  color: rgba(169, 177, 214, 1);
-  caret-color: rgba(169, 177, 214, 1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
+.notification .notification-action {
+  border-radius: 7px;
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--surface1);
+  margin: 4px;
+  padding: 8px;
+  font-size: 0.2rem; /* controls the button size not text size*/
 }
 
-.inline-reply-button {
-  margin-left: 4px;
-  background: rgb(17, 17, 27);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  color: rgba(169, 177, 214, 1);
+.notification .notification-action {
+  background-color: var(--surface0);
 }
 
-.inline-reply-button:disabled {
-  background: initial;
-  color: rgb(150, 150, 150);
-  border: 1px solid transparent;
+.notification .notification-action:hover {
+  background-color: var(--surface1);
 }
 
-.inline-reply-button:hover {
-  background: rgb(27, 27, 43);
+.notification .notification-action:active {
+  background-color: var(--surface2);
 }
 
-.body-image {
-  margin-top: 6px;
-  background-color: #fff;
-  border-radius: 12px;
+.notification.critical progress {
+  background-color: var(--red);
 }
 
-.summary {
-  font-size: 16px;
-  font-weight: 700;
-  background: transparent;
-  color: rgba(187, 154, 247, 1);
-  text-shadow: none;
+.notification.low progress,
+.notification.normal progress {
+  background-color: var(--blue);
 }
 
-.time {
-  font-size: 16px;
-  font-weight: 700;
-  background: transparent;
-  color: rgba(169, 177, 214, 1);
-  text-shadow: none;
-  margin-right: 18px;
+.notification progress,
+.notification trough,
+.notification progressbar {
+  border-radius: 12.6px;
+  padding: 3px 0;
 }
-
-.body {
-  font-size: 15px;
-  font-weight: 400;
-  background: transparent;
-  color: rgba(169, 177, 214, 1);
-  text-shadow: none;
-}
+/* control center */
 
 .control-center {
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid #2ac3de;
-  border-radius: 10px;
+  box-shadow:
+    0 0 8px 0 rgba(0, 0, 0, 0.8),
+    inset 0 0 0 1px var(--surface0);
+  border-radius: 12.6px;
+  background-color: var(--base);
+  color: var(--text);
+  padding: 14px;
 }
 
-.control-center-list {
-  background: transparent;
+.control-center .notification-background {
+  border-radius: 7px;
+  box-shadow: inset 0 0 0 1px var(--surface1);
+  margin: 4px 10px;
 }
 
-.control-center-list-placeholder {
-  opacity: 0.5;
+.control-center .notification-background .notification {
+  border-radius: 7px;
 }
 
-.floating-notifications {
-  background: transparent;
+.control-center .notification-background .notification.low {
+  opacity: 0.8;
 }
 
-.blank-window {
-  background: alpha(black, 0.25);
+.control-center .widget-title {
+  padding: 0 10px;
 }
 
-.widget-title {
-  color: rgba(169, 177, 214, 1);
-  margin: 10px;
-  font-size: 1.5rem;
+.control-center .widget-title > label {
+  color: var(--text);
+  font-size: 1.3em;
 }
 
-.widget-title > button {
-  font-size: initial;
-  color: rgba(169, 177, 214, 1);
-  text-shadow: none;
-  background: rgb(17, 17, 27);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: none;
-  border-radius: 12px;
+.control-center .widget-title button {
+  border-radius: 7px;
+  color: var(--text);
+  background-color: var(--surface0);
+  box-shadow: inset 0 0 0 1px var(--surface1);
+  padding: 8px;
 }
 
-.widget-title > button:hover {
-  background: rgb(27, 27, 43);
+.control-center .widget-title button:hover {
+  background-color: var(--surface1);
 }
+
+.control-center .widget-title button:active {
+  background-color: var(--surface2);
+}
+
+.control-center .notification-group {
+  margin-top: 10px;
+}
+
+.control-center .notification-group:focus .notification-background {
+  background-color: var(--surface0);
+}
+
+scrollbar slider {
+  margin: -3px;
+  opacity: 0.8;
+}
+
+scrollbar trough {
+  margin: 2px 0;
+}
+
+/* dnd */
 
 .widget-dnd {
-  color: rgba(169, 177, 214, 1);
-  margin: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
   font-size: 1.1rem;
 }
 
 .widget-dnd > switch {
   font-size: initial;
-  border-radius: 12px;
-  background: rgb(17, 17, 27);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: var(--surface0);
   box-shadow: none;
 }
 
 .widget-dnd > switch:checked {
-  background: rgb(0, 128, 255);
+  background: var(--blue);
 }
 
 .widget-dnd > switch slider {
-  background: rgb(27, 27, 43);
-  border-radius: 12px;
+  background: var(--surface1);
+  border-radius: 8px;
 }
 
-.widget-label {
-  margin: 10px;
-}
-
-.widget-label > label {
-  font-size: 1.5rem;
-  color: rgba(169, 177, 214, 1);
-}
+/* mpris */
 
 .widget-mpris {
-  color: rgba(169, 177, 214, 1);
-  background: rgb(43, 43, 57);
-  padding: 10px;
-  margin: 10px;
-  border-radius: 10px;
+  margin: 0 5px 10px 5px;
 }
 
 .widget-mpris-player {
-  padding: 8px;
-  margin: 8px;
+  background: var(--surface0);
+  border-radius: 12.6px;
+  color: #cdd6f4;
+}
+
+.mpris-overlay {
+  background-color: var(--surface0);
+  opacity: 0.9;
+  padding: 15px 10px;
+}
+
+.widget-mpris-album-art {
+  -gtk-icon-size: 100px;
+  border-radius: 12.6px;
+  margin: 0 10px;
 }
 
 .widget-mpris-title {
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
+  color: var(--text);
 }
 
 .widget-mpris-subtitle {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  color: var(--subtext1);
+}
+
+.widget-mpris button {
+  border-radius: 12.6px;
+  color: var(--text);
+  margin: 0 5px;
+  padding: 2px;
+}
+
+.widget-mpris button image {
+  -gtk-icon-size: 1.8rem;
+}
+
+.widget-mpris button:hover {
+  background-color: var(--surface0);
+}
+
+.widget-mpris button:active {
+  background-color: var(--surface1);
+}
+
+.widget-mpris button:disabled {
+  opacity: 0.5;
+}
+
+.widget-menubar > box > .menu-button-bar > button > label {
+  font-size: 3rem;
+  padding: 0.5rem 2rem;
+}
+
+.widget-menubar > box > .menu-button-bar > :last-child {
+  color: var(--red);
+}
+
+.power-buttons button:hover,
+.powermode-buttons button:hover,
+.screenshot-buttons button:hover {
+  background: var(--surface0);
+}
+
+.control-center .widget-label > label {
+  color: var(--text);
+  font-size: 2rem;
 }
 
 .widget-buttons-grid {
-  font-size: x-large;
-  padding: 8px;
-  margin: 20px 10px 10px;
-  border-radius: 12px;
-  background: rgb(43, 43, 57);
+  padding-top: 1rem;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button {
-  margin: 3px;
-  background: #343b58;
-  border-radius: 12px;
-  color: rgba(169, 177, 214, 1);
-}
-
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-  /* background: rgb(27, 27, 43); */
-  color: rgba(158, 206, 106, 1);
-}
-
-.widget-menubar > box > .menu-button-bar > button {
-  border: none;
-  background: transparent;
-}
-
-.topbar-buttons > button {
-  border: none;
-  background: transparent;
+.widget-buttons-grid > flowbox > flowboxchild > button label {
+  font-size: 2.5rem;
 }
 
 .widget-volume {
-  background: rgb(43, 43, 57);
-  padding: 8px;
-  margin: 10px;
-  border-radius: 12px;
-  font-size: x-large;
-  color: rgba(169, 177, 214, 1);
+  padding: 1rem 0;
 }
 
-.widget-volume > box > button {
-  background: transparent;
-  border: none;
+.widget-volume label {
+  color: var(--sapphire);
+  padding: 0 1rem;
 }
 
-.per-app-volume {
-  background-color: rgb(17, 17, 27);
-  padding: 4px 8px 8px;
-  margin: 0 8px 8px;
-  border-radius: 12px;
+.widget-volume trough highlight {
+  background: var(--sapphire);
 }
 
-.widget-backlight {
-  background: rgb(43, 43, 57);
-  padding: 8px;
-  margin: 10px;
-  border-radius: 12px;
-  font-size: x-large;
-  color: rgba(169, 177, 214, 1);
+.widget-backlight trough highlight {
+  background: var(--yellow);
 }
 
-.widget-inhibitors {
-  margin: 8px;
+.widget-backlight label {
   font-size: 1.5rem;
+  color: var(--yellow);
 }
 
-.widget-inhibitors > button {
-  font-size: initial;
-  color: rgba(169, 177, 214, 1);
-  text-shadow: none;
-  background: rgb(17, 17, 27);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: none;
-  border-radius: 12px;
+.widget-backlight .KB {
+  padding-bottom: 1rem;
 }
 
-.widget-inhibitors > button:hover {
-  background: rgb(27, 27, 43);
+.image {
+  padding-right: 0.5rem;
 }
+
