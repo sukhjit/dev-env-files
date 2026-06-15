@@ -52,12 +52,9 @@ local home = os.getenv("HOME")
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
-
-hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_PICTURES_DIR", home .. "/Pictures")
-hl.env("HYPRSHOT_DIR", home .. "screenshots")
+hl.env("HYPRSHOT_DIR", home .. "/screenshots")
 -- nvidia
 hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
