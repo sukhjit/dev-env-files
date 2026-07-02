@@ -575,6 +575,7 @@ require('conform').setup {
       lua = true,
       php = true,
       python = true,
+      qml = true,
       tf = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
@@ -606,6 +607,7 @@ require('conform').setup {
     jsonc = { 'prettierd' },
     markdown = { 'prettierd' },
     python = { 'ruff_format' },
+    qml = { 'qmlformat' },
     xml = { 'xmlformatter' },
   },
   formatters = {
