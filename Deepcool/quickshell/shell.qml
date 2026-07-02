@@ -4,8 +4,13 @@ import Quickshell
 import Quickshell.Hyprland
 
 ShellRoot {
-    PanelWindow {
-        id: topbar
+    Variants {
+        model: Quickshell.screens
+
+        PanelWindow {
+            id: topbar
+            property var modelData
+            screen: modelData
 
         function workspaceById(id) {
             var values = Hyprland.workspaces.values;
@@ -135,6 +140,7 @@ ShellRoot {
 
         }
 
+        }
     }
 
 }
