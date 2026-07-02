@@ -18,7 +18,7 @@ ShellRoot {
         }
 
         function workspaces() {
-            var ids = [1, 2, 3, 4, 5];
+            var ids = [1, 2];
             var values = Hyprland.workspaces.values;
             for (var i = 0; i < values.length; i++) {
                 var id = values[i].id;
@@ -102,7 +102,7 @@ ShellRoot {
 
                             anchors.fill: parent
                             hoverEnabled: true
-                            onClicked: Hyprland.dispatch(`workspace ${index + 1}`)
+                            onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + workspace.id + "})")
                         }
 
                         Behavior on opacity {
