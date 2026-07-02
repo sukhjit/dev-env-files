@@ -70,6 +70,9 @@ ShellRoot {
                         }
 
                         Text {
+                            font.family: "MesloLGS Nerd Font"
+                            font.weight: 600
+                            font.pixelSize: 12
                             anchors.centerIn: parent
                             anchors.horizontalCenterOffset: 0
                             text: topbar.workspaceById(modelData).name
