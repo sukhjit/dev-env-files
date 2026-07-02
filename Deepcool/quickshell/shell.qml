@@ -46,13 +46,14 @@ ShellRoot {
 
             // Workspace indicators
             RowLayout {
-                spacing: 2
+                spacing: 3
 
                 Repeater {
                     model: topbar.workspaces()
 
                     Rectangle {
                         readonly property var workspace: topbar.workspaceById(modelData)
+                        readonly property bool active: workspace !== null && workspace.active
                         readonly property bool occupied: workspace !== null && workspace.toplevels.values.length > 0
                         readonly property bool hover: mouseArea.containsMouse
                         readonly property bool focused: Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData
@@ -61,29 +62,36 @@ ShellRoot {
                         height: 22
                         color: {
                             if (focused)
-                                return Color.activeBg;
+                                return Style.activeBg;
+
+                            if (active)
+                                return Style.visibleBg;
 
                             if (hover)
-                                return Color.hoverBg;
+                                return Style.hoverBg;
 
-                            return Color.buttonBg;
+                            return Style.buttonBg;
                         }
 
                         Text {
-                            font.family: "MesloLGS Nerd Font"
-                            font.weight: 600
-                            font.pixelSize: 12
+                            // font.family: "MesloLGS Nerd Font"
+                            font.family: Style.topbar.fontFamily
+                            font.weight: Style.topbar.fontWeight
+                            font.pixelSize: Style.topbar.fontpixelSize
                             anchors.centerIn: parent
                             anchors.horizontalCenterOffset: 0
                             text: topbar.workspaceById(modelData).name
                             color: {
                                 if (focused)
-                                    return Color.activeFg;
+                                    return Style.activeFg;
+
+                                if (active)
+                                    return Style.visibleFg;
 
                                 if (hover)
-                                    return Color.hoverFg;
+                                    return Style.hoverFg;
 
-                                return Color.buttonFg;
+                                return Style.buttonFg;
                             }
 
                             Behavior on color {
