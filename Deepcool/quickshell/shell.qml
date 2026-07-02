@@ -36,67 +36,78 @@ ShellRoot {
         anchors.left: true
         anchors.right: true
         implicitHeight: 30
-        color: "transparent"
+        color: Qt.rgba(0.196, 0.203, 0.29, 0.9)
 
         // Main layout container
         RowLayout {
             anchors.fill: parent
             anchors.margins: 1
-            spacing: 12
+            spacing: 10
 
             // Workspace indicators
             RowLayout {
-                spacing: 3
+                spacing: 2
 
                 Repeater {
-                    // WidgetButton {
-                    //     required property int modelData
-                    //     readonly property var workspace: topbar.workspaceById(modelData)
-                    //     readonly property bool occupied: workspace!=null && workspace.toplevels.values.length > 0
-                    // }
-
-                    // model: 9 // Number of workspaces
                     model: topbar.workspaces()
 
                     Rectangle {
-                        // var ws = Hyprland.workspaces.values.find(w => w.id === index + 1)
-                        // var active = Hyprland.focusedMonitor?.focusedWorkspace?.id === index + 1
+                        readonly property var workspace: topbar.workspaceById(modelData)
+                        readonly property bool occupied: workspace !== null && workspace.toplevels.values.length > 0
+                        readonly property bool hover: mouseArea.containsMouse
+                        readonly property bool focused: Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData
 
-                        id: wsButton
-
-                        width: 24
-                        height: 24
-                        // Workspace color logic: Active (Bright) vs. Exists (Dim) vs. Empty (Gray)
+                        width: 20
+                        height: 22
                         color: {
-                            if (active)
-                                return "#3b82f6";
+                            if (focused)
+                                return Color.activeBg;
 
-                            // if (ws && ws.windows.length > 0) return "#4b5563"
-                            return "#1f2937";
+                            if (hover)
+                                return Color.hoverBg;
+
+                            return Color.buttonBg;
                         }
 
                         Text {
-                            // color: root.active && root.useActiveColor ? root.activeColor : root.foreground
-                            // font.family: root.fontFamily
-                            // font.pixelSize: root.fontSize
-                            // renderType: Text.NativeRendering
-                            // rotation: root.textRotation
-                            // horizontalAlignment: Text.AlignHCenter
-                            // verticalAlignment: Text.AlignVCenter
-                            // Behavior on color {
-                            //     enabled: !root.bar || root.bar.foregroundAnimationEnabled
-                            //     ColorAnimation { duration: 160 }
-                            // }
-
                             anchors.centerIn: parent
                             anchors.horizontalCenterOffset: 0
-                            text: "abc"
+                            text: topbar.workspaceById(modelData).name
+                            color: {
+                                if (focused)
+                                    return Color.activeFg;
+
+                                if (hover)
+                                    return Color.hoverFg;
+
+                                return Color.buttonFg;
+                            }
+
+                            Behavior on color {
+                                enabled: true
+
+                                ColorAnimation {
+                                    duration: 160
+                                }
+
+                            }
+
                         }
 
-                        // Clicking switches the workspace
                         MouseArea {
+                            id: mouseArea
+
                             anchors.fill: parent
+                            hoverEnabled: true
                             onClicked: Hyprland.dispatch(`workspace ${index + 1}`)
+                        }
+
+                        Behavior on opacity {
+                            NumberAnimation {
+                                duration: 140
+                                easing.type: Easing.OutCubic
+                            }
+
                         }
 
                     }
