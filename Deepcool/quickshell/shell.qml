@@ -32,6 +32,10 @@ ShellRoot {
             return ids;
         }
 
+        function focusWorkspace(id) {
+            Hyprland.dispatch("hl.dsp.focus({workspace = " + id + "})");
+        }
+
         anchors.top: true
         anchors.left: true
         anchors.right: true
@@ -110,7 +114,9 @@ ShellRoot {
 
                             anchors.fill: parent
                             hoverEnabled: true
-                            onClicked: Hyprland.dispatch("hl.dsp.focus({workspace = " + workspace.id + "})")
+                            onPressed: function() {
+                                topbar.focusWorkspace(modelData);
+                            }
                         }
 
                         Behavior on opacity {
