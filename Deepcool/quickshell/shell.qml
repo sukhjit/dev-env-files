@@ -22,7 +22,7 @@ ShellRoot {
             RowLayout {
                 anchors.fill: parent
                 anchors.margins: 1
-                spacing: 10
+                spacing: 5
 
                 Workspaces {
                 }

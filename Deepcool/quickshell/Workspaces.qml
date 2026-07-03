@@ -4,13 +4,12 @@ import Quickshell
 import Quickshell.Hyprland
 
 RowLayout {
-    spacing: 3
-
     function workspaceById(id) {
         var values = Hyprland.workspaces.values;
         for (var i = 0; i < values.length; i++) {
             if (values[i].id === id)
                 return values[i];
+
         }
         return null;
     }
@@ -22,14 +21,19 @@ RowLayout {
             var id = values[i].id;
             if (id > 0 && id <= 10 && ids.indexOf(id) === -1)
                 ids.push(id);
+
         }
-        ids.sort(function(a, b) { return a - b; });
+        ids.sort(function(a, b) {
+            return a - b;
+        });
         return ids;
     }
 
     function focusWorkspace(id) {
         Hyprland.dispatch("hl.dsp.focus({workspace = " + id + "})");
     }
+
+    spacing: 3
 
     Repeater {
         model: workspaceIds()
@@ -46,10 +50,13 @@ RowLayout {
             color: {
                 if (focused)
                     return Style.activeBg;
+
                 if (active)
                     return Style.visibleBg;
+
                 if (hover)
                     return Style.hoverBg;
+
                 return Style.buttonBg;
             }
 
@@ -63,24 +70,35 @@ RowLayout {
                 color: {
                     if (focused)
                         return Style.activeFg;
+
                     if (active)
                         return Style.visibleFg;
+
                     if (hover)
                         return Style.hoverFg;
+
                     return Style.buttonFg;
                 }
 
                 Behavior on color {
                     enabled: true
-                    ColorAnimation { duration: 160 }
+
+                    ColorAnimation {
+                        duration: 160
+                    }
+
                 }
+
             }
 
             MouseArea {
                 id: mouseArea
+
                 anchors.fill: parent
                 hoverEnabled: true
-                onPressed: function() { focusWorkspace(modelData); }
+                onPressed: function() {
+                    focusWorkspace(modelData);
+                }
             }
 
             Behavior on opacity {
@@ -88,7 +106,11 @@ RowLayout {
                     duration: 140
                     easing.type: Easing.OutCubic
                 }
+
             }
+
         }
+
     }
+
 }
