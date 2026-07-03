@@ -90,7 +90,7 @@ ShellRoot {
                                 font.pixelSize: Style.topbar.fontpixelSize
                                 anchors.centerIn: parent
                                 anchors.horizontalCenterOffset: 0
-                                text: topbar.workspaceById(modelData).name
+                                text: workspace ? workspace.name : String(modelData)
                                 color: {
                                     if (focused)
                                         return Style.activeFg;
