@@ -24,6 +24,10 @@ ShellRoot {
                 anchors.margins: 1
                 spacing: 5
 
+                Rectangle {
+                    id: leftSpace
+                }
+
                 Workspaces {
                 }
 
