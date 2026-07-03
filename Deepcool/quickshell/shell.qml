@@ -19,27 +19,44 @@ ShellRoot {
             implicitHeight: 30
             color: Qt.rgba(0.196, 0.203, 0.29, 0.9)
 
-            RowLayout {
+            Item {
                 anchors.fill: parent
                 anchors.margins: 1
-                spacing: 5
+                anchors.leftMargin: 5
+                anchors.rightMargin: 5
 
-                Rectangle {
-                    id: leftSpace
+                RowLayout {
+                    id: leftZone
+
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 5
+
+                    Workspaces {
+                    }
+
+                    ActiveWindow {
+                    }
+
                 }
 
-                Workspaces {
+                RowLayout {
+                    id: centreZone
+
+                    anchors.centerIn: parent
+                    spacing: 5
                 }
 
-                ActiveWindow {
-                    Layout.fillWidth: true
-                }
+                RowLayout {
+                    id: rightZone
 
-                Network {
-                }
+                    anchors.right: parent.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 5
 
-                Rectangle {
-                    id: rightSpace
+                    Network {
+                    }
+
                 }
 
             }
