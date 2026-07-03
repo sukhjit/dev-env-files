@@ -35,6 +35,13 @@ ShellRoot {
                     Layout.fillWidth: true
                 }
 
+                Network {
+                }
+
+                Rectangle {
+                    id: rightSpace
+                }
+
             }
 
         }
