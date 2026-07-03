@@ -1,3 +1,32 @@
+local M = {}
+
+M.colors = {
+	-- Backgrounds & Foregrounds
+	bg = "rgba(1a1b26ff)",
+	bg_dark = "rgba(16161eff)",
+	bg_highlight = "rgba(292e42ff)",
+	terminal_black = "rgba(414868ff)",
+	fg = "rgba(a9b1d6ff)",
+	fg_dark = "rgba(787c99ff)",
+	fg_gutter = "rgba(363c51ff)",
+
+	-- Accent Colors
+	blue = "rgba(7aa2f7ff)",
+	cyan = "rgba(7dcfffff)",
+	blue7 = "rgba(394b70ff)",
+	purple = "rgba(bb9af7ff)",
+	magenta = "rgba(bb9af7ff)",
+	magenta2 = "rgba(ff007fff)",
+	orange = "rgba(ff9e64ff)",
+	yellow = "rgba(e0af68ff)",
+
+	-- Status Colors
+	green = "rgba(9ece6aff)",
+	teal = "rgba(73dacaff)",
+	red = "rgba(f7768eff)",
+	comment = "rgba(565f89ff)",
+}
+
 ----------------
 --- MONITORS ---
 ----------------
@@ -109,8 +138,8 @@ hl.config({
 		border_size = 2,
 
 		col = {
-			active_border = { colors = { "rgba(bb9af7ff)", "rgba(b4f9f8ff)" }, angle = 45 },
-			inactive_border = { colors = { "rgba(565f89cc)", "rgba(9aa5cecc)" }, angle = 45 },
+			active_border = { colors = { M.colors.purple, M.colors.blue }, angle = 45 },
+			inactive_border = { colors = { M.colors.bg } },
 		},
 
 		-- Set to true to enable resizing windows by clicking and dragging on borders and gaps
