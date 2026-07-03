@@ -139,6 +139,10 @@ ShellRoot {
 
                 }
 
+                ActiveWindow {
+                    Layout.fillWidth: true
+                }
+
             }
 
         }
