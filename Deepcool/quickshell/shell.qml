@@ -24,7 +24,8 @@ ShellRoot {
                 anchors.margins: 1
                 spacing: 10
 
-                Workspaces {}
+                Workspaces {
+                }
 
                 ActiveWindow {
                     Layout.fillWidth: true
