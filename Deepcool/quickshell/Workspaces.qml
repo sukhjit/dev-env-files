@@ -47,7 +47,7 @@ RowLayout {
             readonly property bool focused: Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData
 
             width: 20
-            height: 22
+            height: Style.height
             color: {
                 if (focused)
                     return Style.activeBg;

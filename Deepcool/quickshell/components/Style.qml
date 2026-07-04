@@ -4,6 +4,7 @@ pragma Singleton
 QtObject {
     id: root
 
+    readonly property int height: 22
     readonly property color buttonBg: "#1d202e"
     readonly property color buttonFg: "#7aa2f7"
     readonly property color activeBg: "#7aa2f7"
