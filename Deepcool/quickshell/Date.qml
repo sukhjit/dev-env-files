@@ -23,20 +23,12 @@ RowLayout {
 
             return Qt.formatDateTime(systemClock.date, "HH:mm:ss");
         }
-
-        MouseArea {
-            id: mouseArea
-
-            anchors.fill: parent
-            hoverEnabled: true
-            cursorShape: Qt.PointingHandCursor
-            onClicked: {
-                root.showFullDate = !root.showFullDate;
-            }
+        onClickedHandler: function() {
+            root.showFullDate = !root.showFullDate;
         }
 
         StyledPopupWindow {
-            show: mouseArea.containsMouse
+            show: dateText.hovered
             text: Qt.formatDate(systemClock.date, "dddd, MMMM d, yyyy")
         }
 

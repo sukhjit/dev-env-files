@@ -6,6 +6,8 @@ Rectangle {
     property string text: ""
     property int widthPadding: 5
     property bool enablePopup: false
+    property var onClickedHandler: null
+    readonly property bool hovered: mouseArea.containsMouse
 
     color: Style.buttonBg
     implicitWidth: text.length > 0 ? textItem.implicitWidth + widthPadding : 0
@@ -25,7 +27,8 @@ Rectangle {
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
         onClicked: {
-            root.showFullDate = !root.showFullDate;
+            if (root.onClickedHandler)
+                root.onClickedHandler();
         }
     }
 
