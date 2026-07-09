@@ -5,6 +5,7 @@ Rectangle {
 
     property string text: ""
     property int widthPadding: 5
+    property bool enablePopup: false
 
     color: Style.buttonBg
     implicitWidth: text.length > 0 ? textItem.implicitWidth + widthPadding : 0
@@ -15,6 +16,17 @@ Rectangle {
 
         text: root.text
         anchors.centerIn: parent
+    }
+
+    MouseArea {
+        id: mouseArea
+
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
+        onClicked: {
+            root.showFullDate = !root.showFullDate;
+        }
     }
 
 }
