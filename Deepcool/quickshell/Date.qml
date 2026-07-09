@@ -35,24 +35,9 @@ RowLayout {
             }
         }
 
-        PopupWindow {
-            id: popup
-
-            visible: mouseArea.containsMouse
-            anchor.item: dateText
-            anchor.rect.x: dateText.width / 2 - width / 2
-            anchor.rect.y: dateText.height + 5
-            implicitWidth: 220
-            implicitHeight: 80
-            color: "transparent"
-
-            StyledRect {
-                border.width: 2
-                border.color: "#444b6a"
-                anchors.fill: parent
-                text: Qt.formatDate(systemClock.date, "dddd, MMMM d, yyyy")
-            }
-
+        StyledPopupWindow {
+            show: mouseArea.containsMouse
+            text: Qt.formatDate(systemClock.date, "dddd, MMMM d, yyyy")
         }
 
     }
