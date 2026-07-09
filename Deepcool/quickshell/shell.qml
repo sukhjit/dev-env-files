@@ -55,7 +55,7 @@ ShellRoot {
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 5
 
-                    Network {
+                    Date {
                     }
 
                 }
