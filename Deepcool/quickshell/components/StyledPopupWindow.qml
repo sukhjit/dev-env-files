@@ -1,3 +1,4 @@
+import QtQuick
 import Quickshell
 
 PopupWindow {
@@ -5,14 +6,12 @@ PopupWindow {
 
     property string text: ""
     property bool show: false
+    property Item anchorItem: null
 
     visible: show
-    anchor.item: dateText
-    anchor.rect.x: dateText.width / 2 - width / 2
-    anchor.rect.y: dateText.height + 5
-    // anchor.item: parent
-    // anchor.rect.x: parent.width / 2 - width / 2
-    // anchor.rect.y: parent.height + 5
+    anchor.item: anchorItem
+    anchor.rect.x: anchorItem ? anchorItem.width / 2 - width / 2 : 0
+    anchor.rect.y: anchorItem ? anchorItem.height + 5 : 0
     implicitWidth: 220
     implicitHeight: 80
     color: "transparent"

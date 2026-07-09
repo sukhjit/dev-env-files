@@ -30,6 +30,7 @@ RowLayout {
         StyledPopupWindow {
             show: dateText.hovered
             text: Qt.formatDate(systemClock.date, "dddd, MMMM d, yyyy")
+            anchorItem: dateText
         }
 
     }
