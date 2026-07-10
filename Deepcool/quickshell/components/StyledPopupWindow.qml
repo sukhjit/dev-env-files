@@ -4,12 +4,12 @@ import Quickshell
 PopupWindow {
     id: popup
 
-    property string text: ""
     property Item anchorItem: null
     property int width: 220
     property int height: 80
     // use show to open and close with animation
     property bool show: false
+    default property alias content: contentArea.data
 
     // always show for animation
     visible: true
@@ -27,13 +27,21 @@ PopupWindow {
 
     }
 
-    StyledRect {
+    Rectangle {
+        id: container
+
+        anchors.fill: parent
+        color: Style.buttonBg
         border.width: 2
         border.color: Style.border01
-        anchors.fill: parent
-        text: popup.text
         scale: popup.show ? 1 : 0.5
         opacity: popup.show ? 1 : 0
+
+        Item {
+            id: contentArea
+
+            anchors.fill: parent
+        }
 
         Behavior on scale {
             NumberAnimation {
