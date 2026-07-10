@@ -27,7 +27,7 @@ Item {
         font.weight: Style.topbar.fontWeight
         font.pixelSize: Style.topbar.fontpixelSize
         font.wordSpacing: -1.3
-        color: Style.buttonFg
+        color: Style.acWindowText
         text: title
         elide: Text.ElideRight
     }
