@@ -28,7 +28,8 @@ RowLayout {
             id: networkDetailsText
 
             anchors.centerIn: parent
-            text: "Network Details (" + NetworkService.connectionType + ")"
+            // text: "Network Details (" + NetworkService.connectionType + ")" + NetworkService.connectionDevice
+            text: NetworkService.detailedOutput
         }
 
     }
