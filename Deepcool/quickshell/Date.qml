@@ -34,8 +34,8 @@ RowLayout {
 
             show: dateText.hovered || contentHovered || hideDelay.running
             anchorItem: dateText
-            width: 164
-            height: 150
+            popupWidth: calLayout.implicitWidth + 12
+            popupHeight: calLayout.implicitHeight + 12
             onContentHoveredChanged: {
                 if (!contentHovered && !dateText.hovered)
                     hideDelay.start();
@@ -70,6 +70,8 @@ RowLayout {
             }
 
             ColumnLayout {
+                id: calLayout
+
                 anchors.fill: parent
                 anchors.margins: 6
                 spacing: 2
