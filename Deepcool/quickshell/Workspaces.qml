@@ -16,7 +16,7 @@ RowLayout {
     }
 
     function workspaceIds() {
-        var ids = [1, 2];
+        var ids = [];
         var values = Hyprland.workspaces.values;
         for (var i = 0; i < values.length; i++) {
             var id = values[i].id;
