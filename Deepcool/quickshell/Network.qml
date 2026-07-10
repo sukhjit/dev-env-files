@@ -82,4 +82,21 @@ RowLayout {
         widthPadding: 10
     }
 
+    StyledPopupWindow {
+        id: networkDetails
+
+        anchorItem: networkText
+        popupWidth: networkDetailsText.implicitWidth + 12
+        popupHeight: networkDetailsText.implicitHeight + 12
+        show: networkText.hovered
+
+        StyledText {
+            id: networkDetailsText
+
+            anchors.centerIn: parent
+            text: "Network Details"
+        }
+
+    }
+
 }
