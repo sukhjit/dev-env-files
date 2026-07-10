@@ -30,7 +30,7 @@ RowLayout {
         StyledPopupWindow {
             id: calPopup
 
-            property bool contentHovered: calMouseArea.containsMouse
+            property bool contentHovered: calMouseArea.containsMouse && calPopup.isShowing
 
             show: dateText.hovered || contentHovered || hideDelay.running
             anchorItem: dateText

@@ -10,6 +10,7 @@ PopupWindow {
     // use show to open and close with animation
     property bool show: false
     default property alias content: contentArea.data
+    readonly property bool isShowing: container.opacity > 0
 
     // always show for animation
     visible: true
