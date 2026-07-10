@@ -6,25 +6,31 @@ import Quickshell.Networking
 import qs.components
 
 RowLayout {
-    // Process {
-    //     id: networkMonitor
-    //     command: ["nmcli", "monitor"]
+    // Used for debugging
+    // Timer {
+    //     interval: 4000
     //     running: true
-    //     stdout: SplitParser {
-    //         onRead: {
-    //             netProc.running = true;
-    //         }
+    //     repeat: true
+    //     onTriggered: {
+    //         netProc.running = false;
+    //         netProc.running = true;
     //     }
     // }
 
-    Timer {
-        interval: 4000
+    id: root
+
+    Process {
+        id: networkMonitor
+
+        command: ["nmcli", "monitor"]
         running: true
-        repeat: true
-        onTriggered: {
-            netProc.running = false;
-            netProc.running = true;
+
+        stdout: SplitParser {
+            onRead: {
+                netProc.running = true;
+            }
         }
+
     }
 
     Process {
@@ -57,8 +63,6 @@ RowLayout {
 
                 }
                 // UI state logic
-                // implement wifi strength icons
-                // "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
                 if (connectionType === "ETHERNET")
                     connectionIcon = "󰀂";
 
