@@ -16,6 +16,7 @@ QtObject {
     readonly property color urgentFg: "#ffffff"
     readonly property color visibleBg: "#394b70"
     readonly property color visibleFg: "#24283b"
+    readonly property color border01: "#444b6a"
     readonly property string fontfamily: "MesloLGS Nerd Font"
     // topbar style
     readonly property QtObject
