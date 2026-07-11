@@ -20,16 +20,21 @@ RowLayout {
         id: networkDetails
 
         anchorItem: networkText
-        popupWidth: networkDetailsText.implicitWidth + 12
-        popupHeight: networkDetailsText.implicitHeight + 12
+        popupWidth: Math.max(160, networkDetailsText.implicitWidth + 12)
+        popupHeight: Math.max(30, networkDetailsText.implicitHeight + 12)
         show: networkText.hovered
+        onShowChanged: {
+            if (show)
+                NetworkService.fetchDetails();
+
+        }
 
         StyledText {
             id: networkDetailsText
 
             anchors.centerIn: parent
             // text: "Network Details (" + NetworkService.connectionType + ")" + NetworkService.connectionDevice
-            text: NetworkService.detailedOutput
+            text: NetworkService.detailedOutput || "Loading..."
         }
 
     }
