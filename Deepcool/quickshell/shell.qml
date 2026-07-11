@@ -58,6 +58,9 @@ ShellRoot {
                     CpuUsage {
                     }
 
+                    CpuTemp {
+                    }
+
                     Network {
                     }
 

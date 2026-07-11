@@ -71,9 +71,9 @@ RowLayout {
     }
 
     Process {
-        id: btopProcess
+        id: monitorProcess
 
-        command: ["ghostty", "-e", "btop"]
+        command: ["ghostty", "-e", "htop"]
     }
 
     Timer {
@@ -92,7 +92,7 @@ RowLayout {
         widthPadding: 10
         text: "  " + root.cpuUsage + "%"
         onClickedHandler: function() {
-            btopProcess.running = true;
+            monitorProcess.running = true;
         }
 
         StyledPopupWindow {
