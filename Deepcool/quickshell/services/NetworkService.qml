@@ -1,8 +1,9 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 pragma Singleton
 
-QtObject {
+Scope {
     id: service
 
     readonly property string icon: {
@@ -27,10 +28,6 @@ QtObject {
     property string cidr: ""
     property string gateway: "N/A"
     property string netmask: "N/A"
-    // Process variables
-    property Process detailedProcess
-    property Process fetchProcess
-    property Process monitor
 
     function cidrToNetmask(cidr) {
         var bits = parseInt(cidr);
@@ -58,7 +55,7 @@ QtObject {
 
     }
 
-    detailedProcess: Process {
+    Process {
         id: detailedProcess
 
         // ensure command updates gracefully when connectionDevice changes
@@ -101,7 +98,7 @@ QtObject {
 
     }
 
-    monitor: Process {
+    Process {
         id: monitor
 
         command: ["nmcli", "monitor"]
@@ -117,7 +114,7 @@ QtObject {
 
     }
 
-    fetchProcess: Process {
+    Process {
         id: fetchProcess
 
         command: ["nmcli", "-t", "-f", "NAME,TYPE,DEVICE", "con", "show", "--active"]
