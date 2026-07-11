@@ -31,7 +31,7 @@ Scope {
 
     function buildDetailedOutput() {
         if (service.connectionType === "WIFI")
-            return ["Network: " + service.essid, "Signal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)", "Frequency: " + service.frequency + "MHz", "Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
+            return ["Network: " + service.essid, "Signal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)", "Frequency: " + service.frequency, "Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
         else
             return ["Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
     }
@@ -94,7 +94,8 @@ Scope {
                     service.signalPct = parseInt(fields["AP[1].SIGNAL"] || "0") || 0;
                     service.signalDbm = Math.round((service.signalPct / 2) - 100);
                     var chan = fields["AP[1].CHAN"] || "0";
-                    service.frequency = service.channelToFreq(chan).toString();
+                    var freqNum = service.channelToFreq(chan);
+                    service.frequency = (freqNum / 1000).toFixed(1) + "GHz";
                 }
                 service.detailedOutput = service.buildDetailedOutput();
             }
