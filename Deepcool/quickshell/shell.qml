@@ -61,6 +61,9 @@ ShellRoot {
                     CpuTemp {
                     }
 
+                    Gpu {
+                    }
+
                     Network {
                     }
 

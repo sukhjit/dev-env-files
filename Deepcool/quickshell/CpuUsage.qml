@@ -107,7 +107,6 @@ RowLayout {
                 id: cpuDetailsText
 
                 anchors.centerIn: parent
-                // text: "Loading..."
                 text: {
                     var rows = ["Total: " + root.cpuUsage + "%"];
                     for (var i = 0; i < root.coreDetails.length; i++) {
