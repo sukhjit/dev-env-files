@@ -14,9 +14,20 @@ QtObject {
 
         return "";
     }
+    // core structural variables
     property string connectionType: ""
     property string connectionDevice: ""
     property string detailedOutput: ""
+    // UI variables parsed directly from detailedProcess
+    property string essid: "N/A"
+    property int signalPct: 0
+    property int signalDbm: -100
+    property string frequency: "N/A"
+    property string ipAddress: "N/A"
+    property string cidr: ""
+    property string gateway: "N/A"
+    property string netmask: "N/A"
+    // Process variables
     property Process monitor
     property Process fetchProcess
     property Process detailedProcess
