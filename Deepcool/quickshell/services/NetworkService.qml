@@ -75,6 +75,38 @@ Scope {
     }
 
     Process {
+        id: signalProcess
+
+        command: ["nmcli", "-t", "-f", "IN-USE,SIGNAL", "dev", "wifi", "list", "ifname", service.connectionDevice, "--rescan", "no"]
+
+        stdout: StdioCollector {
+            onStreamFinished: {
+                this.text.split("\n").forEach(function(line) {
+                    if (line.startsWith("*:")) {
+                        var pct = parseInt(line.substring(2));
+                        if (!isNaN(pct))
+                            service.signalPct = pct;
+
+                    }
+                });
+            }
+        }
+
+    }
+
+    Timer {
+        interval: 30000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            if (service.connectionDevice && service.connectionType === "WIFI" && !signalProcess.running)
+                signalProcess.running = true;
+
+        }
+    }
+
+    Process {
         id: detailedProcess
 
         command: ["nmcli", "-t", "-f", "GENERAL,AP,IP4,WIFI-PROPERTIES", "dev", "show", service.connectionDevice]
