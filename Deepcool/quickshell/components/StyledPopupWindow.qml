@@ -13,7 +13,7 @@ PopupWindow {
     readonly property bool isShowing: container.opacity > 0
 
     // always show for animation
-    visible: true
+    visible: show || container.opacity > 0
     color: "transparent"
     // bind anchor settings
     anchor.item: anchorItem
