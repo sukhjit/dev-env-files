@@ -61,6 +61,7 @@ QtObject {
     detailedProcess: Process {
         id: detailedProcess
 
+        // ensure command updates gracefully when connectionDevice changes
         command: ["nmcli", "-t", "-f", "GENERAL,AP,IP4,WIFI-PROPERTIES", "dev", "show", service.connectionDevice]
 
         stdout: StdioCollector {
@@ -101,12 +102,16 @@ QtObject {
     }
 
     monitor: Process {
+        id: monitor
+
         command: ["nmcli", "monitor"]
         running: true
 
         stdout: SplitParser {
             onRead: {
-                fetchProcess.running = true;
+                if (!fetchProcess.running)
+                    fetchProcess.running = true;
+
             }
         }
 
@@ -121,6 +126,7 @@ QtObject {
             onStreamFinished: {
                 let lines = this.text.split("\n");
                 let detectedType = "";
+                let detectedDevice = "";
                 for (let i = 0; i < lines.length; i++) {
                     let parts = lines[i].split(":");
                     if (parts.length < 3)
@@ -129,14 +135,21 @@ QtObject {
                     let type = parts[1];
                     if (type === "802-3-ethernet") {
                         detectedType = "ETHERNET";
-                        service.connectionDevice = parts[2];
+                        detectedDevice = parts[2];
+                        break; // Stop looking once active link is found
                     }
                     if (type === "802-11-wireless") {
                         detectedType = "WIFI";
-                        service.connectionDevice = parts[2];
+                        detectedDevice = parts[2];
+                        break;
                     }
                 }
+                service.connectionDevice = detectedDevice;
                 service.connectionType = detectedType;
+                // Fetch the details automatically once the interface state updates
+                if (detectedDevice)
+                    service.fetchDetails();
+
             }
         }
 
