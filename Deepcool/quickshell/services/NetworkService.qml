@@ -10,9 +10,21 @@ Scope {
         if (connectionType === "ETHERNET")
             return "󰀂";
 
-        if (connectionType === "WIFI")
-            return "󰤨";
+        if (connectionType === "WIFI") {
+            if (signalPct >= 80)
+                return "󰤨";
 
+            if (signalPct >= 60)
+                return "󰤥";
+
+            if (signalPct >= 40)
+                return "󰤢";
+
+            if (signalPct >= 20)
+                return "󰤟";
+
+            return "󰤯";
+        }
         return "";
     }
     // core structural variables
