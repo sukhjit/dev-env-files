@@ -34,18 +34,21 @@ QtObject {
 
     function cidrToNetmask(cidr) {
         var bits = parseInt(cidr);
-        var mask = bits === 0 ? 0 : (~(0xFFFFFFFF >>> bits)) >>> 0;
-        return ((mask >>> 24) & 0xFF) + "." + ((mask >>> 16) & 0xFF) + "." + ((mask >>> 8) & 0xFF) + "." + (mask & 0xFF);
+        var mask = bits === 0 ? 0 : (~(4.29497e+09 >>> bits)) >>> 0;
+        return ((mask >>> 24) & 255) + "." + ((mask >>> 16) & 255) + "." + ((mask >>> 8) & 255) + "." + (mask & 255);
     }
 
     function channelToFreq(ch) {
         var c = parseInt(ch);
         if (c >= 1 && c <= 13)
             return 2407 + c * 5;
+
         if (c === 14)
             return 2484;
+
         if (c >= 36)
             return 5000 + c * 5;
+
         return 0;
     }
 
@@ -62,13 +65,14 @@ QtObject {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                var fields = {};
+                var fields = {
+                };
                 this.text.split("\n").forEach(function(line) {
                     var idx = line.indexOf(":");
                     if (idx >= 0)
                         fields[line.substring(0, idx)] = line.substring(idx + 1);
-                });
 
+                });
                 var ipWithCidr = fields["IP4.ADDRESS[1]"] || "";
                 var slash = ipWithCidr.indexOf("/");
                 if (slash >= 0) {
@@ -80,19 +84,16 @@ QtObject {
                     service.cidr = "";
                     service.netmask = "N/A";
                 }
-
                 service.gateway = fields["IP4.GATEWAY"] || "N/A";
-
                 if (service.connectionType === "WIFI") {
                     service.essid = fields["AP[1].SSID"] || "N/A";
                     service.signalPct = parseInt(fields["AP[1].SIGNAL"] || "0") || 0;
                     service.signalDbm = Math.round((service.signalPct / 2) - 100);
                     var chan = fields["AP[1].CHAN"] || "0";
                     service.frequency = service.channelToFreq(chan).toString();
-
-                    service.detailedOutput = "Network: " + service.essid + "\nSignal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)\nFrequency: " + service.frequency + "MHz\nInterface: " + service.connectionDevice + "\nIP: " + service.ipAddress + "/" + service.cidr + "\nGateway: " + service.gateway + "\nNetmask: " + service.netmask;
+                    service.detailedOutput = ["Network: " + service.essid, "Signal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)", "Frequency: " + service.frequency + "MHz", "Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
                 } else {
-                    service.detailedOutput = "Interface: " + service.connectionDevice + "\nIP: " + service.ipAddress + "/" + service.cidr + "\nGateway: " + service.gateway + "\nNetmask: " + service.netmask;
+                    service.detailedOutput = ["Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
                 }
             }
         }
