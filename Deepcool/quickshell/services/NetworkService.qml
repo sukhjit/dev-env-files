@@ -29,6 +29,13 @@ Scope {
     property string gateway: "N/A"
     property string netmask: "N/A"
 
+    function buildDetailedOutput() {
+        if (service.connectionType === "WIFI")
+            return ["Network: " + service.essid, "Signal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)", "Frequency: " + service.frequency + "MHz", "Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
+        else
+            return ["Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
+    }
+
     function cidrToNetmask(cidr) {
         var bits = parseInt(cidr);
         var mask = bits === 0 ? 0 : (~(4.29497e+09 >>> bits)) >>> 0;
@@ -58,7 +65,6 @@ Scope {
     Process {
         id: detailedProcess
 
-        // ensure command updates gracefully when connectionDevice changes
         command: ["nmcli", "-t", "-f", "GENERAL,AP,IP4,WIFI-PROPERTIES", "dev", "show", service.connectionDevice]
 
         stdout: StdioCollector {
@@ -89,10 +95,8 @@ Scope {
                     service.signalDbm = Math.round((service.signalPct / 2) - 100);
                     var chan = fields["AP[1].CHAN"] || "0";
                     service.frequency = service.channelToFreq(chan).toString();
-                    service.detailedOutput = ["Network: " + service.essid, "Signal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)", "Frequency: " + service.frequency + "MHz", "Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
-                } else {
-                    service.detailedOutput = ["Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
                 }
+                service.detailedOutput = service.buildDetailedOutput();
             }
         }
 
@@ -133,7 +137,7 @@ Scope {
                     if (type === "802-3-ethernet") {
                         detectedType = "ETHERNET";
                         detectedDevice = parts[2];
-                        break; // Stop looking once active link is found
+                        break;
                     }
                     if (type === "802-11-wireless") {
                         detectedType = "WIFI";
@@ -143,7 +147,6 @@ Scope {
                 }
                 service.connectionDevice = detectedDevice;
                 service.connectionType = detectedType;
-                // Fetch the details automatically once the interface state updates
                 if (detectedDevice)
                     service.fetchDetails();
 
