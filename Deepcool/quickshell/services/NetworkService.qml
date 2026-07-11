@@ -28,9 +28,9 @@ QtObject {
     property string gateway: "N/A"
     property string netmask: "N/A"
     // Process variables
-    property Process monitor
-    property Process fetchProcess
     property Process detailedProcess
+    property Process fetchProcess
+    property Process monitor
 
     function cidrToNetmask(cidr) {
         var bits = parseInt(cidr);
@@ -53,7 +53,7 @@ QtObject {
     }
 
     function fetchDetails() {
-        if (!detailedProcess.running)
+        if (service.connectionDevice && !detailedProcess.running)
             detailedProcess.running = true;
 
     }
