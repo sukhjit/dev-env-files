@@ -55,6 +55,9 @@ ShellRoot {
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 5
 
+                    CpuUsage {
+                    }
+
                     Network {
                     }
 
