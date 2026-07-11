@@ -16,7 +16,6 @@ RowLayout {
 
         stdout: StdioCollector {
             onStreamFinished: {
-                console.log("GPu", this.text);
                 let cleanText = this.text.trim();
                 if (cleanText.length > 0) {
                     let parts = cleanText.split(",");

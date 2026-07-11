@@ -42,10 +42,22 @@ Scope {
     property string netmask: "N/A"
 
     function buildDetailedOutput() {
-        if (service.connectionType === "WIFI")
-            return ["Network: " + service.essid, "Signal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)", "Frequency: " + service.frequency, "Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
-        else
-            return ["Interface: " + service.connectionDevice, "IP: " + service.ipAddress + "/" + service.cidr, "Gateway: " + service.gateway, "Netmask: " + service.netmask].join("\n");
+        var rows = [];
+        if (service.connectionType === "WIFI") {
+            rows.push("Network: " + service.essid);
+            rows.push("Signal strength: " + service.signalDbm + "dBm (" + service.signalPct + "%)");
+            rows.push("Frequency: " + service.frequency);
+            rows.push("Interface: " + service.connectionDevice);
+            rows.push("IP: " + service.ipAddress + "/" + service.cidr);
+            rows.push("Gateway: " + service.gateway);
+            rows.push("Netmask: " + service.netmask);
+        } else {
+            rows.push("Interface: " + service.connectionDevice);
+            rows.push("IP: " + service.ipAddress + "/" + service.cidr);
+            rows.push("Gateway: " + service.gateway);
+            rows.push("Netmask: " + service.netmask);
+        }
+        return rows.join("\n");
     }
 
     function cidrToNetmask(cidr) {
