@@ -81,7 +81,7 @@ RowLayout {
         id: ramText
 
         widthPadding: 10
-        text: "  " + root.memUsagePercent + "%"
+        text: " " + root.memUsagePercent + "%"
 
         StyledPopupWindow {
             id: ramPopup

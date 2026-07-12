@@ -70,6 +70,9 @@ ShellRoot {
                     Ram {
                     }
 
+                    Weather {
+                    }
+
                     Date {
                     }
 

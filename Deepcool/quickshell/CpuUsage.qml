@@ -90,7 +90,7 @@ RowLayout {
         id: cpuText
 
         widthPadding: 10
-        text: "  " + root.cpuUsage + "%"
+        text: " " + root.cpuUsage + "%"
         onClickedHandler: function() {
             monitorProcess.running = true;
         }
