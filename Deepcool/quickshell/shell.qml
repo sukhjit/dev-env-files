@@ -64,6 +64,9 @@ ShellRoot {
                     Gpu {
                     }
 
+                    Ram {
+                    }
+
                     Network {
                     }
 
