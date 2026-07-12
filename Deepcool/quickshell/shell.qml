@@ -55,6 +55,9 @@ ShellRoot {
                     anchors.verticalCenter: parent.verticalCenter
                     spacing: 5
 
+                    Network {
+                    }
+
                     CpuUsage {
                     }
 
@@ -65,9 +68,6 @@ ShellRoot {
                     }
 
                     Ram {
-                    }
-
-                    Network {
                     }
 
                     Date {
