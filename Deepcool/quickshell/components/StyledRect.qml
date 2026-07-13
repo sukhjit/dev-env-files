@@ -7,6 +7,7 @@ Rectangle {
     property int widthPadding: 5
     property bool enablePopup: false
     property var onClickedHandler: null
+    property var onRightClickedHandler: null
     readonly property bool hovered: mouseArea.containsMouse
 
     color: Style.buttonBg
@@ -25,10 +26,18 @@ Rectangle {
 
         anchors.fill: parent
         hoverEnabled: true
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         cursorShape: Qt.PointingHandCursor
-        onClicked: {
-            if (root.onClickedHandler)
-                root.onClickedHandler();
+        onClicked: (mouse) => {
+            if (mouse.button === Qt.RightButton) {
+                if (root.onRightClickedHandler)
+                    root.onRightClickedHandler();
+
+            } else {
+                if (root.onClickedHandler)
+                    root.onClickedHandler();
+
+            }
         }
     }
 
