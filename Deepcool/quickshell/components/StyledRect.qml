@@ -4,6 +4,8 @@ Rectangle {
     id: root
 
     property string text: ""
+    property int textFormat: Text.AutoText
+    property int textSize: Style.topbar.fontpixelSize
     property int widthPadding: 5
     property bool enablePopup: false
     property var onClickedHandler: null
@@ -18,6 +20,8 @@ Rectangle {
         id: textItem
 
         text: root.text
+        textFormat: root.textFormat
+        font.pixelSize: root.textSize
         anchors.centerIn: parent
     }
 

@@ -76,6 +76,9 @@ ShellRoot {
                     PowerProfile {
                     }
 
+                    Notification {
+                    }
+
                     Weather {
                     }
 
