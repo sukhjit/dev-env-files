@@ -73,6 +73,9 @@ ShellRoot {
                     Ram {
                     }
 
+                    PowerProfile {
+                    }
+
                     Weather {
                     }
 
