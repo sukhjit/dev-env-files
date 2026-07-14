@@ -85,6 +85,9 @@ ShellRoot {
                     Date {
                     }
 
+                    Power {
+                    }
+
                 }
 
             }
