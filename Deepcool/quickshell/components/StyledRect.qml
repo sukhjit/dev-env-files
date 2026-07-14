@@ -16,6 +16,7 @@ Rectangle {
     color: Style.buttonBg
     implicitWidth: text.length > 0 ? textItem.implicitWidth + widthPadding : 0
     implicitHeight: Style.height
+    radius: 3
 
     StyledText {
         id: textItem
