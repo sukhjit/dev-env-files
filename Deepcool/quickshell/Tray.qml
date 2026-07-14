@@ -34,6 +34,10 @@ RowLayout {
 
     spacing: 8
 
+    TrayMenu {
+        id: trayMenu
+    }
+
     Rectangle {
         implicitHeight: Style.height
         implicitWidth: trayRow.implicitWidth + 10
@@ -69,13 +73,15 @@ RowLayout {
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton | Qt.RightButton
-                    onClicked: {
+                    onClicked: (mouse) => {
                         if (mouse.button === Qt.LeftButton) {
                             modelData.activate();
                         } else if (mouse.button === Qt.RightButton) {
-                            if (modelData.hasMenu)
-                                modelData.display(parent, 0, height);
-
+                            if (modelData.hasMenu) {
+                                trayMenu.menuHandle = modelData.menu;
+                                trayMenu.anchorItem = parent;
+                                trayMenu.show = true;
+                            }
                         }
                     }
                 }
