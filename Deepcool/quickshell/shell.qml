@@ -47,6 +47,9 @@ ShellRoot {
                     anchors.centerIn: parent
                     spacing: 5
 
+                    Webcam {
+                    }
+
                     Media {
                     }
 
