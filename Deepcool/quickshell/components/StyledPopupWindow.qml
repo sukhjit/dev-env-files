@@ -10,10 +10,10 @@ PopupWindow {
     // use show to open and close with animation
     property bool show: false
     default property alias content: contentArea.data
-    readonly property bool isShowing: container.opacity > 0
+    readonly property bool isShowing: container.width > 0
 
     // always show for animation
-    visible: show || container.opacity > 0
+    visible: show || container.width > 0
     color: "transparent"
     // bind anchor settings
     anchor.item: anchorItem
@@ -31,12 +31,14 @@ PopupWindow {
     Rectangle {
         id: container
 
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
         color: Style.buttonBg
         border.width: 2
         border.color: Style.border01
-        scale: popup.show ? 1 : 0.5
-        opacity: popup.show ? 1 : 0
+        width: popup.show ? popupWidth : 0
+        height: popup.show ? popupHeight : 0
+        clip: true
 
         Item {
             id: contentArea
@@ -44,18 +46,18 @@ PopupWindow {
             anchors.fill: parent
         }
 
-        Behavior on scale {
+        Behavior on width {
             NumberAnimation {
-                duration: 250
-                easing.type: Easing.OutBack
+                duration: 260
+                easing.type: Easing.OutCubic
             }
 
         }
 
-        Behavior on opacity {
+        Behavior on height {
             NumberAnimation {
-                duration: 200
-                easing.type: Easing.InOutQuad
+                duration: 260
+                easing.type: Easing.OutCubic
             }
 
         }
