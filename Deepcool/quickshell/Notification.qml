@@ -101,7 +101,7 @@ RowLayout {
             anchorItem: notiText
             popupWidth: notiDetailsText.implicitWidth + 12
             popupHeight: notiDetailsText.implicitHeight + 12
-            show: notiText.hovered
+            show: notiText.hovered && root.tooltip.length > 0
 
             StyledText {
                 id: notiDetailsText
