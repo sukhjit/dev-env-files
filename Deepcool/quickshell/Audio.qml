@@ -8,8 +8,11 @@ import qs.components
 RowLayout {
     id: root
 
+    // use this value to check for headphone
+    readonly property string headphoneSource: "ryzen hd audio controller"
     readonly property int volume: volumeToPercent(Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.volume : 0)
     readonly property bool muted: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.muted : false
+    readonly property string description: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.description : ""
     readonly property string icon: {
         if (root.muted)
             return "󰖁";
@@ -30,7 +33,7 @@ RowLayout {
             return false;
 
         const desc = (Pipewire.defaultAudioSink.description || "").toLowerCase();
-        return desc.includes("headphone");
+        return desc.includes(root.headphoneSource);
     }
 
     function volumeToPercent(volume) {
@@ -69,6 +72,24 @@ RowLayout {
         onRightClickedHandler: function() {
             pamixer.running = true;
         }
+
+        StyledPopupWindow {
+            id: audioPopup
+
+            anchorItem: audioText
+            popupWidth: audioDetailsText.implicitWidth + 12
+            popupHeight: audioDetailsText.implicitHeight + 12
+            show: audioText.hovered
+
+            StyledText {
+                id: audioDetailsText
+
+                anchors.centerIn: parent
+                text: root.description
+            }
+
+        }
+
     }
 
 }
