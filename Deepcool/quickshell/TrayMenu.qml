@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Hyprland
 import qs.components
 
 PopupWindow {
@@ -10,6 +11,8 @@ PopupWindow {
     property Item anchorItem: null
     property bool show: false
 
+    // property to dismiss popups on outer click
+    grabFocus: true
     visible: show
     color: "transparent"
     anchor.item: anchorItem
@@ -17,9 +20,29 @@ PopupWindow {
     anchor.rect.y: anchorItem ? anchorItem.height + 4 : 0
     implicitWidth: 200
     implicitHeight: itemsColumn.implicitHeight + 16
+    onShowChanged: {
+        if (show)
+            popup.anchor.updateAnchor();
 
-    onShowChanged: if (show) popup.anchor.updateAnchor()
-    onVisibleChanged: if (!visible) show = false
+    }
+    // explicitly focus the visual wrapper inside the window when it opens
+    onVisibleChanged: {
+        if (!visible)
+            show = false;
+        else
+            menuWrapper.forceActiveFocus();
+    }
+
+    HyprlandFocusGrab {
+        id: hyprGrab
+
+        active: popup.visible
+        windows: [popup]
+        // fires when clicking outside the menu boundary
+        onCleared: {
+            popup.show = false;
+        }
+    }
 
     QsMenuOpener {
         id: opener
@@ -28,12 +51,27 @@ PopupWindow {
     }
 
     Rectangle {
+        id: menuWrapper
+
         anchors.fill: parent
         color: Style.buttonBg
         border.color: Style.border01
         border.width: 1
         radius: 4
         clip: true
+        Keys.onPressed: (event) => {
+            if (event.key === Qt.Key_Escape) {
+                popup.show = false;
+                event.accepted = true;
+            }
+        }
+
+        // mouse overlay to absorb internal menu clicks safely
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+            }
+        }
 
         Column {
             id: itemsColumn
@@ -96,7 +134,9 @@ PopupWindow {
                                 popup.show = false;
                             }
                         }
+
                     }
+
                 }
 
             }
