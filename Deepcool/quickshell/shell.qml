@@ -89,6 +89,9 @@ ShellRoot {
                     Date {
                     }
 
+                    Tray {
+                    }
+
                     Power {
                     }
 
