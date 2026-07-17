@@ -48,6 +48,9 @@ ShellRoot {
                     anchors.centerIn: parent
                     spacing: 5
 
+                    ScreenRecording {
+                    }
+
                     Webcam {
                     }
 

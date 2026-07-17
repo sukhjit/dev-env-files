@@ -7,9 +7,13 @@ if [[ ! -d "$OUTPUT_DIR" ]]; then
   exit 1
 fi
 
+PIDFILE="/tmp/monitor-recorder.pid"
+
 start_screenrecording() {
   local filename="$OUTPUT_DIR/screenrecording-$(date +'%Y%m%d_%H%M%S').mp4"
   wf-recorder --audio -f "$filename" -c libx264 -p crf=23 -p preset=medium -p movflags=+faststart "$@" &
+  echo $! >"$PIDFILE"
+  qs ipc call screenrecord start
   toggle_screenrecording_indicator
 }
 
@@ -19,6 +23,8 @@ stop_screenrecording() {
   notify-send "Screen recording saved to $OUTPUT_DIR" -t 5000
 
   sleep 0.2 # ensures the process is actually dead before we check
+  rm -f "$PIDFILE"
+  qs ipc call screenrecord stop
   toggle_screenrecording_indicator
 }
 

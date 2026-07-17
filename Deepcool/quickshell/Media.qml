@@ -8,6 +8,8 @@ RowLayout {
 
     property string mediaStatus: ""
 
+    visible: root.mediaStatus !== ""
+
     Process {
         id: mediaProcess
 

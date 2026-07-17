@@ -15,6 +15,8 @@ RowLayout {
         return "";
     }
 
+    visible: root.active
+
     Process {
         id: webcamChecker
 
@@ -40,7 +42,6 @@ RowLayout {
         id: webcamIcon
 
         text: root.icon
-        visible: root.active
         widthPadding: 10
     }
 
