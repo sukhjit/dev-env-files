@@ -64,7 +64,7 @@ local menu = "walker"
 -- Or execute your favorite apps at launch like this:
 
 hl.on("hyprland.start", function()
-	hl.exec_cmd("uwsm-app -- waybar")
+	hl.exec_cmd("uwsm-app -- quickshell")
 	hl.exec_cmd("uwsm-app -- swaybg -i ~/Pictures/background.jpg")
 	hl.exec_cmd("uwsm-app -- hypridle")
 	hl.exec_cmd("uwsm-app -- swaync")
@@ -252,7 +252,6 @@ hl.bind("ALT + space", hl.dsp.exec_cmd(menu))
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("$HOME/.local/bin/menu"))
-hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("$XDG_CONFIG_HOME/waybar/scripts/restart.sh"))
 hl.bind(mainMod .. " + SHIFT + l", hl.dsp.exec_cmd("wlogout --protocol layer-shell"))
 
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("$HOME/.local/bin/screenshot region"))
