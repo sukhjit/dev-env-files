@@ -88,10 +88,10 @@ RowLayout {
         text: root.textIcon
         textFormat: Text.AutoText
         textSize: 14
-        onClickedHandler: function() {
+        clickHandler: function() {
             toggleClient.running = true;
         }
-        onRightClickedHandler: function() {
+        rightClickHandler: function() {
             toggleDnd.running = true;
         }
 

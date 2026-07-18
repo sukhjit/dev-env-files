@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 
 Item {
     id: backend
@@ -9,6 +10,9 @@ Item {
     property int displayMonth: currentDate.getMonth()
     property string monthName: ""
     property var days: []
+
+    implicitWidth: calLayout.implicitWidth
+    implicitHeight: calLayout.implicitHeight
     readonly property var monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     function rebuild() {
@@ -28,12 +32,11 @@ Item {
                 "isToday": false
             });
         }
-        var today = new Date();
         for (var j = 1; j <= daysInMonth; j++) {
             result.push({
                 "day": j,
                 "inMonth": true,
-                "isToday": today.getDate() === j && today.getMonth() === displayMonth && today.getFullYear() === displayYear
+                "isToday": currentDate.getDate() === j && currentDate.getMonth() === displayMonth && currentDate.getFullYear() === displayYear
             });
         }
         var remaining = 42 - result.length;
@@ -48,9 +51,8 @@ Item {
     }
 
     function toToday() {
-        var now = new Date();
-        displayYear = now.getFullYear();
-        displayMonth = now.getMonth();
+        displayYear = currentDate.getFullYear();
+        displayMonth = currentDate.getMonth();
         rebuild();
     }
 
@@ -74,14 +76,101 @@ Item {
         rebuild();
     }
 
+    onCurrentDateChanged: rebuild()
     Component.onCompleted: rebuild()
 
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: backend.currentDate = new Date()
+    ColumnLayout {
+        id: calLayout
+
+        anchors.fill: parent
+        anchors.margins: 6
+        spacing: 2
+
+        RowLayout {
+            Layout.fillWidth: true
+
+            StyledText {
+                text: "<"
+                color: "#f7768e"
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: cal.prevMonth()
+                }
+
+            }
+
+            StyledText {
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                text: cal.monthName + " " + cal.displayYear
+                color: "#f7768e"
+            }
+
+            StyledText {
+                text: ">"
+                color: "#f7768e"
+
+                MouseArea {
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: cal.nextMonth()
+                }
+
+            }
+
+        }
+
+        Row {
+            Layout.fillWidth: true
+
+            Repeater {
+                model: ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+
+                StyledText {
+                    width: 22
+                    horizontalAlignment: Text.AlignHCenter
+                    text: modelData
+                    color: "#e0b840"
+                }
+
+            }
+
+        }
+
+        Grid {
+            columns: 7
+
+            Repeater {
+                model: cal.days
+
+                Rectangle {
+                    width: 22
+                    height: 16
+                    radius: 2
+                    color: "transparent"
+
+                    StyledText {
+                        anchors.centerIn: parent
+                        text: modelData.day
+                        color: {
+                            if (modelData.isToday)
+                                return "#e05050";
+
+                            if (!modelData.inMonth)
+                                return Style.visibleBg;
+
+                            return Style.buttonFg;
+                        }
+                    }
+
+                }
+
+            }
+
+        }
+
     }
 
 }

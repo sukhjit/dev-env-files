@@ -18,7 +18,7 @@ RowLayout {
         color: "#db4b4b"
         text: "⏻"
         textColor: Style.activeFg
-        onClickedHandler: function() {
+        clickHandler: function() {
             wlogoutProcess.running = true;
         }
     }

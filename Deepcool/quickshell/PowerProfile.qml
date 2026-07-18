@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Io
 import Quickshell.Services.UPower
 import qs.components
 
@@ -52,7 +51,7 @@ RowLayout {
 
         widthPadding: 10
         text: root.icon
-        onClickedHandler: function() {
+        clickHandler: function() {
             root.cycleProfile();
         }
 
