@@ -55,6 +55,10 @@ trough {
   background-color: var(--surface0);
 }
 
+.blank-window {
+  background: alpha(black, 0.35);
+}
+
 /* notifications */
 
 .notification-background {

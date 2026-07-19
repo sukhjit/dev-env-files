@@ -3,18 +3,17 @@
   "ignore-gtk-theme": true,
   "positionX": "right",
   "positionY": "top",
-  "control-center-margin-top": 10,
-  "control-center-margin-bottom": 10,
-  "control-center-margin-right": 10,
+  "control-center-margin-top": 0,
+  "control-center-margin-bottom": 0,
+  "control-center-margin-right": 0,
   "control-center-margin-left": 10,
   "notification-body-image-height": 100,
   "notification-body-image-width": 200,
   "timeout": 10,
   "timeout-low": 5,
   "timeout-critical": 0,
-  "fit-to-screen": false,
+  "fit-to-screen": true,
   "control-center-width": 500,
-  "control-center-height": 1030,
   "notification-window-width": 500,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
@@ -23,6 +22,13 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "text-empty": "No Notification",
+  "scripts": {
+    "slack-focus": {
+      "exec": "hyprctl dispatch 'hl.dsp.focus({ window = \"class:[Ss]lack\" })'",
+      "app-name": "[Ss]lack",
+      "run-on": "action"
+    }
+  },
   "widgets": ["mpris", "title", "notifications"],
   "widget-config": {
     "title": {
