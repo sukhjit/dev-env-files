@@ -21,6 +21,12 @@ Scope {
         return rows.join("\n");
     }
 
+    function runMonitorProcess() {
+        if (!monitorProcess.running)
+            monitorProcess.running = true;
+
+    }
+
     FileView {
         id: thermalZoneFile
 

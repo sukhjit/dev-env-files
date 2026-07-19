@@ -7,12 +7,14 @@ RowLayout {
     id: root
 
     StyledRect {
+        // monitorProcess.running = true;
+
         id: cpuText
 
         widthPadding: 10
         text: CpuService.usageText
         clickHandler: function() {
-            monitorProcess.running = true;
+            CpuService.runMonitorProcess();
         }
 
         StyledPopupWindow {

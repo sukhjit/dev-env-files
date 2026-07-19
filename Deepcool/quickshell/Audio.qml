@@ -12,10 +12,10 @@ RowLayout {
         widthPadding: 10
         text: AudioService.text
         clickHandler: function() {
-            wiremix.running = true;
+            AudioService.runPamixer();
         }
         rightClickHandler: function() {
-            pamixer.running = true;
+            AudioService.runWiremix();
         }
 
         StyledPopupWindow {

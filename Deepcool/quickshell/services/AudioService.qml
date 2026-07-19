@@ -45,6 +45,18 @@ Scope {
         return Math.round(volume * 100);
     }
 
+    function runWiremix() {
+        if (!wiremix.running)
+            wiremix.running = true;
+
+    }
+
+    function runPamixer() {
+        if (!pamixer.running)
+            pamixer.running = true;
+
+    }
+
     PwObjectTracker {
         objects: [Pipewire.defaultAudioSink]
     }
