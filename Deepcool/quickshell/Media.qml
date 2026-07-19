@@ -16,6 +16,24 @@ RowLayout {
         clickHandler: function() {
             MediaService.playPause();
         }
+
+        StyledPopupWindow {
+            id: mediaPopup
+
+            anchorItem: mediaText
+            popupWidth: mediaDetailsText.implicitWidth + 12
+            popupHeight: mediaDetailsText.implicitHeight + 12
+            show: mediaText.hovered
+
+            StyledText {
+                id: mediaDetailsText
+
+                anchors.centerIn: parent
+                text: MediaService.hoverText
+            }
+
+        }
+
     }
 
 }
