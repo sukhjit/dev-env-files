@@ -10,7 +10,7 @@ RowLayout {
         id: cpuText
 
         widthPadding: 10
-        text: CpuService.usageText
+        text: "C:" + CpuService.cpuUsage + "% " + CpuService.cpuTemperature + "°C"
         clickHandler: function() {
             CpuService.runMonitorProcess();
         }

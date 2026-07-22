@@ -72,10 +72,7 @@ ShellRoot {
                     Network {
                     }
 
-                    CpuUsage {
-                    }
-
-                    CpuTemp {
+                    CpuCombined {
                     }
 
                     Gpu {
