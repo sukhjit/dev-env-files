@@ -15,8 +15,12 @@ Scope {
     property string tempText: " " + service.cpuTemperature + "°C"
     property string usageTextHover: {
         var rows = ["Total: " + service.cpuUsage + "%"];
-        for (var i = 0; i < service.coreDetails.length; i++) {
-            rows.push(service.coreDetails[i]);
+        for (var i = 0; i < service.coreDetails.length; i += 2) {
+            var row = service.coreDetails[i];
+            if (i + 1 < service.coreDetails.length)
+                row = row.padEnd(16) + service.coreDetails[i + 1];
+
+            rows.push(row);
         }
         return rows.join("\n");
     }
