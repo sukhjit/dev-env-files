@@ -24,7 +24,7 @@
   "text-empty": "No Notification",
   "scripts": {
     "slack-focus": {
-      "exec": "hyprctl dispatch 'hl.dsp.focus({ window = \"class:[Ss]lack\" })'",
+      "exec": "/home/sukhjit/.local/bin/focus-slack",
       "app-name": "[Ss]lack",
       "run-on": "action"
     }
