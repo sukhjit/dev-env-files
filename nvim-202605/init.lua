@@ -610,11 +610,6 @@ require('conform').setup {
     qml = { 'qmlformat' },
     xml = { 'xmlformatter' },
   },
-  formatters = {
-    prettierd = {
-      args = { '--trailing-comma', 'none' },
-    },
-  },
 }
 
 vim.keymap.set({ 'n', 'v' }, '<leader>f', function()
