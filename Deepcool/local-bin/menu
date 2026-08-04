@@ -101,6 +101,10 @@ tmuxRepos() {
     local dir="$HOME/work/$chosen"
 
     tmux new-window -n "$chosen" -t 0: -c "$dir"
+
+    local tmuxWorkspace=$(hyprctl clients -j | jq -r '.[] | select(.title=="tmux") | .workspace.id')
+
+    hyprctl eval "hl.dispatch(hl.dsp.focus({ workspace = \"$tmuxWorkspace\" }))"
 }
 
 show_main_menu() {
