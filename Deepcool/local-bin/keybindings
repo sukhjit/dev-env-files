@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Hyprland binds run with a PATH lacking ~/.local/bin (qs-dmenu lives there)
+export PATH="$HOME/.local/bin:$PATH"
+
 dynamic_bindings() {
     hyprctl -j binds |
         jq -r '.[] | {modmask, key, keycode, description, dispatcher, arg} | "\(.modmask),\(.key)@\(.keycode),\(.description),\(.dispatcher),\(.arg)"' |
@@ -72,10 +75,7 @@ parse_bindings() {
 }'
 }
 
-monitor_height=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .height')
-menu_height=$((monitor_height * 40 / 100))
-
 dynamic_bindings |
     sort -u |
     parse_bindings |
-    walker --dmenu -p 'Keybindings' --height 800 -n
+    qs-dmenu -p 'Keybindings'

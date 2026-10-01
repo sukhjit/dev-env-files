@@ -54,7 +54,7 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal = "ghostty"
-local menu = "walker"
+local launcher = "qs ipc call launcher toggle"
 
 -------------------
 ---- AUTOSTART ----
@@ -64,11 +64,10 @@ local menu = "walker"
 -- Or execute your favorite apps at launch like this:
 
 hl.on("hyprland.start", function()
-	hl.exec_cmd("uwsm-app -- quickshell")
+	hl.exec_cmd("uwsm-app -- quickshell --log-rules 'qt.svg.draw.warning=false'")
 	hl.exec_cmd("uwsm-app -- swaybg -i ~/Pictures/background.jpg")
 	hl.exec_cmd("uwsm-app -- hypridle")
 	hl.exec_cmd("uwsm-app -- swaync")
-	hl.exec_cmd(menu .. " --gapplication-service")
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 end)
 
@@ -248,7 +247,8 @@ hl.device({
 
 local mainMod = "SUPER"
 
-hl.bind("ALT + space", hl.dsp.exec_cmd(menu))
+hl.bind("ALT + space", hl.dsp.exec_cmd(launcher))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(launcher))
 
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("$HOME/.local/bin/menu"))
@@ -261,7 +261,6 @@ hl.bind(mainMod .. " + RETURN", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("swaync-client -t -sw"))
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("librewolf --private-window"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo({ action = "toggle" }))
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))

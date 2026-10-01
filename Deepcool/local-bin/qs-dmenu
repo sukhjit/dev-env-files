@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# dmenu-style picker using the quickshell launcher.
+# Usage: printf 'a\nb\n' | qs-dmenu [-p prompt] [-i] [-t]
+#   -i  options are image paths: show file names plus a preview of the selected image
+#   -t  free text: Enter with no matching option returns the typed text (may be empty).
+#       Without it, only one of the given options can be returned (typos are ignored).
+# Prints chosen line; exits 1 on cancel or if quickshell isn't running.
+
+prompt="Search..."
+preview=false
+freetext=false
+while getopts "p:it" opt; do
+    case $opt in
+    p) prompt="$OPTARG" ;;
+    i) preview=true ;;
+    t) freetext=true ;;
+    *) ;;
+    esac
+done
+
+dir=$(mktemp -d "${XDG_RUNTIME_DIR:-/tmp}/qs-dmenu.XXXXXX") || exit 1
+trap 'rm -rf "$dir"' EXIT
+
+cat >"$dir/options"
+mkfifo "$dir/result" || exit 1
+
+qs ipc call launcher dmenu "$prompt" "$dir/options" "$dir/result" "$preview" "$freetext" >/dev/null 2>&1 || exit 1
+
+# blocks until launcher replies "+<choice>" (submitted) or "-" (cancelled). Launcher answers on
+# close/reload; timeout covers a crash or kill, where nothing would ever write to the FIFO.
+reply=$(timeout 600 cat "$dir/result")
+[[ $reply == +* ]] || exit 1
+printf '%s\n' "${reply#+}"

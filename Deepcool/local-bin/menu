@@ -1,26 +1,21 @@
 #!/usr/bin/env bash
 
+# Hyprland binds run with a PATH lacking ~/.local/bin (qs-dmenu lives there)
+export PATH="$HOME/.local/bin:$PATH"
+
 menu() {
     local prompt="$1"
     local options="$2"
-    local extra="$3"
-    local preselect="$4"
 
-    read -r -a args <<<"$extra"
-
-    if [[ -n $preselect ]]; then
-        local index
-        index=$(echo -e "$options" | grep -nxF "$preselect" | cut -d: -f1)
-        if [[ -n $index ]]; then
-            args+=("-c" "$index")
-        fi
-    fi
-
-    echo -e "$options" | walker --dmenu --width 295 --minheight 1 --maxheight 630 -p "$prompt…" "${args[@]}" 2>/dev/null
+    echo -e "$options" | qs-dmenu -p "$prompt…"
 }
 
 show_background_menu() {
-    walker -m menus:BackgroundSelector --width 800 --minheight 400
+    local choice
+    choice=$(find -L "$HOME/Pictures" "$HOME/Dropbox/Wallpapers" -maxdepth 2 -type f \
+        \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.bmp' -o -iname '*.webp' \) 2>/dev/null |
+        sort | qs-dmenu -i -p "Background…") || return
+    "$HOME/.local/bin/set-bg" "$choice"
 }
 
 audio() {
@@ -61,8 +56,7 @@ battery() {
         devicesList="${devicesList}${model}: ${percentage}\n"
     done
 
-    local lineCount=$(echo -e $devicesList | wc -l)
-    echo -e "$devicesList" | walker --width 100 --height $lineCount --dmenu -n
+    echo -e "$devicesList" | qs-dmenu -p "Battery…"
 }
 
 selectednote() {
@@ -70,12 +64,12 @@ selectednote() {
 
     local curfiles=$(find $noteFolder -type f -printf '%T@ %P\n' | sort -nr | cut -d' ' -f2-)
     local choice=$(
-        echo -e "New\n$curfiles" | walker --dmenu --height 10 -p "Choose note or create new: "
+        echo -e "New\n$curfiles" | qs-dmenu -p "Choose note or create new…"
     )
 
     case $choice in
     New)
-        name="$(echo "" | walker --dmenu -p "Enter new file name without extension")" || exit 0
+        name="$(echo "" | qs-dmenu -t -p "Enter new file name without extension…")" || exit 0
         : "${name:=$(date +%F_%H-%M-%S)}"
         setsid -f "$TERMINAL" -e nvim $noteFolder$name".md" >/dev/null 2>&1
         ;;
@@ -94,7 +88,7 @@ tmuxRepos() {
 
     [ -n "$repoName" ] || exit 0
 
-    local chosen=$(echo -e "$repoName" | walker --dmenu -p 'Projects:')
+    local chosen=$(echo -e "$repoName" | qs-dmenu -p 'Projects…')
 
     [ -n "$chosen" ] || exit 0
 
@@ -114,12 +108,11 @@ show_main_menu() {
     *Background*) show_background_menu ;;
     *Keybindings*) source $HOME/.local/bin/keybindings ;;
     *Notes*) selectednote ;;
-    *NwgDock*) pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c walker ;;
+    *NwgDock*) pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c "qs ipc call launcher toggle" ;;
     *Screenshot*) source $HOME/.local/bin/screenshot ;;
     *Screenrecord*) source $HOME/.local/bin/start-stop-screenrecord ;;
     *Battery*) battery ;;
     *Color*)
-        walker --close
         hyprpicker
         ;;
     *) exit 0 ;;
