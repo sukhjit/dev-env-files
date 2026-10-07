@@ -21,6 +21,10 @@ local function run_build(name, cmd, cwd)
   end
 end
 
+-- Treat json.tmpl files as JSON files
+vim.filetype.add {
+  pattern = { ['.*%.json%.tmpl'] = 'json' },
+}
 -- This autocommand runs after a plugin is installed or updated and
 --  runs the appropriate build command for that plugin if necessary.
 --
@@ -588,6 +592,13 @@ require('conform').setup {
   default_format_opts = {
     lsp_format = 'fallback',
   },
+  formatters = {
+    prettierd = {
+      args = function(_, ctx)
+        return { (ctx.filename:gsub('%.tmpl$', '')) }
+      end,
+    },
+  },
   formatters_by_ft = {
     sh = { 'shfmt' },
     lua = { 'stylua' },
@@ -604,7 +615,7 @@ require('conform').setup {
     tf = { 'terraform_fmt' },
     ['terraform-vars'] = { 'terraform_fmt' },
     typescript = { 'prettierd' },
-    json = { 'prettierd' },
+    json = { 'jq' },
     jsonc = { 'prettierd' },
     markdown = { 'prettierd' },
     python = { 'ruff_format' },
