@@ -3,8 +3,14 @@ edit = [
 	{ run = "${EDITOR:-vim} %s", desc = "$EDITOR",      for = "unix", block = true },
 ]
 play = [
-    { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
+	{ run = "mpv --force-window %s", desc = "mpv", orphan = true, for = "unix" },
 	{ run = "xdg-open %s1",    desc = "Play", for = "linux", orphan = true },
 	{ run = "mediainfo %s1; echo 'Press enter to exit'; read _", block = true, desc = "Show media info", for = "unix" },
+]
+
+[open]
+prepend_rules = [
+	{ mime = "video/*", use = "play" },
+	{ mime = "audio/*", use = "play" },
 ]
 
