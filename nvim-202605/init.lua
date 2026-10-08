@@ -136,7 +136,7 @@ require('gitsigns').setup {
     end, { desc = 'git [b]lame line' })
     map('n', '<leader>hd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
     map('n', '<leader>hD', function()
-      gitsigns.diffthis '@'
+      gitsigns.diffthis '~'
     end, { desc = 'git [D]iff against last commit' })
     map('n', '<leader>hQ', function()
       gitsigns.setqflist 'all'
@@ -308,7 +308,7 @@ vim.keymap.set('n', '<leader>s/', function()
 end, { desc = '[S]earch [/] in Open Files' })
 
 vim.keymap.set('n', '<leader>sn', function()
-  builtin.find_files { cwd = vim.fn.stdpath 'config' }
+  builtin.find_files { cwd = vim.fn.stdpath 'config', follow = true }
 end, { desc = '[S]earch [N]eovim files' })
 
 -- =================
@@ -712,6 +712,11 @@ require('nvim-treesitter').install(parsers)
 ---@param buf integer
 ---@param language string
 local function treesitter_try_attach(buf, language)
+  -- Check if the buffer is valid (might not be after install completes)
+  if not vim.api.nvim_buf_is_valid(buf) then
+    return
+  end
+
   -- Check if a parser exists and load it
   if not vim.treesitter.language.add(language) then
     return
