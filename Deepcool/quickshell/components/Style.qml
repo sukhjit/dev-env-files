@@ -31,7 +31,6 @@ QtObject {
     // launcher style
     readonly property QtObject
     launcher: QtObject {
-        // mirrors walker/themes/mine/style.css
         readonly property int width: 664
         // dmenu image-preview mode (qs-dmenu -i): wider box, list on the left
         readonly property int previewWidth: 900
@@ -40,7 +39,7 @@ QtObject {
         readonly property int itemHeight: 32
         readonly property int itemPadding: 6
         readonly property int iconSize: 18
-        // GTK lookup size; walker resolves at 16 -> flat theme variants
+        // GTK lookup size; 16 resolves to flat theme variants
         readonly property int iconLookupSize: 16
         readonly property string fontFamily: "monospace"
         readonly property int fontpixelSize: 12

@@ -58,7 +58,7 @@ Rectangle {
 
         }
 
-        // walker hides .item-subtext, so name only
+        // name only, no subtext
         StyledText {
             Layout.fillWidth: true
             text: root.modelData.name

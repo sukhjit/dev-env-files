@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Resolve icon names to files via GTK4, so launcher icons match GTK apps (walker).
+# Resolve icon names to files via GTK4, so launcher icons match GTK apps.
 # Usage: resolve-icons.py <size> <icon-name>...  -> JSON {name: path} on stdout
 import json
 import os

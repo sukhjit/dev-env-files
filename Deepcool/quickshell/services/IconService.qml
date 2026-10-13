@@ -5,7 +5,7 @@ import Quickshell.Io
 import qs.components
 
 // GTK-resolved icon paths for launcher apps. Qt's theme lookup picks different
-// size variants than GTK, so icons wouldn't match walker otherwise.
+// size variants than GTK, so icons wouldn't match GTK apps otherwise.
 Singleton {
     id: root
 
