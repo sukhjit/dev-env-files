@@ -7,11 +7,20 @@ pragma Singleton
 Scope {
     id: service
 
-    // use this value to check for headphone
-    readonly property string headphoneSource: "ryzen hd audio controller"
-    readonly property int volume: volumeToPercent(Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.volume : 0)
-    readonly property bool muted: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio.muted : false
-    readonly property string description: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.description : ""
+    // default sink name + headphone state come from pactl, since
+    // Pipewire.defaultAudioSink can go stale when a sink appears after startup
+    property string defaultSinkName: ""
+    property bool isHeadphones: false
+    readonly property PwNode sink: {
+        const name = service.defaultSinkName;
+        const node = name ? Pipewire.nodes.values.find((n) => {
+            return n.isSink && !n.isStream && n.name === name;
+        }) : null;
+        return node || Pipewire.defaultAudioSink;
+    }
+    readonly property int volume: volumeToPercent(service.sink && service.sink.audio ? service.sink.audio.volume : 0)
+    readonly property bool muted: service.sink && service.sink.audio ? service.sink.audio.muted : false
+    readonly property string description: service.sink ? service.sink.description : ""
     readonly property string icon: {
         if (service.muted)
             return "󰖁";
@@ -26,13 +35,6 @@ Scope {
             return "";
 
         return "";
-    }
-    property bool isHeadphones: {
-        if (!Pipewire.defaultAudioSink)
-            return false;
-
-        const desc = (Pipewire.defaultAudioSink.description || "").toLowerCase();
-        return desc.includes(service.headphoneSource);
     }
     property string text: {
         if (service.muted)
@@ -57,8 +59,85 @@ Scope {
 
     }
 
+    function parseSinkInfo(output) {
+        const newline = output.indexOf("\n");
+        if (newline < 0)
+            return ;
+
+        const name = output.slice(0, newline).trim();
+        let headphones = false;
+        try {
+            const sinks = JSON.parse(output.slice(newline + 1));
+            const sink = sinks.find((s) => {
+                return s.name === name;
+            });
+            if (sink) {
+                const port = (sink.active_port || "").toLowerCase();
+                const formFactor = ((sink.properties || {
+                })["device.form_factor"] || "").toLowerCase();
+                headphones = port.includes("headphone") || formFactor === "headphone" || formFactor === "headset";
+            }
+        } catch (e) {
+            console.warn("AudioService: failed to parse pactl output:", e);
+        }
+        service.defaultSinkName = name;
+        service.isHeadphones = headphones;
+    }
+
     PwObjectTracker {
-        objects: [Pipewire.defaultAudioSink]
+        objects: [service.sink]
+    }
+
+    Process {
+        id: sinkQuery
+
+        command: ["sh", "-c", "pactl get-default-sink; pactl -f json list sinks"]
+        running: true
+
+        stdout: StdioCollector {
+            onStreamFinished: service.parseSinkInfo(this.text)
+        }
+
+    }
+
+    // re-query on server (default sink) or sink (port/add/remove) events
+    Process {
+        id: sinkWatcher
+
+        command: ["pactl", "subscribe"]
+        running: true
+        onExited: restartWatcher.start()
+
+        stdout: SplitParser {
+            onRead: (line) => {
+                if (line.includes("on server") || line.includes("on sink #"))
+                    queryDebounce.restart();
+
+            }
+        }
+
+    }
+
+    Timer {
+        id: queryDebounce
+
+        interval: 150
+        onTriggered: {
+            if (!sinkQuery.running)
+                sinkQuery.running = true;
+            else
+                queryDebounce.restart();
+        }
+    }
+
+    Timer {
+        id: restartWatcher
+
+        interval: 2000
+        onTriggered: {
+            sinkWatcher.running = true;
+            queryDebounce.restart();
+        }
     }
 
     Process {
