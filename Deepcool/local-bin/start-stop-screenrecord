@@ -14,7 +14,6 @@ start_screenrecording() {
   wf-recorder --audio -f "$filename" -c libx264 -p crf=23 -p preset=medium -p movflags=+faststart "$@" &
   echo $! >"$PIDFILE"
   qs ipc call screenrecord start
-  toggle_screenrecording_indicator
 }
 
 stop_screenrecording() {
@@ -25,11 +24,6 @@ stop_screenrecording() {
   sleep 0.2 # ensures the process is actually dead before we check
   rm -f "$PIDFILE"
   qs ipc call screenrecord stop
-  toggle_screenrecording_indicator
-}
-
-toggle_screenrecording_indicator() {
-  pkill -RTMIN+8 waybar
 }
 
 screenrecording_active() {
