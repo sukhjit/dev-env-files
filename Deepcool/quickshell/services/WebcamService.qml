@@ -15,13 +15,16 @@ Scope {
     }
     property string text: service.icon
 
-    Process {
-        id: webcamChecker
+    // The uvcvideo driver's use count rises while any process has a /dev/video* node open,
+    // so it answers the same question as fuser without spawning anything
+    FileView {
+        id: uvcRefcnt
 
-        command: ["sh", "-c", "fuser /dev/video* >/dev/null 2>&1"]
-        onExited: (exitCode) => {
-            return service.active = exitCode === 0;
-        }
+        path: "/sys/module/uvcvideo/refcnt"
+        printErrors: false
+        onTextChanged: service.active = (parseInt(text()) || 0) > 0
+        // Module not loaded (no webcam plugged in)
+        onLoadFailed: service.active = false
     }
 
     Timer {
@@ -29,11 +32,7 @@ Scope {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: {
-            if (!webcamChecker.running)
-                webcamChecker.running = true;
-
-        }
+        onTriggered: uvcRefcnt.reload()
     }
 
 }

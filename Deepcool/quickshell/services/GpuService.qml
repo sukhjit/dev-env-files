@@ -16,20 +16,20 @@ Scope {
         return rows.join("\n");
     }
 
+    // One long-lived nvidia-smi printing a line every 2s, instead of spawning one per sample
     Process {
         id: nvidiaSmiProc
 
-        command: ["nvidia-smi", "--query-gpu=utilization.gpu,temperature.gpu", "--format=csv,noheader,nounits"]
+        command: ["nvidia-smi", "--query-gpu=utilization.gpu,temperature.gpu", "--format=csv,noheader,nounits", "--loop-ms=2000"]
+        running: true
+        onExited: restartTimer.start()
 
-        stdout: StdioCollector {
-            onStreamFinished: {
-                let cleanText = this.text.trim();
-                if (cleanText.length > 0) {
-                    let parts = cleanText.split(",");
-                    if (parts.length === 2) {
-                        service.gpuUsage = parseInt(parts[0]);
-                        service.gpuTemp = parseInt(parts[1]);
-                    }
+        stdout: SplitParser {
+            onRead: (line) => {
+                let parts = line.trim().split(",");
+                if (parts.length === 2) {
+                    service.gpuUsage = parseInt(parts[0]);
+                    service.gpuTemp = parseInt(parts[1]);
                 }
             }
         }
@@ -37,15 +37,10 @@ Scope {
     }
 
     Timer {
-        interval: 2000
-        running: true
-        repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            if (!nvidiaSmiProc.running)
-                nvidiaSmiProc.running = true;
+        id: restartTimer
 
-        }
+        interval: 5000
+        onTriggered: nvidiaSmiProc.running = true
     }
 
 }

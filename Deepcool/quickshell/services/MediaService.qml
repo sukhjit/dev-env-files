@@ -1,15 +1,35 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
+import Quickshell.Services.Mpris
 pragma Singleton
 
 Scope {
     id: service
 
-    property string mediaStatus: ""
-    property string mediaArtist: ""
-    property string mediaTitle: ""
-    property string mediaPlayer: ""
+    // Prefer a playing player, else a paused one; stopped players are hidden like playerctl's "Stopped" status
+    readonly property var player: {
+        const players = Mpris.players.values;
+        return players.find((p) => {
+            return p.playbackState === MprisPlaybackState.Playing;
+        }) ?? players.find((p) => {
+            return p.playbackState === MprisPlaybackState.Paused;
+        }) ?? null;
+    }
+    property string mediaStatus: {
+        if (!player)
+            return "";
+
+        const icon = player.playbackState === MprisPlaybackState.Playing ? "" : "󰐊";
+        let time = player.positionSupported ? formatDuration(player.position) : "";
+        if (player.lengthSupported && player.length > 0)
+            time += "/" + formatDuration(player.length);
+
+        return icon + " " + time;
+    }
+    property string mediaArtist: player ? player.trackArtist : ""
+    property string mediaTitle: player ? player.trackTitle : ""
+    // Bus name minus prefix and instance suffix, matching playerctl's playerName (e.g. "spotify", "firefox")
+    property string mediaPlayer: player ? player.dbusName.replace("org.mpris.MediaPlayer2.", "").replace(/\.instance.*$/, "") : ""
     property string hoverText: {
         var rows = [];
         rows.push("Player: " + mediaPlayer);
@@ -19,83 +39,26 @@ Scope {
     }
 
     function playPause() {
-        if (!playPauseProcess.running)
-            playPauseProcess.running = true;
+        if (player && player.canTogglePlaying)
+            player.togglePlaying();
 
     }
 
-    function hasMediaLength(text) {
-        let count = text.split('/').length;
-        let lastChar = text.slice(-1);
-        return count == 2 && lastChar == "/" ? false : true;
+    // Same shape as playerctl's duration(): M:SS, or H:MM:SS past an hour
+    function formatDuration(seconds) {
+        const total = Math.floor(seconds);
+        const h = Math.floor(total / 3600);
+        const m = Math.floor((total % 3600) / 60);
+        const s = String(total % 60).padStart(2, "0");
+        return h > 0 ? h + ":" + String(m).padStart(2, "0") + ":" + s : m + ":" + s;
     }
 
-    Process {
-        id: mediaProcess
-
-        command: ["sh", "-c", "playerctl metadata --format '{{status}} {{duration(position)}}/{{duration(mpris:length)}}' 2>/dev/null"]
-
-        stdout: StdioCollector {
-            id: mediaCollector
-
-            onStreamFinished: {
-                let output = mediaCollector.text.trim();
-                // if length of media is not provided, remove "/" from the end of output
-                if (!hasMediaLength(output))
-                    output = output.slice(0, -1);
-
-                if (output.includes("Paused")) {
-                    service.mediaStatus = output.replace("Paused", "󰐊");
-                    return ;
-                }
-                if (output.includes("Playing")) {
-                    service.mediaStatus = output.replace("Playing", "");
-                    return ;
-                }
-                service.mediaStatus = "";
-            }
-        }
-
-    }
-
-    Process {
-        id: metaProcess
-
-        command: ["sh", "-c", "playerctl metadata --format '{{artist}}|||{{title}}|||{{playerName}}' 2>/dev/null"]
-
-        stdout: StdioCollector {
-            id: metaCollector
-
-            onStreamFinished: {
-                let output = metaCollector.text.trim();
-                let parts = output.split("|||");
-                service.mediaArtist = (parts[0] || "").trim();
-                service.mediaTitle = (parts[1] || "").trim();
-                service.mediaPlayer = (parts[2] || "").trim();
-            }
-        }
-
-    }
-
-    Process {
-        id: playPauseProcess
-
-        command: ["playerctl", "play-pause"]
-    }
-
+    // position isn't reactive while playing; nudge it once a second so the elapsed time ticks
     Timer {
         interval: 1000
-        running: true
+        running: service.player !== null && service.player.playbackState === MprisPlaybackState.Playing
         repeat: true
-        triggeredOnStart: true
-        onTriggered: {
-            if (!mediaProcess.running)
-                mediaProcess.running = true;
-
-            if (!metaProcess.running)
-                metaProcess.running = true;
-
-        }
+        onTriggered: service.player.positionChanged()
     }
 
 }
