@@ -76,7 +76,8 @@ Scope {
     // Re-centres while hidden so the next open finds the wheel already positioned and its thumbnails decoded.
     onAppliedChanged: {
         if (applied === pendingPath) pendingPath = ""
-        if (!shown) rebuild(landing)
+        // Not `landing`: inside this handler that binding may still hold the old applied value.
+        if (!shown) rebuild(pendingPath !== "" ? pendingPath : applied)
     }
 
     function seg(delay) {
@@ -245,33 +246,36 @@ Scope {
         running: true
         command: ["flock", "-w", "5", (Quickshell.env("XDG_RUNTIME_DIR") || "/tmp") + "/wallpaper-index.lock",
                   "env", "WALLPAPER_LIBRARY=" + root.library, "python3", Quickshell.shellDir + "/scripts/wallpaper-index.py"]
-        onExited: idx.running = true
+        onExited: idx.reload()
     }
 
-    Process {
+    // Loads the last index at startup, then re-reads after each indexer run.
+    // Safe to read any time: wallpaper-index.py writes a temp file and os.replace()s it in.
+    FileView {
         id: idx
-        command: ["cat", root.home + "/.cache/wallpaper-picker/index.json"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                if (text === root.indexText) return
-                let parsed
-                try {
-                    parsed = JSON.parse(text)
-                } catch (e) {
-                    parsed = []
-                }
-                root.indexText = text
-                root.all = parsed
-                if (parsed.length === 0) {
-                    root.close()
-                    return
-                }
-                const seen = {}
-                root.all.forEach(w => seen[w.theme] = true)
-                root.themes = ["all"].concat(Object.keys(seen).sort())
-                root.rebuild(root.shown && root.current ? root.current.path : root.landing)
-            }
+        path: root.home + "/.cache/wallpaper-picker/index.json"
+        onLoaded: root.loadIndex(text())
+        onLoadFailed: root.loadIndex("")
+    }
+
+    function loadIndex(text) {
+        if (text === root.indexText) return
+        let parsed
+        try {
+            parsed = JSON.parse(text)
+        } catch (e) {
+            parsed = []
         }
+        root.indexText = text
+        root.all = parsed
+        if (parsed.length === 0) {
+            root.close()
+            return
+        }
+        const seen = {}
+        root.all.forEach(w => seen[w.theme] = true)
+        root.themes = ["all"].concat(Object.keys(seen).sort())
+        root.rebuild(root.shown && root.current ? root.current.path : root.landing)
     }
 
     // A new image only fades in once decoded, so quick flips never show a blank frame.
@@ -488,21 +492,29 @@ Scope {
 
                 readonly property real cardW: 560
                 readonly property real cardH: 330
+                // Cards exist only within ±reach of the centre; covers every warm (ad < 10) card.
+                readonly property int reach: 10
+                readonly property int slots: 2 * reach + 1
 
+                // A fixed ring of slots rather than one delegate per wallpaper: slot s shows the wallpaper whose
+                // index ≡ s (mod slots) within ±reach of the centre, so a scroll only reassigns the slot at the hidden far edge.
                 Repeater {
-                    model: root.items
+                    model: wheel.slots
                     delegate: Item {
                         id: card
-                        required property var modelData
                         required property int index
-                        readonly property real d: index - root.pos
+                        readonly property int first: Math.round(root.pos) - wheel.reach
+                        // The wallpaper index this slot currently shows.
+                        readonly property int wi: first + (((index - first) % wheel.slots) + wheel.slots) % wheel.slots
+                        readonly property var modelData: wi >= 0 && wi < root.items.length ? root.items[wi] : null
+                        readonly property real d: wi - root.pos
                         readonly property real ad: Math.abs(d)
                         readonly property real side: Math.max(-1, Math.min(1, d))
                         readonly property bool near: ad < 5.5
                         // Wider than visible so thumbnails are decoded before a card scrolls into view.
                         readonly property bool warm: ad < 10
 
-                        visible: near
+                        visible: near && modelData !== null
                         width: wheel.cardW
                         height: wheel.cardH
                         y: (wheel.height - height) / 2
@@ -522,7 +534,7 @@ Scope {
 
                         Loader {
                             anchors.fill: parent
-                            active: card.warm
+                            active: card.warm && card.modelData !== null
                             sourceComponent: frame
                         }
 
@@ -544,7 +556,7 @@ Scope {
 
                                     Image {
                                         anchors.fill: parent
-                                        source: "file://" + card.modelData.thumb
+                                        source: card.modelData ? "file://" + card.modelData.thumb : ""
                                         sourceSize.width: 640
                                         sourceSize.height: 360
                                         fillMode: Image.PreserveAspectCrop
@@ -566,7 +578,7 @@ Scope {
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: card.index === root.cur ? root.apply() : root.go(card.index)
+                            onClicked: card.wi === root.cur ? root.apply() : root.go(card.wi)
                         }
                     }
                 }

@@ -12,19 +12,27 @@ RowLayout {
             let dirPath = match[2].trim();
             return "file://" + dirPath + "/hicolor/16x16/status/" + iconName + ".png";
         }
+        return "";
     }
 
     function formatIconSource(rawIcon) {
         if (!rawIcon)
             return "";
 
-        // dropbox icon
-        if (rawIcon.includes("dropboxstatus") && rawIcon.includes("?path="))
-            return formatDropboxIcon(rawIcon);
+        // dropbox icon; if its URL doesn't parse, fall through to the standard rules
+        if (rawIcon.includes("dropboxstatus") && rawIcon.includes("?path=")) {
+            let dropboxIcon = formatDropboxIcon(rawIcon);
+            if (dropboxIcon)
+                return dropboxIcon;
 
+        }
         // standard fallback rules for all other system tray icons
-        if (rawIcon.startsWith("/") || rawIcon.startsWith("file://"))
-            return rawIcon.startsWith("file://") ? rawIcon : "file:///" + rawIcon;
+        if (rawIcon.startsWith("file://"))
+            return rawIcon;
+
+        // absolute path already starts with "/", so "file://" + "/path" = "file:///path"
+        if (rawIcon.startsWith("/"))
+            return "file://" + rawIcon;
 
         if (rawIcon.startsWith("image://"))
             return rawIcon;

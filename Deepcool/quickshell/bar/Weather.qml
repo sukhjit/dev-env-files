@@ -1,17 +1,11 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Io
+import Quickshell
 import qs.components
 import qs.services
 
 RowLayout {
     id: root
-
-    Process {
-        id: openWeatherPage
-
-        command: ["sh", "-c", "librewolf --safe-mode --private-window " + WeatherService.weatherUrl]
-    }
 
     StyledRect {
         id: weatherText
@@ -19,7 +13,7 @@ RowLayout {
         widthPadding: 10
         text: WeatherService.text
         clickHandler: function() {
-            openWeatherPage.running = true;
+            Quickshell.execDetached(["uwsm-app", "--", "librewolf", "--safe-mode", "--private-window", WeatherService.weatherUrl]);
         }
 
         StyledPopupWindow {

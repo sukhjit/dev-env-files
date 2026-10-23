@@ -1,15 +1,9 @@
 import QtQuick.Layouts
-import Quickshell.Io
+import Quickshell
 import qs.components
 
 RowLayout {
     id: root
-
-    Process {
-        id: wlogoutProcess
-
-        command: ["wlogout", "--protocol", "layer-shell"]
-    }
 
     StyledRect {
         id: powerText
@@ -19,7 +13,8 @@ RowLayout {
         text: "⏻"
         textColor: Style.activeFg
         clickHandler: function() {
-            wlogoutProcess.running = true;
+            // pgrep guard keeps the old one-wlogout-at-a-time behaviour
+            Quickshell.execDetached(["sh", "-c", "pgrep -x wlogout >/dev/null || exec uwsm-app -- wlogout --protocol layer-shell"]);
         }
     }
 

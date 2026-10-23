@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 
 Item {
-    id: backend
+    id: root
 
     property bool showFullDate: true
     property date currentDate: new Date()
@@ -10,9 +10,8 @@ Item {
     property int displayMonth: currentDate.getMonth()
     property string monthName: ""
     property var days: []
-
-    implicitWidth: calLayout.implicitWidth
-    implicitHeight: calLayout.implicitHeight
+    // currentDate ticks every second (bar clock); this only changes once a day
+    readonly property int todayKey: currentDate.getFullYear() * 10000 + currentDate.getMonth() * 100 + currentDate.getDate()
     readonly property var monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
     function rebuild() {
@@ -76,7 +75,11 @@ Item {
         rebuild();
     }
 
-    onCurrentDateChanged: rebuild()
+    implicitWidth: calLayout.implicitWidth
+    implicitHeight: calLayout.implicitHeight
+    // toToday() sets displayYear/displayMonth explicitly, so a month rollover
+    // doesn't depend on those bindings updating before this handler runs
+    onTodayKeyChanged: toToday()
     Component.onCompleted: rebuild()
 
     ColumnLayout {
@@ -96,7 +99,7 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: cal.prevMonth()
+                    onClicked: root.prevMonth()
                 }
 
             }
@@ -104,7 +107,7 @@ Item {
             StyledText {
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                text: cal.monthName + " " + cal.displayYear
+                text: root.monthName + " " + root.displayYear
                 color: "#f7768e"
             }
 
@@ -115,7 +118,7 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: cal.nextMonth()
+                    onClicked: root.nextMonth()
                 }
 
             }
@@ -143,7 +146,7 @@ Item {
             columns: 7
 
             Repeater {
-                model: cal.days
+                model: root.days
 
                 Rectangle {
                     width: 22

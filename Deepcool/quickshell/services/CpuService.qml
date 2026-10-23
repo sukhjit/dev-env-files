@@ -26,15 +26,37 @@ Scope {
     }
 
     function runMonitorProcess() {
-        if (!monitorProcess.running)
-            monitorProcess.running = true;
+        Quickshell.execDetached(["uwsm-app", "--", Quickshell.env("TERMINAL") || "ghostty", "-e", "htop"]);
+    }
 
+    // hwmon numbering changes between boots, so walk hwmon0..N at startup
+    // until the one named k10temp (the CPU sensor) is found.
+    FileView {
+        id: hwmonNameFile
+
+        property int index: 0
+
+        path: "/sys/class/hwmon/hwmon" + index + "/name"
+        onLoaded: {
+            if (text().trim() === "k10temp") {
+                thermalZoneFile.path = "/sys/class/hwmon/hwmon" + index + "/temp1_input";
+                path = "";
+            } else {
+                // Defer the path change: changing it inside onLoaded starts a load that gets dropped
+                // ("got operation finished from dropped operation" warning, and no onLoaded for it)
+                Qt.callLater(() => {
+                    return index++;
+                });
+            }
+        }
+        // Ran past the last hwmon without finding k10temp
+        onLoadFailed: path = ""
     }
 
     FileView {
         id: thermalZoneFile
 
-        path: "/sys/class/hwmon/hwmon1/temp1_input"
+        path: ""
         onTextChanged: {
             var rawText = text();
             if (!rawText)
@@ -113,12 +135,6 @@ Scope {
         }
     }
 
-    Process {
-        id: monitorProcess
-
-        command: ["ghostty", "-e", "htop"]
-    }
-
     Timer {
         interval: 2000
         running: true
@@ -126,7 +142,9 @@ Scope {
         triggeredOnStart: true
         onTriggered: {
             procStatFile.reload();
-            thermalZoneFile.reload();
+            if (thermalZoneFile.path !== "")
+                thermalZoneFile.reload();
+
         }
     }
 

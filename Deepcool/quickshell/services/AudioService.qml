@@ -48,9 +48,7 @@ Scope {
     }
 
     function runWiremix() {
-        if (!wiremix.running)
-            wiremix.running = true;
-
+        Quickshell.execDetached(["uwsm-app", "--", Quickshell.env("TERMINAL") || "ghostty", "--class=Wiremix", "-e", "wiremix"]);
     }
 
     function runPamixer() {
@@ -138,12 +136,6 @@ Scope {
             sinkWatcher.running = true;
             queryDebounce.restart();
         }
-    }
-
-    Process {
-        id: wiremix
-
-        command: [Quickshell.env("TERMINAL"), "--class=Wiremix", "-e", "wiremix"]
     }
 
     Process {

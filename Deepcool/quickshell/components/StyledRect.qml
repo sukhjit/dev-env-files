@@ -4,7 +4,7 @@ Rectangle {
     id: root
 
     property string text: ""
-    property int textFormat: Text.AutoText
+    property int textFormat: Text.PlainText
     property int textSize: Style.topbar.fontpixelSize
     property color textColor: Style.buttonFg
     property int widthPadding: 5
