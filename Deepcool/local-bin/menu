@@ -10,12 +10,9 @@ menu() {
     echo -e "$options" | qs-dmenu -p "$prompt…"
 }
 
-show_background_menu() {
-    local choice
-    choice=$(find -L "$HOME/Pictures" "$HOME/Dropbox/Wallpapers" -maxdepth 2 -type f \
-        \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.bmp' -o -iname '*.webp' \) 2>/dev/null |
-        sort | qs-dmenu -i -p "Background…") || return
-    "$HOME/.local/bin/set-bg" "$choice"
+show_wallpaper_menu() {
+    # The wallpaper picker in quickshell/wallpaper/ (indexes ~/Dropbox/Wallpapers and ~/Pictures, applies with set-bg)
+    qs ipc call wallpaper open
 }
 
 audio() {
@@ -102,10 +99,10 @@ tmuxRepos() {
 }
 
 show_main_menu() {
-    case $(menu "Choose" "  Project\n  Audio\n  Keybindings\n󰎚  Notes\n  Background\n󱂩  NwgDock\n  Screenshot\n  Screenrecord\n  Battery\n󰃉  Color") in
+    case $(menu "Choose" "  Project\n  Audio\n  Keybindings\n󰎚  Notes\n  Wallpaper\n󱂩  NwgDock\n  Screenshot\n  Screenrecord\n  Battery\n󰃉  Color") in
     *Project*) tmuxRepos ;;
     *Audio*) audio ;;
-    *Background*) show_background_menu ;;
+    *Wallpaper*) show_wallpaper_menu ;;
     *Keybindings*) source $HOME/.local/bin/keybindings ;;
     *Notes*) selectednote ;;
     *NwgDock*) pgrep -f nwg-dock-hyprland && pkill -f nwg-dock-hyprland || nwg-dock-hyprland -i 30 -x -c "qs ipc call launcher toggle" ;;
