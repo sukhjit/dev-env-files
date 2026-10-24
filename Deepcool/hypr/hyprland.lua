@@ -65,7 +65,8 @@ local launcher = "qs ipc call launcher toggle"
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd("uwsm-app -- quickshell --log-rules 'qt.svg.draw.warning=false'")
-	hl.exec_cmd("uwsm-app -- swaybg -i ~/Pictures/background.jpg")
+	-- Restore the picker's last choice, falling back to the default background.
+	hl.exec_cmd([[sh -c 'bg=$(cat ~/.cache/wallpaper-picker/current 2>/dev/null); [ -f "$bg" ] || bg=~/Pictures/background.jpg; exec ~/.local/bin/set-bg "$bg"']])
 	hl.exec_cmd("uwsm-app -- hypridle")
 	hl.exec_cmd("uwsm-app -- swaync")
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
