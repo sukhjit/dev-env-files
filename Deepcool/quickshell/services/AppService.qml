@@ -68,7 +68,7 @@ Singleton {
     // Scores the best alignment, not the first: greedy first-occurrence matching underscored good hits
     // ("lc" ranked "Qt V4L2 video capture" above "LibreOffice Calc"). O(text * query): the gap penalty
     // caps at 5, so all candidates 6+ back collapse into one running max.
-    // Long texts (big clipboard entries) use the greedy scorer instead: ~140ms per 100K chars per
+    // Long texts use the greedy scorer instead: ~140ms per 100K chars per
     // keystroke otherwise. Greedy still matches anywhere in the text, just ranks less precisely.
     readonly property int fuzzyBestMaxLength: 1000
 

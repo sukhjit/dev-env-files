@@ -16,10 +16,9 @@ Scope {
     // before mapping.
     property var openScreen: null
     property bool shown: false
-    // Prefix modes: "=" calculator, "$" clipboard history, "." files, "@" web search; anything else searches apps
+    // Prefix modes: "=" calculator, "." files, "@" web search; anything else searches apps
     readonly property var prefixes: ({
         "=": "calc",
-        "$": "clipboard",
         ".": "files",
         "@": "web"
     })
@@ -34,11 +33,8 @@ Scope {
     readonly property bool previewMode: mode === "dmenu" && dmenuPreview
     readonly property string mode: modeOf(search.text)
     readonly property string query: queryOf(search.text)
-    readonly property var textModel: mode === "calc" ? calcRows() : mode === "clipboard" ? clipRows() : mode === "files" ? fileRows() : mode === "web" ? webRows() : mode === "dmenu" ? dmenuRows() : []
+    readonly property var textModel: mode === "calc" ? calcRows() : mode === "files" ? fileRows() : mode === "web" ? webRows() : mode === "dmenu" ? dmenuRows() : []
     readonly property var activeList: mode === "apps" ? list : textList
-
-    // Singletons are lazy; touch ClipboardService at startup so its watcher records copies from the start
-    Component.onCompleted: ClipboardService.historyLimit
     // Hover selects only after real mouse motion; list changing under a still cursor must not steal selection
     property bool mouseNav: false
     property point lastMousePos: Qt.point(-1, -1)
@@ -74,24 +70,6 @@ Scope {
                 "dim": false
             };
         }));
-    }
-
-    function clipRows() {
-        const rows = ClipboardService.search(query).map((t) => {
-            const lines = t.trim().split("\n");
-            return {
-                "payload": t,
-                "text": lines[0].replace(/\s+/g, " ").trim(),
-                "subtext": lines.length > 1 ? "+" + (lines.length - 1) + " lines" : "",
-                "dim": false
-            };
-        });
-        return rows.length > 0 ? rows : [{
-            "payload": "",
-            "text": ClipboardService.history.length === 0 ? "Clipboard history empty" : "No Results",
-            "subtext": "",
-            "dim": true
-        }];
     }
 
     // basename as text, ~-shortened parent dir as subtext
@@ -223,7 +201,7 @@ Scope {
     }
 
     // Selection follows a row's identity, not its position: lists are JS arrays rebuilt on every
-    // update (new clipboard entry, qalc result, app list refresh), which resets currentIndex.
+    // update (qalc result, app list refresh), which resets currentIndex.
     // A key is recorded on each user move and restored after a rebuild (see ListView onModelChanged).
     function textRowKey(row) {
         if (!row)
@@ -309,12 +287,6 @@ Scope {
                 CalcService.commitLive();
             else
                 CalcService.commit(item.expr, item.result);
-            root.open = false;
-        } else if (mode === "clipboard") {
-            if (!item || item.payload.length === 0)
-                return ;
-
-            ClipboardService.copy(item.payload);
             root.open = false;
         } else if (mode === "files") {
             if (!item || item.payload.length === 0)

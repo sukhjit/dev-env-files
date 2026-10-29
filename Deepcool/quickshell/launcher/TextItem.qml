@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs.components
 
-// Generic text row for prefix modes (calc, clipboard). modelData: {text, subtext, dim}
+// Generic text row for prefix modes (calc, files, web). modelData: {text, subtext, dim}
 Rectangle {
     id: root
 
